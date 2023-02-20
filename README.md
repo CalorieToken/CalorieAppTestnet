@@ -23,8 +23,23 @@ pip install https://github.com/kivy/kivy/archive/master.zip
 pip install https://github.com/kivymd/KivyMD/archive/master.zip
 ```
 
+```bash
+pip install pycryptodome
+```
+
+```bash
+pip install clipboard
+```
+
+```bash
+pip install xrpl-py
+```
+
+
+
 ### Dependencies:
 
 - [Kivy]
 - [KivyMD]
+- [xrpl-py]
 - [Python 3.7+](https://www.python.org/)
