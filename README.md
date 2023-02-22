@@ -33,6 +33,7 @@ pip install clipboard
 pip install xrpl-py
 ```
 Dependencies:
+* Python 3.9+
 * Kivy
 * KivyMD
 * xrpl-py
