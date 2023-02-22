@@ -1,5 +1,10 @@
 # CalorieAppTestnet
 
+<p align="center">
+    <img align="center" src="/Images/CalorieAppLogoTranspa.png" width="175"></img>
+</p>
+
+
 CalorieAppTestnet
 CalorieApp is a mobile application for tracking food-related transactions using the XRPL. The app allows you to log your food expenses and track your daily calorie intake in real-time, all in one place.
 
