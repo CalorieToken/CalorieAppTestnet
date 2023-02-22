@@ -13,7 +13,7 @@ To install the CalorieApp, follow these steps:
 
 Clone the repository:
 ```bash
-git clone https://github.com/yourusername/CalorieAppTestnet.git
+git clone https://github.com/CalorieToken/CalorieAppTestnet.git
 ```
 
 Install the required dependencies:
