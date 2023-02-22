@@ -33,11 +33,11 @@ pip install clipboard
 pip install xrpl-py
 ```
 Dependencies:
-Kivy
-KivyMD
-xrpl-py
-pycryptodome
-clipboard
+* Kivy
+* KivyMD
+* xrpl-py
+* pycryptodome
+* clipboard
 
 Usage
 To start the CalorieApp, navigate to the cloned repository and run the following command:
@@ -57,5 +57,5 @@ License
 The CalorieApp is licensed under the AGPL-3.0 license.
 
 Contact
-If you have any questions or concerns, please reach out to us on Twitter or YouTube.
+If you have any questions or concerns, please reach out to us on Twitter.
 [![Twitter](https://img.shields.io/twitter/follow/CalorieToken?label=follow&logo=twitter&style=flat&color=brightgreen)](https://twitter.com/CalorieToken)
