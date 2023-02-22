@@ -1,6 +1,6 @@
 # CalorieAppTestnet
 
-CalorieApp
+CalorieAppTestnet
 CalorieApp is a mobile application for tracking food-related transactions using the XRPL. The app allows you to log your food expenses and track your daily calorie intake in real-time, all in one place.
 
 Features
@@ -8,38 +8,55 @@ Log food-related transactions on the XRPL
 Track your daily calorie intake
 View your transaction history and calorie log
 Open-source and transparent
+Installation
+To install the CalorieApp, follow these steps:
 
+Clone the repository:
+```bash
+git clone https://github.com/yourusername/CalorieAppTestnet.git
+```
 
-[![Twitter](https://img.shields.io/twitter/follow/CalorieToken?label=follow&logo=twitter&style=flat&color=brightgreen)](https://twitter.com/CalorieToken)
-[![YouTube](https://img.shields.io/static/v1?label=subscribe&logo=youtube&logoColor=ff0000&color=brightgreen&message=5k)](https://www.youtube.com/@calorietoken)
-
-## Installation
-
+Install the required dependencies:
 ```bash
 pip install https://github.com/kivy/kivy/archive/master.zip
 ```
-
 ```bash
 pip install https://github.com/kivymd/KivyMD/archive/master.zip
 ```
-
 ```bash
 pip install pycryptodome
 ```
-
 ```bash
 pip install clipboard
 ```
-
 ```bash
 pip install xrpl-py
 ```
+Dependencies:
+Kivy
+KivyMD
+xrpl-py
+pycryptodome
+clipboard
 
+Usage
+To start the CalorieApp, navigate to the cloned repository and run the following command:
+```bash
+python CalorieAppTestnetV10.py
+```
+Contributing
+We welcome contributions from the community. To contribute to the CalorieApp, follow these steps:
 
+Fork the repository.
+Create a new branch for your feature.
+Make your changes and commit them.
+Push your changes to your fork.
+Submit a pull request to the main repository.
 
-### Dependencies:
+License
+The CalorieApp is licensed under the AGPL-3.0 license.
 
-- [Kivy]
-- [KivyMD]
-- [xrpl-py]
-- [Python 3.7+](https://www.python.org/)
+Contact
+If you have any questions or concerns, please reach out to us on Twitter or YouTube.
+[![Twitter](https://img.shields.io/twitter/follow/CalorieToken?label=follow&logo=twitter&style=flat&color=brightgreen)](https://twitter.com/CalorieToken)
+[![YouTube](https://img.shields.io/static/v1?label=subscribe&logo=youtube&logoColor=ff0000&color=brightgreen&message=5k)](https://www.youtube.com/@calorietoken)
