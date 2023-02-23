@@ -66,3 +66,7 @@ The CalorieApp is licensed under the AGPL-3.0 license.
 ### Contact
 If you have any questions or concerns, please reach out to us on Twitter.
 [![Twitter](https://img.shields.io/twitter/follow/CalorieToken?label=follow&logo=twitter&style=flat&color=brightgreen)](https://twitter.com/CalorieToken)
+
+<p align="center">
+    <img align="center" src="/Images/ImpressionCalorieAppTestnetV10.png" width="175"></img>
+</p>
