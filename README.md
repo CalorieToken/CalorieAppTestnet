@@ -61,7 +61,7 @@ Push your changes to your fork.
 Submit a pull request to the main repository.
 
 ### License
-The CalorieApp is licensed under the AGPL-3.0 license.
+The CalorieApp is licensed under a CUSTOM (dual) License (!).
 
 ### Contact
 If you have any questions or concerns, please reach out to us on Twitter.
