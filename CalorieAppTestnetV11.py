@@ -1,3 +1,4 @@
+# Kivy libraries for the GUI.
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import Screen, ScreenManager
 from kivy.metrics import dp
@@ -10,7 +11,9 @@ from kivy.core.clipboard import Clipboard
 from kivy.uix.boxlayout import BoxLayout
 from kivymd.uix.label import MDLabel
 from kivymd.uix.textfield import MDTextField
+from kivy.properties import ObjectProperty
 
+# Encryption libraries for password and key encryption.
 import logging
 logging.basicConfig(level=logging.WARNING)
 import string
@@ -22,7 +25,12 @@ from ecpy.keys import ECPrivateKey
 from hashlib import sha512
 from ecpy.curves import Curve
 from ecpy.eddsa import EDDSA
+from Crypto.Cipher import AES
+from Crypto.Random import get_random_bytes
+import shelve
+import bcrypt
 
+# XRPL libraries for xrpl functionality
 import xrpl
 from xrpl.wallet import Wallet
 from xrpl.core import addresscodec
@@ -69,11 +77,11 @@ class WalletScreen(Screen):
 
         self.xrp_address.text = test_wallet.classic_address
         self.wallet_data.close()
-        self.check_balance(dt=16)
+        self.check_balance(dt=33)
 
-        Clock.schedule_interval(self.check_balance, 16)
-        self.check_balance_lipisa(dt=16)
-        Clock.schedule_interval(self.check_balance_lipisa, 16)
+        Clock.schedule_interval(self.check_balance, 33)
+        self.check_balance_lipisa(dt=33)
+        Clock.schedule_interval(self.check_balance_lipisa, 33)
 
     def check_balance(self, dt):
         try:
@@ -97,6 +105,9 @@ class WalletScreen(Screen):
             # Divide the balance by 1 million to convert to units of 1
             balance = int(data["account_data"]["Balance"]) / 1e6
             self.xrp_balance.text = str(balance)
+
+
+            # Transaction History
 
             tx_info = AccountTx(
                 account=test_wallet.classic_address,
@@ -161,7 +172,7 @@ class WalletScreen(Screen):
             )
             response = client.request(acct_objects)
 
-            # # Tokensvalues (all trustlines)--v--v--v--v--v--v--v--v--v--v--v--v--v--v--v--v--v--v--v--v--v--v
+            # Tokensvalues (all trustlines)
 
             data = json.loads((json.dumps(response.result, indent=4, sort_keys=True)))
             tokensvalue = dict()
@@ -173,7 +184,7 @@ class WalletScreen(Screen):
                 tokensvalue[currency] = value
                 currenciescheck[currency] = currency
 
-                # # Lipisa (Tokensvalue)----------------------------------------------------------------------
+            # Lipisa (Tokensvalue)
             if '4C69706973610000000000000000000000000000' in currenciescheck:
                 self.lipisa_balance.text = (tokensvalue['4C69706973610000000000000000000000000000'])
             else:
@@ -261,7 +272,7 @@ class WalletScreen(Screen):
         self.public_key = self.wallet_data["public_key"]
         nonce = self.wallet_data["nonce"]
         encrypted_private_key = self.wallet_data["private_key"]
-        password = self.wallet_data["password"].encode()
+        password = self.wallet_data["password"].decode('utf-8').encode('ascii')
         salt = self.wallet_data["salt"]
         key = PBKDF2(password, salt, dkLen=32, count=100000)
         cipher = AES.new(key, AES.MODE_GCM,nonce=nonce)
@@ -298,9 +309,6 @@ class WalletScreen(Screen):
         else:
           print(f'Transaction failed with error: {tx_response.result}')
 
-        # Get xaddress
-        test_xaddress = addresscodec.classic_address_to_xaddress(test_account, tag=12345,
-                                                                 is_test_network=True)
         self.dialog.dismiss()
         self.wallet_data.close()
     def send_xrp_screen(self):
@@ -369,7 +377,6 @@ class WalletScreen(Screen):
 
     def settingsscreen(self):
         self.manager.current = "settings_screen"
-
 class SendXRPScreen(Screen):
 
     def on_pre_enter(self):
@@ -385,7 +392,7 @@ class SendXRPScreen(Screen):
         self.xrp_address.text = test_wallet.classic_address
         self.wallet_data.close()
         self.check_balance(dt=16)
-        Clock.schedule_interval(self.check_balance, 16)
+        Clock.schedule_interval(self.check_balance, 33)
 
     def show_error_message(self, message):
         self.dialog = MDDialog(
@@ -492,18 +499,25 @@ class SendXRPScreen(Screen):
         # Open the dialog
         self.dialog.open()
 
+
     def perform_send(self, entered_password):
+        # Load the password hash from the file
+        wallet_data = shelve.open("wallet_data")
+        hashed_password = wallet_data.get("password")
+        wallet_data.close()
+
+        # Check if the password is correct
+        password = entered_password.encode("utf-8")
+        if not bcrypt.checkpw(password, hashed_password):
+            self.password_field.hint_text = "Wrong password, try again"
+            return
+
         try:
             self.wallet_data = shelve.open("wallet_data")
-            saved_password = self.wallet_data["password"]
-            if entered_password != saved_password:
-                self.password_field.hint_text = "Wrong password, try again"
-                return
-
             self.public_key = self.wallet_data["public_key"]
             nonce = self.wallet_data["nonce"]
             encrypted_private_key = self.wallet_data["private_key"]
-            password = self.wallet_data["password"].encode()
+            password = self.wallet_data["password"].decode('utf-8').encode('ascii')
             salt = self.wallet_data["salt"]
             key = PBKDF2(password, salt, dkLen=32, count=100000)
             cipher = AES.new(key, AES.MODE_GCM,nonce=nonce)
@@ -527,13 +541,14 @@ class SendXRPScreen(Screen):
             my_tx_payment_signed = safe_sign_and_autofill_transaction(my_tx_payment, test_wallet, client)
 
             # Submit and send the transaction
-            # send_reliable_submission(my_tx_payment_signed, client)
-            print(test_wallet.secret_numbers)
+            send_reliable_submission(my_tx_payment_signed, client)
+
             self.dialog.dismiss()
             self.wallet_data.close()
         except XRPLBinaryCodecException as e:
             self.wallet_data.close()
             self.password_field.hint_text = "XRPLBinaryCodecException Error"
+
 
     def check_balance(self, dt):
         try:
@@ -557,6 +572,8 @@ class SendXRPScreen(Screen):
             # Divide the balance by 1 million to convert to units of 1
             balance = int(data["account_data"]["Balance"]) / 1e6
             self.xrp_balance.text = str(balance)
+
+            # Transaction History
 
             tx_info = AccountTx(
                 account=test_wallet.classic_address,
@@ -617,7 +634,7 @@ class SendLipisaScreen(Screen):
         self.xrp_address.text = test_wallet.classic_address
         self.wallet_data.close()
         self.check_balance_lipisa(dt=16)
-        Clock.schedule_interval(self.check_balance_lipisa, 16)
+        Clock.schedule_interval(self.check_balance_lipisa, 33)
 
     def show_error_message(self, message):
         self.dialog = MDDialog(
@@ -755,18 +772,26 @@ class SendLipisaScreen(Screen):
         # Open the dialog
         self.dialog.open()
 
+
     def perform_send(self, entered_password):
+
+
+        # Load the password hash from the file
+        wallet_data = shelve.open("wallet_data")
+        hashed_password = wallet_data.get("password")
+        wallet_data.close()
+
+        # Check if the password is correct
+        password = entered_password.encode("utf-8")
+        if not bcrypt.checkpw(password, hashed_password):
+            self.password_field.hint_text = "Wrong password, try again"
+            return
         try:
             self.wallet_data = shelve.open("wallet_data")
-            saved_password = self.wallet_data["password"]
-            if entered_password != saved_password:
-                self.password_field.hint_text = "Wrong password, try again"
-                return
-
             self.public_key = self.wallet_data["public_key"]
             nonce = self.wallet_data["nonce"]
             encrypted_private_key = self.wallet_data["private_key"]
-            password = self.wallet_data["password"].encode()
+            password = self.wallet_data["password"].decode('utf-8').encode('ascii')
             salt = self.wallet_data["salt"]
             key = PBKDF2(password, salt, dkLen=32, count=100000)
             cipher = AES.new(key, AES.MODE_GCM,nonce=nonce)
@@ -824,7 +849,7 @@ class SendLipisaScreen(Screen):
             )
             response = client.request(acct_objects)
 
-            # # Tokensvalues (all trustlines)--v--v--v--v--v--v--v--v--v--v--v--v--v--v--v--v--v--v--v--v--v--v
+            # Tokensvalues (all trustlines)
 
             data = json.loads((json.dumps(response.result, indent=4, sort_keys=True)))
 
@@ -837,11 +862,13 @@ class SendLipisaScreen(Screen):
                 tokensvalue[currency] = value
                 currenciescheck[currency] = currency
 
-                # # Lipisa (Tokensvalue)----------------------------------------------------------------------
+            # Lipisa (Tokensvalue)
             if '4C69706973610000000000000000000000000000' in currenciescheck:
                 self.lipisa_balance.text = (tokensvalue['4C69706973610000000000000000000000000000'])
             else:
                 self.lipisa_balance.text = 'No Lipisa Trustline'
+
+            # Transaction History
 
             tx_info = AccountTx(
                 account=test_wallet.classic_address,
@@ -957,17 +984,24 @@ class NFTMintScreen(Screen):
         self.dialog.open()
 
     def perform_mint(self, entered_password):
+
+
+        # Load the password hash from the file
+        wallet_data = shelve.open("wallet_data")
+        hashed_password = wallet_data.get("password")
+        wallet_data.close()
+
+        # Check if the password is correct
+        password = entered_password.encode("utf-8")
+        if not bcrypt.checkpw(password, hashed_password):
+            self.password_field.hint_text = "Wrong password, try again"
+            return
         try:
             self.wallet_data = shelve.open("wallet_data")
-            saved_password = self.wallet_data["password"]
-            if entered_password != saved_password:
-                self.password_field.hint_text = "Wrong password, try again"
-                return
-
             self.public_key = self.wallet_data["public_key"]
             nonce = self.wallet_data["nonce"]
             encrypted_private_key = self.wallet_data["private_key"]
-            password = self.wallet_data["password"].encode()
+            password = self.wallet_data["password"].decode('utf-8').encode('ascii')
             salt = self.wallet_data["salt"]
             key = PBKDF2(password, salt, dkLen=32, count=100000)
             cipher = AES.new(key, AES.MODE_GCM,nonce=nonce)
@@ -985,7 +1019,7 @@ class NFTMintScreen(Screen):
             current_validated_ledger = get_latest_validated_ledger_sequence(client)
             test_wallet.sequence = get_next_valid_seq_number(test_wallet.classic_address, client)
             
-            # Prepare transaction ----------------------------------------------------------
+            # Prepare transaction
             my_tx_payment = xrpl.models.transactions.NFTokenMint(
                 account=test_wallet.classic_address,
                 flags=8,
@@ -1084,11 +1118,9 @@ class SettingsScreen(Screen):
 
     def foodtrackscreen(self):
         self.manager.current = "foodtrack_screen"
-
 class IntroScreen(Screen):
     def next(self):
         self.manager.current = "first_use_screen"
-
 class FirstUseScreen(Screen):
     def create_password(self):
         password = self.ids.password.text
@@ -1104,20 +1136,28 @@ class FirstUseScreen(Screen):
         if not any(char in string.punctuation for char in password):
             self.ids.password.helper_text = "Password must contain at least one symbol."
             return
+        if len(password) < 8:
+            self.ids.password.helper_text = "Password must be at least 8 characters long."
+            return
 
         # Check if password and confirmation password match
         if password != confirm_password:
             self.ids.confirm_password.helper_text = "Password and confirmation password must match."
             return
 
+        # Hash the password using bcrypt before storing it
+        hashed_password = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
+
         # Use password to encrypt private keys
         self.wallet_data = shelve.open("wallet_data")
-        self.wallet_data["password"] = password
+        self.wallet_data["password"] = hashed_password
         self.wallet_data.close()
         self.manager.current = "importkeys_screen"
 
 class ImportKeysScreen(Screen):
-    wallet_data = None
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.wallet_data = None
 
     def generate_keys(self):
         test_wallet = generate_faucet_wallet(client, debug=True)
@@ -1127,7 +1167,7 @@ class ImportKeysScreen(Screen):
         dialog = MDDialog(
             title="Keys",
             text="Copy keypair to store it somewhere safe in order to keep access to your funds!\n"
-         "Private Key: {}\nPublic Key: {}".format(test_wallet.private_key, test_wallet.public_key),
+                 "Private Key: {}\nPublic Key: {}".format(test_wallet.private_key, test_wallet.public_key),
             size_hint=(0.8, None),
             md_bg_color=(0.71, 0.75, 0.86, 1),
             buttons=[
@@ -1154,22 +1194,22 @@ class ImportKeysScreen(Screen):
 
     def proceed(self, dialog):
         dialog.dismiss()
-        self.manager.current = "importkeys_screen"
+
 
     def store_keys(self):
-        self.wallet_data = shelve.open("wallet_data")
         if not self.ids.public_key.text:
             self.ids.public_key.hint_text = "Public key must be filled"
             return
         if not self.ids.private_key.text:
             self.ids.private_key.hint_text = "Private key must be filled"
             return
-        
+
         public_key = self.ids.public_key.text
         private_key = self.ids.private_key.text
-        
-         # Check if it is a valid HEX
+
+        # Check if it is a valid HEX
         import re
+
         def is_hex(s):
             # A valid hex string must have an even number of characters and only contain
             # characters from 0-9 and A-F (case-insensitive)
@@ -1182,7 +1222,7 @@ class ImportKeysScreen(Screen):
         if not is_hex(private_key):
             self.ids.private_key.hint_text = "Private key must be a valid hex string"
             return
-        
+
         # Derive Public key from Private key
         if private_key.startswith(ED_PREFIX):
             private = ECPrivateKey(int(private_key[len(ED_PREFIX):], 16), Curve.get_curve("Ed25519"))
@@ -1218,45 +1258,55 @@ class ImportKeysScreen(Screen):
             return
 
         # Store private key
-        private_key = self.ids.private_key.text.encode()
-        password = self.wallet_data["password"].encode()
+        self.wallet_data = shelve.open("wallet_data")
+        password = self.wallet_data["password"].decode('utf-8').encode('ascii')
         salt = get_random_bytes(16)
         self.wallet_data["salt"] = salt
         key = PBKDF2(password, salt, dkLen=32, count=100000)
         cipher = AES.new(key, AES.MODE_GCM)
         nonce = cipher.nonce
-        encrypted_private_key = cipher.encrypt(private_key)
+        encrypted_private_key = cipher.encrypt(private_key.encode())
         self.wallet_data["public_key"] = public_key
         self.wallet_data["private_key"] = encrypted_private_key
         self.wallet_data["nonce"] = nonce
+        self.wallet_data["keys"] = {"public": public_key, "private": private_key}
         self.wallet_data.close()
 
         # Go to "wallet_screen"
         self.manager.current = "wallet_screen"
 
+
+
 class LoginScreen(Screen):
     def login(self):
-        entered_password = self.ids.password.text
-        self.wallet_data = shelve.open("wallet_data")
-        stored_password = self.wallet_data.get("password", None)
-        if entered_password == stored_password:
-            private_key = self.wallet_data.get("private_key", None)
-            public_key = self.wallet_data.get("public_key", None)
-            if private_key is not None and public_key is not None:
-                self.manager.current = "wallet_screen"
-            else:
-                self.manager.current = "importkeys_screen"
-        else:
-            self.ids.password.hint_text = "Wrong password, try again"
-        self.wallet_data.close()
+        # Load the password hash from the file
+        wallet_data = shelve.open("wallet_data")
+        hashed_password = wallet_data.get("password")
+        wallet_data.close()
 
-class WalletApp(MDApp):
+        # Check if the password is correct
+        password = self.ids.password.text.encode("utf-8")
+        if not bcrypt.checkpw(password, hashed_password):
+
+            self.password.hint_text = "Wrong password, try again"
+            return
+
+        # Navigate to the appropriate screen based on whether the keys are stored
+        wallet_data = shelve.open("wallet_data")
+        if wallet_data.get("keys") is None:
+            wallet_data.close()
+            self.manager.current = "importkeys_screen"
+        else:
+            wallet_data.close()
+            self.manager.current = "wallet_screen"
+            
+class CalorieAppTestnetV11(MDApp):
     def build(self):
-        self.title = "XRP Wallet"
+        self.title = "CalorieAppTestnetV11"
         self.theme_cls.primary_palette = "Green"
         self.theme_cls.accent_palette = "Green"
         self.theme_cls.material_style = "M2"
-        self.load_kv('CalorieAppTestnetV10.kv')
+        self.load_kv('CalorieAppTestnetV11.kv')
         self.manager = ScreenManager()
         self.intro_screen = IntroScreen(name="intro_screen")
         self.first_use_screen = FirstUseScreen(name="first_use_screen")
@@ -1264,12 +1314,12 @@ class WalletApp(MDApp):
         self.login_screen = LoginScreen(name="login_screen")
         self.wallet_screen = WalletScreen(name="wallet_screen")
         self.sendxrp_screen = SendXRPScreen(name="sendxrp_screen")
-        self.sendlipisa_screen =SendLipisaScreen(name="sendlipisa_screen")
+        self.sendlipisa_screen = SendLipisaScreen(name="sendlipisa_screen")
         self.nftmint_screen = NFTMintScreen(name="nftmint_screen")
         self.walletgenerator_screen = WalletGeneratorScreen(name="walletgenerator_screen")
         self.dextrade_screen = DEXTradeScreen(name="dextrade_screen")
         self.foodtrack_screen = FoodTrackScreen(name="foodtrack_screen")
-        self.settings_screen = SettingsScreen(name="settings_screen")
+        self.settings_screen = SettingsScreen(name="settings_screen")       
         self.manager.add_widget(self.intro_screen)
         self.manager.add_widget(self.first_use_screen)
         self.manager.add_widget(self.importkeys_screen)
@@ -1282,13 +1332,21 @@ class WalletApp(MDApp):
         self.manager.add_widget(self.dextrade_screen)
         self.manager.add_widget(self.foodtrack_screen)
         self.manager.add_widget(self.settings_screen)
-        self.wallet_data = shelve.open("wallet_data")
-        if 'password' in self.wallet_data:
-            self.manager.current = "login_screen"
-        else:
+        try:
+            self.wallet_data = shelve.open("wallet_data")
+            if "password" in self.wallet_data:
+                self.manager.current = "login_screen"
+            else:
+                self.manager.current = "intro_screen"
+        except:
             self.manager.current = "intro_screen"
-        self.wallet_data.close()
+        finally:
+            self.wallet_data.close()
         return self.manager
+    
+    def on_stop(self):
+        self.wallet_data.close()
+    
 
 if __name__ == "__main__":
-    WalletApp().run()
+    CalorieAppTestnetV11().run()
