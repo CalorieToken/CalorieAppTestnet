@@ -38,6 +38,9 @@ pip install clipboard
 ```bash
 pip install xrpl-py
 ```
+```bash
+pip install bcrypt
+```
 Dependencies:
 * Python 3.9+
 * Kivy
@@ -45,6 +48,7 @@ Dependencies:
 * xrpl-py
 * pycryptodome
 * clipboard
+* bcrypt
 
 ### Usage
 To start the CalorieApp, navigate to the cloned repository and run the following command:
