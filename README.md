@@ -53,7 +53,7 @@ Dependencies:
 ### Usage
 To start the CalorieApp, navigate to the cloned repository and run the following command:
 ```bash
-python CalorieAppTestnetV10.py
+python main.py
 ```
 ### Contributing
 We welcome contributions from the community. To contribute to the CalorieApp, follow these steps:
