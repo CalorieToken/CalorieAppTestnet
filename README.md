@@ -56,7 +56,7 @@ To start the CalorieApp, navigate to the cloned repository and run the following
 python main.py
 ```
 ### Test Android APK
-For testing purposes, you can download the test Android APK [here](#) (https://calorietoken.net/wp-content/uploads/CalorieAppTestNet/CalorieAppTestNetV11-0.1.apk).
+For testing purposes, you can download the test Android APK here: (https://calorietoken.net/wp-content/uploads/CalorieAppTestNet/CalorieAppTestNetV11-0.1.apk).
 
 **Note: This application is currently in the testing phase and is not ready for the Play Store. Install at your own risk.**
 
