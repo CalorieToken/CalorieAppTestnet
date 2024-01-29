@@ -36,7 +36,7 @@ pip install pycryptodome
 pip install clipboard
 ```
 ```bash
-pip install xrpl-py
+pip install xrpl-py==1.6.0
 ```
 ```bash
 pip install bcrypt
@@ -45,7 +45,7 @@ Dependencies:
 * Python 3.9+
 * Kivy
 * KivyMD
-* xrpl-py
+* xrpl-py==1.6.0
 * pycryptodome
 * clipboard
 * bcrypt
