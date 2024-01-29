@@ -55,6 +55,17 @@ To start the CalorieApp, navigate to the cloned repository and run the following
 ```bash
 python main.py
 ```
+### Test Android APK
+For testing purposes, you can download the test Android APK [here](#) (https://calorietoken.net/wp-content/uploads/CalorieAppTestNet/CalorieAppTestNetV11-0.1.apk).
+
+**Note: This application is currently in the testing phase and is not ready for the Play Store. Install at your own risk.**
+
+**Test XRPL Wallet:**
+This version features a simple XRPL wallet running on the testnet. Upon generating a test wallet within the app, you will receive 1000 test XRP for experimenting with transactions and exploring the features.
+
+**Important:**
+This application is intended for testing and showcase purposes only. It is not suitable for production use, and any transactions made with the test XRP are not real and will not impact your actual XRPL account or holdings.
+
 ### Contributing
 We welcome contributions from the community. To contribute to the CalorieApp, follow these steps:
 
