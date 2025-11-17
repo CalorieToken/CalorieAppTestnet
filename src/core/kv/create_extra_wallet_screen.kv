@@ -1,0 +1,174 @@
+<CreateExtraWalletScreen>:
+    invalid_keys: invalid_keys
+
+    MDBoxLayout:
+        orientation: "vertical"
+        canvas.before:
+            Color:
+                rgba: rgba('#bfc6e0')
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        MDBoxLayout:
+            size_hint: (1, None)
+            height: "56dp"
+            orientation: "horizontal"
+            padding: ["8dp", "8dp"]
+            spacing: "8dp"
+            canvas.before:
+                Color:
+                    rgba: rgba('#505CA9')
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            MDLabel:
+                size_hint: (None, None)
+                size: ("44dp", "44dp")
+            MDLabel:
+                text: "Create Extra Wallet"
+                theme_text_color: "Custom"
+                text_color: rgba('#ffffff')
+                halign: 'center'
+                valign: 'center'
+                font_size: '18sp'
+                size_hint_x: 1
+            MDCard:
+                size_hint: (None, None)
+                size: ("40dp", "40dp")
+                radius: [20,]
+                md_bg_color: rgba('#e8ebf5')
+                elevation: 0
+                padding: "4dp"
+                pos_hint: {"center_y": 0.5}
+                Image:
+                    source: 'assets/images/CalorieLogoTranspa.png'
+                    size_hint: (1, 1)
+                    mipmap: True
+        MDGridLayout:
+            cols: 1
+            size_hint: (1, .75)
+
+            MDLabel:
+                text: "Generate your XRPL wallet"
+                font_style: "Title"
+                halign: "center"
+                theme_text_color: "Custom"
+                text_color: rgba('#202443')
+            MDBoxLayout:
+                orientation: "horizontal"
+                MDLabel:
+                    text: "Public key:"
+                    font_style: "Body"
+                    size_hint_x: 0.2
+                MDTextField:
+                    mode: "filled"
+                    line_color_focus: rgba('#008D36')
+                    hint_text_color_focus: rgba('#008D36')
+                    fill_color_normal: rgba('#dadeed')
+                    fill_color_focus: rgba('#e9ebf5')
+                    id: public_key
+                    font_style: "Body"
+                    halign: "center"
+                    size_hint_x: 0.8
+            MDBoxLayout:
+                orientation: "horizontal"
+                MDLabel:
+                    text: "Private key:"
+                    font_style: "Body"
+                    size_hint_x: 0.2
+                MDTextField:
+                    mode: "filled"
+                    line_color_focus: rgba('#008D36')
+                    hint_text_color_focus: rgba('#008D36')
+                    fill_color_normal: rgba('#dadeed')
+                    fill_color_focus: rgba('#e9ebf5')
+                    id: private_key
+                    font_style: "Body"
+                    size_hint_x: 0.8
+
+            MDLabel:
+            MDGridLayout:
+                cols: 3
+                size_hint: (1, .2)
+
+                MDLabel:
+                    size_hint: (4, 1)
+                MDButton:
+                    style: "filled"
+                    size_hint: (None, None)
+                    width: dp(200)
+                    height: "52dp"
+                    radius: [24]
+                    md_bg_color: rgba('#505CA9')
+                    on_release: root.generate_keys()
+                    MDButtonIcon:
+                        icon: "wallet-plus"
+                        icon_color: rgba('#f9b233')
+                    MDButtonText:
+                        text: "Generate keys"
+                        text_color: rgba('#008D36')
+                MDLabel:
+                    size_hint: (4, 1)
+
+            MDLabel:
+
+            MDGridLayout:
+                cols: 3
+                size_hint: (1, .2)
+
+                MDLabel:
+                    size_hint: (4, 1)
+                MDButton:
+                    style: "filled"
+                    size_hint: (None, None)
+                    width: dp(200)
+                    height: "52dp"
+                    radius: [24]
+                    md_bg_color: rgba('#505CA9')
+                    on_release: root.store_keys()
+                    MDButtonIcon:
+                        icon: "lock-check"
+                        icon_color: rgba('#f9b233')
+                    MDButtonText:
+                        text: "Store keys"
+                        text_color: rgba('#008D36')
+                MDLabel:
+                    size_hint: (4, 1)
+            MDLabel:
+                size_hint: (1, .29)
+            MDLabel:
+                id: invalid_keys
+                font_style: "Body"
+                halign: "center"
+                theme_text_color: "Primary"
+            MDLabel:
+        # Bottom navigation bar
+        MDGridLayout:
+            cols: 3
+            size_hint: (1, .08)
+            canvas.before:
+                Color:
+                    rgba: rgba('#505CA9')
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            MDIconButton:
+                icon: "arrow-left"
+                theme_icon_size: "Custom"
+                icon_size: "24sp"
+                theme_icon_color: "Custom"
+                icon_color: rgba('#008D36')
+                size_hint: (.15, 1)
+                pos_hint: {"center_y": .5}
+                on_press: root.back_to_createimportwallet()
+                canvas.before:
+                    Color:
+                        rgba: rgba('#bfc6e0')
+                    RoundedRectangle:
+                        pos: self.pos[0] + dp(5), self.pos[1] + dp(5)
+                        size: self.size[0] - dp(10), self.size[1] - dp(10)
+                        radius: [dp(8)]
+            MDLabel:
+                size_hint: (.85, 1)
+

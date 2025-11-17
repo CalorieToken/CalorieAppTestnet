@@ -1,0 +1,88 @@
+<LoginScreen>:
+    password: password
+
+    MDBoxLayout:
+        orientation: "vertical"
+        canvas.before:
+            Color:
+                rgba: rgba('#bfc6e0')
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        AppHeader:
+            id: app_header
+            title: "Login"
+        MDGridLayout:
+            cols: 1
+            size_hint: (1, .75)
+
+            MDLabel:
+            MDLabel:
+                text: "Enter your password"
+                font_style: "Title"
+                halign: "center"
+                theme_text_color: "Custom"
+                text_color: rgba('#202443')
+            MDLabel:
+            # Password input with eye icon container
+            MDBoxLayout:
+                orientation: "horizontal"
+                size_hint_y: None
+                height: "48dp"
+                spacing: "8dp"
+                
+                MDTextField:
+                    password: True
+                    mode: "filled"
+                    line_color_focus: rgba('#008D36')
+                    hint_text_color_focus: rgba('#008D36')
+                    fill_color_normal: rgba('#dadeed')
+                    fill_color_focus: rgba('#e9ebf5')
+                    id: password
+                    hint_text: "Enter your password"
+                    font_style: "Body"
+                    size_hint_x: 0.9
+                
+                MDIconButton:
+                    id: password_toggle_icon
+                    icon: "eye"
+                    theme_icon_color: "Custom"
+                    icon_color: rgba('#505CA9')
+                    size_hint_x: 0.1
+                    size_hint_y: None
+                    height: "48dp"
+                    pos_hint: {"center_y": .5}
+                    on_release: root.toggle_password_visibility()
+                    
+            MDLabel:
+                id: error_label
+            MDLabel:
+            MDGridLayout:
+                cols: 3
+                size_hint: (1, None)
+                height: "56dp"
+
+                MDLabel:
+                    size_hint: (4, 1)
+                MDButton:
+                    id: login_button
+                    style: "filled"
+                    size_hint: (None, None)
+                    width: dp(180)
+                    height: "52dp"
+                    radius: [24]
+                    md_bg_color: rgba('#505CA9')
+                    on_release: root.check_login()
+                    MDButtonIcon:
+                        icon: "login"
+                        icon_color: rgba('#f9b233')
+                    MDButtonText:
+                        text: "Log In"
+                        text_color: rgba('#008D36')
+                MDLabel:
+                    size_hint: (4, 1)
+            MDLabel:
+        MDBoxLayout:
+            size_hint: (1, .08)
+            md_bg_color: rgba('#505CA9')
+

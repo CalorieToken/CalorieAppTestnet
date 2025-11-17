@@ -1,0 +1,119 @@
+<SendTestTokenScreen>
+    xrp_address: xrp_address
+    token_balance: token_balance
+    amount_token_input: amount_token_input
+    destination_input: destination_input
+
+    MDBoxLayout:
+        orientation: "vertical"
+        canvas.before:
+            Color:
+                rgba: rgba('#bfc6e0')
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        AppHeader:
+            id: app_header
+            title: "Send Token"
+        ContentScroll:
+            ContentSection:
+
+                # Address Card
+                ContentCard:
+                    md_bg_color: rgba('#ffffff')
+                    height: address_box.height + dp(16)
+                    MDBoxLayout:
+                        id: address_box
+                        orientation: "vertical"
+                        spacing: "6dp"
+                        size_hint_y: None
+                        height: self.minimum_height
+                        MDLabel:
+                            text: "Your Address"
+                            font_style: "Label"
+                            theme_text_color: "Custom"
+                            text_color: rgba('#202443')
+                            size_hint_y: None
+                            height: "20dp"
+                        MDLabel:
+                            id: xrp_address
+                            font_style: "Body"
+                            theme_text_color: "Custom"
+                            text_color: rgba('#202443')
+                            halign: "center"
+                            size_hint_y: None
+                            height: "24dp"
+
+                # Amount and Destination Card
+                ContentCard:
+                    md_bg_color: rgba('#ffffff')
+                    height: amount_box.height + dp(16)
+                    MDBoxLayout:
+                        id: amount_box
+                        orientation: "vertical"
+                        spacing: "10dp"
+                        size_hint_y: None
+                        height: self.minimum_height
+                        MDTextField:
+                            mode: "filled"
+                            line_color_focus: rgba('#008D36')
+                            hint_text_color_focus: rgba('#008D36')
+                            fill_color_normal: rgba('#dadeed')
+                            fill_color_focus: rgba('#e9ebf5')
+                            id: amount_token_input
+                            multiline: False
+                            hint_text: 'Amount (Token)'
+                        MDTextField:
+                            mode: "filled"
+                            line_color_focus: rgba('#008D36')
+                            hint_text_color_focus: rgba('#008D36')
+                            fill_color_normal: rgba('#dadeed')
+                            fill_color_focus: rgba('#e9ebf5')
+                            id: destination_input
+                            multiline: False
+                            hint_text: 'Destination Address'
+                        MDButton:
+                            style: "filled"
+                            size_hint: (1, None)
+                            height: "52dp"
+                            radius: [24]
+                            md_bg_color: rgba('#505CA9')
+                            on_release: root.send_token()
+                            MDButtonIcon:
+                                icon: "send"
+                                icon_color: rgba('#f9b233')
+                            MDButtonText:
+                                text: "Send Token"
+                                text_color: rgba('#008D36')
+
+                # Balance Card
+                ContentCard:
+                    md_bg_color: rgba('#e8f5ed')
+                    height: balance_box.height + dp(16)
+                    MDBoxLayout:
+                        id: balance_box
+                        orientation: "vertical"
+                        spacing: "4dp"
+                        size_hint_y: None
+                        height: self.minimum_height
+                        MDLabel:
+                            text: "Token Balance"
+                            font_style: "Label"
+                            theme_text_color: "Custom"
+                            text_color: rgba('#008D36')
+                            size_hint_y: None
+                            height: "20dp"
+                        MDLabel:
+                            id: token_balance
+                            font_style: "Title"
+                            theme_text_color: "Custom"
+                            text_color: rgba('#006b2d')
+                            halign: "center"
+                            size_hint_y: None
+                            height: "28dp"
+
+                # Transactions Card (reusable)
+                TransactionsCard:
+                    id: transactions_card
+        BackBottomBar:
+            callback: root.backto_wallet

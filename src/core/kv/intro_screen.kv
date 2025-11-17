@@ -1,0 +1,69 @@
+<IntroScreen>:
+    MDBoxLayout:
+        orientation: "vertical"
+        canvas.before:
+            Color:
+                rgba: rgba('#bfc6e0')
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        AppHeader:
+            title: "CalorieApp"
+        MDGridLayout:
+            cols: 1
+            size_hint: (1, .75)
+
+            MDLabel:
+                font_style: "Title"
+                text: "Welcome to the CalorieApp"
+                halign: "center"
+                theme_text_color: "Custom"
+                text_color: rgba('#202443')
+            MDLabel:
+                text: "Track your Calories"
+                halign: "center"
+                theme_text_color: "Custom"
+                text_color: rgba('#202443')
+            MDLabel:
+                text: "Calorie aims to be the world's food token"
+                halign: "center"
+                theme_text_color: "Custom"
+                text_color: rgba('#202443')
+            MDGridLayout:
+                cols: 3
+                size_hint: (1, None)
+                height: "56dp"
+
+                MDLabel:
+                    size_hint: (4, 1)
+                MDButton:
+                    style: "filled"
+                    size_hint: (None, None)
+                    width: dp(200)
+                    height: "52dp"
+                    radius: [24]
+                    md_bg_color: rgba('#505CA9')
+                    on_release: root.next()
+                    MDButtonIcon:
+                        icon: "page-next-outline"
+                        icon_color: rgba('#f9b233')
+                    MDButtonText:
+                        text: "Next"
+                        text_color: rgba('#008D36')
+                MDLabel:
+                    size_hint: (4, 1)
+            MDLabel:
+        # Simple bottom bar
+        MDBoxLayout:
+            size_hint: (1, .08)
+            md_bg_color: rgba('#505CA9')
+            padding: ["8dp", 0]
+            canvas.before:
+                Color:
+                    rgba: rgba('#505CA9')
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            MDLabel:
+                text: ""
+

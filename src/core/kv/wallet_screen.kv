@@ -1,0 +1,169 @@
+<WalletScreen>:
+
+    xrp_balance: xrp_balance
+
+    MDBoxLayout:
+        orientation: "vertical"
+        canvas.before:
+            Color:
+                rgba: rgba('#bfc6e0')
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        AppHeader:
+            id: app_header
+            title: "XRPL Wallet"
+        ContentScroll:
+            size_hint: (1, 1)
+            do_scroll_x: False
+            do_scroll_y: True
+            ContentSection:
+
+                # Account Address Card
+                ContentCard:
+                    height: "120dp"
+                    md_bg_color: rgba('#e8ebf5')
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        spacing: "8dp"
+                        padding: ("8dp", "8dp", "8dp", "8dp")
+                        MDLabel:
+                            text: "Account Address"
+                            font_style: "Label"
+                            theme_text_color: "Custom"
+                            text_color: rgba('#202443')
+                            size_hint_y: None
+                            height: "20dp"
+                        # Tap the address to select account
+                        # Address display + copy button
+                        MDBoxLayout:
+                            orientation: "horizontal"
+                            spacing: "8dp"
+                            size_hint_y: None
+                            height: "32dp"
+                            ClickableLabel:
+                                id: xrp_address_label
+                                text: ""
+                                font_style: "Label"
+                                text_color: rgba('#202443')
+                                halign: "left"
+                                valign: "center"
+                                shorten: True
+                                shorten_from: "center"
+                                on_release: app.manager.get_screen('wallet_screen').open_account_selector()
+                            MDIconButton:
+                                icon: "content-copy"
+                                theme_icon_color: "Custom"
+                                icon_color: rgba('#f9b233')
+                                size_hint: (None, None)
+                                size: ("40dp", "40dp")
+                                on_release: root.copy_address()
+
+                # XRP Balance Card
+                ContentCard:
+                    height: "110dp"
+                    md_bg_color: rgba('#e8f5ed')
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        spacing: "6dp"
+                        MDLabel:
+                            text: "XRP Balance"
+                            font_style: "Label"
+                            theme_text_color: "Custom"
+                            text_color: rgba('#008D36')
+                            size_hint_y: None
+                            height: "22dp"
+                        MDBoxLayout:
+                            orientation: "horizontal"
+                            spacing: "12dp"
+                            size_hint_y: None
+                            height: "46dp"
+                            MDLabel:
+                                id: xrp_balance
+                                text: "0.00"
+                                font_style: "Title"
+                                theme_text_color: "Custom"
+                                text_color: rgba('#006b2d')
+                                halign: "left"
+                                valign: "center"
+                            MDBoxLayout:
+                                orientation: "horizontal"
+                                spacing: "6dp"
+                                size_hint_x: None
+                                width: "88dp"
+                                MDIconButton:
+                                    icon: "send"
+                                    theme_icon_color: "Custom"
+                                    icon_color: rgba('#505CA9')
+                                    on_press: root.send_xrp_screen()
+                                MDIconButton:
+                                    icon: "arrow-left-right-bold-outline"
+                                    theme_icon_color: "Custom"
+                                    icon_color: rgba('#008D36')
+                                    on_press: root.dextradescreen()
+                        MDLabel:
+                            text: "Reserve: 1 XRP"
+                            font_style: "Label"
+                            theme_text_color: "Custom"
+                            text_color: rgba('#505CA9')
+                            size_hint_y: None
+                            height: "16dp"
+
+                # Trustlines Card (header + list)
+                ContentCard:
+                    height: "180dp"
+                    md_bg_color: rgba('#ffffff')
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        spacing: "6dp"
+                        MDBoxLayout:
+                            orientation: "horizontal"
+                            size_hint_y: None
+                            height: "40dp"
+                            spacing: "8dp"
+                            MDIcon:
+                                icon: "link-variant"
+                                theme_text_color: "Custom"
+                                text_color: rgba('#505CA9')
+                                icon_size: "22sp"
+                                size_hint: (None, None)
+                                size: ("28dp", "32dp")
+                            MDLabel:
+                                text: "Trustlines"
+                                font_style: "Label"
+                                theme_text_color: "Custom"
+                                text_color: rgba('#202443')
+                                halign: "left"
+                                valign: "center"
+                            MDBoxLayout:
+                                size_hint_x: None
+                                width: "96dp"
+                                spacing: "4dp"
+                                MDIconButton:
+                                    icon: "plus-circle"
+                                    theme_icon_color: "Custom"
+                                    icon_color: rgba('#008D36')
+                                    on_press: root.add_trustline_screen()
+                                MDIconButton:
+                                    icon: "refresh"
+                                    theme_icon_color: "Custom"
+                                    icon_color: rgba('#505CA9')
+                                    on_press: root.refresh_trustlines()
+                        MDScrollView:
+                            id: trustlines_scroll
+                            do_scroll_x: False
+                            do_scroll_y: True
+                            bar_color: rgba('#f9b233')
+                            MDGridLayout:
+                                id: trustlines_container
+                                cols: 1
+                                padding: "4dp"
+                                spacing: "4dp"
+                                size_hint_y: None
+                                height: self.minimum_height
+
+                # Recent Transactions Card (reusable)
+                TransactionsCard:
+                    id: transactions_card
+        PrimaryBottomBar:
+

@@ -1,0 +1,347 @@
+#:set CAL_BLUE rgba('#505CA9')
+#:set CAL_GREEN rgba('#008D36')
+#:set CAL_YELLOW rgba('#f9b233')
+#:set CAL_BG_LIGHT rgba('#e8ebf5')
+#:set CAL_BG_MID rgba('#dadeed')
+#:set CAL_TEXT_DARK rgba('#202443')
+#:set CAL_WHITE 1,1,1,1
+#:import ButtonBehavior kivy.uix.behaviors.ButtonBehavior
+
+<RootLayout>:
+    ScreenManager:
+        id: screen_manager
+
+<DrawerClickableItem@MDNavigationDrawerItem>
+    focus_color: CAL_BG_MID
+    text_color: CAL_TEXT_DARK
+    icon_color: CAL_GREEN
+    ripple_color: CAL_BLUE
+    selected_color: CAL_TEXT_DARK
+<DrawerLabelItem@MDNavigationDrawerItem>
+    text_color: CAL_TEXT_DARK
+    icon_color: CAL_TEXT_DARK
+    focus_behavior: False
+    selected_color: "#4a4939"
+    _no_ripple_effect: True
+
+# Shared header bar used across screens
+<AppHeader@MDBoxLayout>
+    title: ""
+    size_hint: (1, None)
+    height: "56dp"
+    orientation: "horizontal"
+    padding: ["8dp", "8dp"]
+    spacing: "8dp"
+    canvas.before:
+        Color:
+            rgba: CAL_BLUE
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    MDLabel:
+        size_hint: (None, None)
+        size: ("44dp", "44dp")
+    MDLabel:
+        text: root.title
+        theme_text_color: "Custom"
+        text_color: CAL_WHITE
+        halign: 'center'
+        valign: 'center'
+        font_size: '18sp'
+        size_hint_x: 1
+    MDCard:
+        size_hint: (None, None)
+        size: ("40dp", "40dp")
+        radius: [20,]
+        md_bg_color: CAL_BG_LIGHT
+        elevation: 0
+        padding: "4dp"
+        pos_hint: {"center_y": 0.5}
+        Image:
+            source: 'assets/images/CalorieLogoTranspa.png'
+            size_hint: (1, 1)
+            mipmap: True
+
+# Clickable text label helper
+<ClickableLabel@MDLabel+ButtonBehavior>
+    theme_text_color: "Custom"
+    text_color: CAL_TEXT_DARK
+
+# Bottom bar with menu button (opens drawer)
+<PrimaryBottomBar@MDBoxLayout>
+    size_hint: (1, .08)
+    md_bg_color: CAL_BLUE
+    padding: ["8dp", "0dp"]
+    spacing: "8dp"
+    canvas.before:
+        Color:
+            rgba: CAL_BLUE
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    MDIconButton:
+        icon: "menu"
+        theme_icon_size: "Custom"
+        icon_size: "24sp"
+        theme_icon_color: "Custom"
+        icon_color: CAL_GREEN
+        on_press: app.toggle_current_screen_drawer()
+        canvas.before:
+            Color:
+                rgba: CAL_BG_MID
+            RoundedRectangle:
+                pos: self.pos[0] + dp(5), self.pos[1] + dp(5)
+                size: self.size[0] - dp(10), self.size[1] - dp(10)
+                radius: [dp(8)]
+    MDLabel:
+        text: ""
+        size_hint_x: 1
+
+# Bottom bar with back arrow and callback
+<BackBottomBar@MDBoxLayout>
+    callback: lambda *args: None
+    size_hint: (1, .08)
+    md_bg_color: CAL_BLUE
+    padding: ["8dp", "0dp"]
+    spacing: "8dp"
+    canvas.before:
+        Color:
+            rgba: CAL_BLUE
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    MDIconButton:
+        icon: "arrow-left"
+        theme_icon_color: "Custom"
+        icon_color: CAL_BG_LIGHT
+        on_release: root.callback()
+    MDLabel:
+        text: ""
+        size_hint_x: 1
+
+# Shared content helpers for consistent spacing and style
+<ContentSection@MDBoxLayout>
+    orientation: "vertical"
+    padding: ["12dp", "12dp"]
+    spacing: "12dp"
+    size_hint_y: None
+    height: self.minimum_height
+
+<ContentScroll@MDScrollView>
+    size_hint: (1, 1)
+    do_scroll_x: False
+    do_scroll_y: True
+    bar_color: CAL_YELLOW
+
+<ContentCard@MDCard>
+    size_hint: (1, None)
+    radius: [12]
+    elevation: 2
+    md_bg_color: CAL_WHITE
+
+# (Themed button classes removed for now due to internal MDButton container expectations.)
+    padding: ["12dp", "8dp"]
+
+# Reusable transactions list card
+<TransactionsCard@ContentCard>
+    md_bg_color: CAL_WHITE
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: "6dp"
+        MDLabel:
+            text: "Recent Transactions"
+            font_style: "Label"
+            theme_text_color: "Custom"
+            text_color: CAL_TEXT_DARK
+            size_hint_y: None
+            height: "20dp"
+        MDScrollView:
+            do_scroll_x: False
+            do_scroll_y: True
+            bar_color: CAL_YELLOW
+            MDGridLayout:
+                cols: 1
+                padding: "6dp"
+                spacing: "4dp"
+                size_hint_y: None
+                height: self.minimum_height
+                MDLabel:
+                    id: transaction1
+                    font_size: "11sp"
+                    size_hint_y: None
+                    height: "20dp"
+                    shorten: True
+                    shorten_from: 'right'
+                    theme_text_color: "Custom"
+                    text_color: CAL_TEXT_DARK
+                MDLabel:
+                    id: transaction2
+                    font_size: "11sp"
+                    size_hint_y: None
+                    height: "20dp"
+                    shorten: True
+                    shorten_from: 'right'
+                    theme_text_color: "Custom"
+                    text_color: CAL_TEXT_DARK
+                MDLabel:
+                    id: transaction3
+                    font_size: "11sp"
+                    size_hint_y: None
+                    height: "20dp"
+                    shorten: True
+                    shorten_from: 'right'
+                    theme_text_color: "Custom"
+                    text_color: CAL_TEXT_DARK
+                MDLabel:
+                    id: transaction4
+                    font_size: "11sp"
+                    size_hint_y: None
+                    height: "20dp"
+                    shorten: True
+                    shorten_from: 'right'
+                    theme_text_color: "Custom"
+                    text_color: CAL_TEXT_DARK
+                MDLabel:
+                    id: transaction5
+                    font_size: "11sp"
+                    size_hint_y: None
+                    height: "20dp"
+                    shorten: True
+                    shorten_from: 'right'
+                    theme_text_color: "Custom"
+                    text_color: CAL_TEXT_DARK
+                MDLabel:
+                    id: transaction6
+                    font_size: "11sp"
+                    size_hint_y: None
+                    height: "20dp"
+                    shorten: True
+                    shorten_from: 'right'
+                    theme_text_color: "Custom"
+                    text_color: CAL_TEXT_DARK
+                MDLabel:
+                    id: transaction7
+                    font_size: "11sp"
+                    size_hint_y: None
+                    height: "20dp"
+                    shorten: True
+                    shorten_from: 'right'
+                    theme_text_color: "Custom"
+                    text_color: CAL_TEXT_DARK
+                MDLabel:
+                    id: transaction8
+                    font_size: "11sp"
+                    size_hint_y: None
+                    height: "20dp"
+                    shorten: True
+                    shorten_from: 'right'
+                    theme_text_color: "Custom"
+                    text_color: CAL_TEXT_DARK
+                MDLabel:
+                    id: transaction9
+                    font_size: "11sp"
+                    size_hint_y: None
+                    height: "20dp"
+                    shorten: True
+                    shorten_from: 'right'
+                    theme_text_color: "Custom"
+                    text_color: CAL_TEXT_DARK
+                MDLabel:
+                    id: transaction10
+                    font_size: "11sp"
+                    size_hint_y: None
+                    height: "20dp"
+                    shorten: True
+                    shorten_from: 'right'
+                    theme_text_color: "Custom"
+                    text_color: CAL_TEXT_DARK
+                MDLabel:
+                    id: transaction11
+                    font_size: "11sp"
+                    size_hint_y: None
+                    height: "20dp"
+                    shorten: True
+                    shorten_from: 'right'
+                    theme_text_color: "Custom"
+                    text_color: CAL_TEXT_DARK
+                MDLabel:
+                    id: transaction12
+                    font_size: "11sp"
+                    size_hint_y: None
+                    height: "20dp"
+                    shorten: True
+                    shorten_from: 'right'
+                    theme_text_color: "Custom"
+                    text_color: CAL_TEXT_DARK
+                MDLabel:
+                    id: transaction13
+                    font_size: "11sp"
+                    size_hint_y: None
+                    height: "20dp"
+                    shorten: True
+                    shorten_from: 'right'
+                    theme_text_color: "Custom"
+                    text_color: CAL_TEXT_DARK
+                MDLabel:
+                    id: transaction14
+                    font_size: "11sp"
+                    size_hint_y: None
+                    height: "20dp"
+                    shorten: True
+                    shorten_from: 'right'
+                    theme_text_color: "Custom"
+                    text_color: CAL_TEXT_DARK
+                MDLabel:
+                    id: transaction15
+                    font_size: "11sp"
+                    size_hint_y: None
+                    height: "20dp"
+                    shorten: True
+                    shorten_from: 'right'
+                    theme_text_color: "Custom"
+                    text_color: CAL_TEXT_DARK
+                MDLabel:
+                    id: transaction16
+                    font_size: "11sp"
+                    size_hint_y: None
+                    height: "20dp"
+                    shorten: True
+                    shorten_from: 'right'
+                    theme_text_color: "Custom"
+                    text_color: CAL_TEXT_DARK
+                MDLabel:
+                    id: transaction17
+                    font_size: "11sp"
+                    size_hint_y: None
+                    height: "20dp"
+                    shorten: True
+                    shorten_from: 'right'
+                    theme_text_color: "Custom"
+                    text_color: CAL_TEXT_DARK
+                MDLabel:
+                    id: transaction18
+                    font_size: "11sp"
+                    size_hint_y: None
+                    height: "20dp"
+                    shorten: True
+                    shorten_from: 'right'
+                    theme_text_color: "Custom"
+                    text_color: CAL_TEXT_DARK
+                MDLabel:
+                    id: transaction19
+                    font_size: "11sp"
+                    size_hint_y: None
+                    height: "20dp"
+                    shorten: True
+                    shorten_from: 'right'
+                    theme_text_color: "Custom"
+                    text_color: CAL_TEXT_DARK
+                MDLabel:
+                    id: transaction20
+                    font_size: "11sp"
+                    size_hint_y: None
+                    height: "20dp"
+                    shorten: True
+                    shorten_from: 'right'
+                    theme_text_color: "Custom"
+                    text_color: CAL_TEXT_DARK
