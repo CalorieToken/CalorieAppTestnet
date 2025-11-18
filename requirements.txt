@@ -32,3 +32,5 @@ aiohttp
 
 # Note: shelve and json are part of Python standard library
 # Note: pyjnius is installed automatically by buildozer when building for Android
+# Image generation utility (local social asset automation)
+pillow>=10.3.0
