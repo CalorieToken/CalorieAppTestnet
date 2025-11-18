@@ -3,13 +3,15 @@
 [![CI](https://github.com/CalorieToken/CalorieAppTestnet/actions/workflows/ci.yml/badge.svg)](https://github.com/CalorieToken/CalorieAppTestnet/actions/workflows/ci.yml)
 [![CodeQL](https://github.com/CalorieToken/CalorieAppTestnet/actions/workflows/codeql.yml/badge.svg)](https://github.com/CalorieToken/CalorieAppTestnet/actions/workflows/codeql.yml)
 [![UX Tour](https://github.com/CalorieToken/CalorieAppTestnet/actions/workflows/ux_tour.yml/badge.svg)](https://github.com/CalorieToken/CalorieAppTestnet/actions/workflows/ux_tour.yml)
-[![Version](https://img.shields.io/badge/version-1.1.0-blue.svg)](https://github.com/CalorieToken/CalorieAppTestnet)
+[![Version](https://img.shields.io/badge/version-1.1.1-blue.svg)](https://github.com/CalorieToken/CalorieAppTestnet)
 [![Python](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/)
 [![License](https://img.shields.io/badge/license-Custom%20Dual-orange.svg)](LICENSE)
 [![Website](https://img.shields.io/badge/website-calorietoken.net-green.svg)](https://calorietoken.net)
 [![XRPL](https://img.shields.io/badge/XRPL-Mainnet%20%26%20Testnet-blue.svg)](https://xrpl.org/)
 
 A mobile-first cryptocurrency wallet and food tracking application for **CalorieToken** on the XRP Ledger, built with KivyMD.
+
+> **Latest Update (2025-11-18 – v1.1.1):** Repository hardening, public-safe documentation index, UX layout consistency, security enhancements. See [CHANGELOG](docs/CHANGELOG.md#111---2025-11-18). Pending merge from branch `chore/repo-hardening`.
 
 ## 🪙 CalorieToken Integration
 
