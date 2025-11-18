@@ -24,6 +24,7 @@ from xrpl.wallet import Wallet
 from src.utils.storage_paths import WALLET_DATA_PATH
 from src.utils.faucet_manager import generate_multi_faucet_wallet
 from src.utils.mnemonic_manager import generate_wallet_with_mnemonic
+from src.utils.clipboard_utils import secure_copy
 
 JSON_RPC_URL = "https://testnet.xrpl-labs.com"  # Use XRPL Labs testnet (more reliable)
 client = JsonRpcClient(JSON_RPC_URL)
@@ -82,7 +83,7 @@ Private Key: {wallet.private_key}"""
     def copy_mnemonic(self, mnemonic):
         """Copy mnemonic to clipboard."""
         mnemonic_text = " ".join(mnemonic)
-        Clipboard.copy(mnemonic_text)
+        secure_copy(mnemonic_text, clear_after=30.0)
         print("✅ Extra wallet mnemonic copied to clipboard!")
 
     def get_next_account_number(self):
@@ -150,8 +151,7 @@ Private Key: {wallet.private_key}"""
 
     def copy_keys(self, private_key, public_key):
         # Copy the private and public keys to the clipboard
-        cb = Clipboard
-        cb.copy("Private_Key: " + private_key + "\n" + "Public_Key: " + public_key)
+        secure_copy("Private_Key: " + private_key + "\n" + "Public_Key: " + public_key, clear_after=30.0)
 
     def proceed(self, dialog):
         dialog.dismiss()

@@ -1,9 +1,6 @@
-<NFTMintScreen>
-    uri: uri
-    taxon: taxon
-    input_error: input_error
-
-    MDBoxLayout:
+#:import r src.utils.responsive
+<NFTMintScreen>:
+    ResponsiveContainer:
         orientation: "vertical"
         canvas.before:
             Color:
@@ -14,113 +11,92 @@
         AppHeader:
             id: app_header
             title: "Mint NFT"
-        MDGridLayout:
-            cols: 1
-            size_hint: (1, .75)
-            MDLabel:
-                size_hint: (1, .05)
-            MDGridLayout:
-                size_hint: (1, .1)
-                cols: 4
-                MDLabel:
-                    size_hint: (.2, 1)
-                MDGridLayout:
-                    size_hint: (.05, 1)
-                    rows:2
-                    MDIcon:
-                        icon: "brush"
-                        theme_text_color: "Custom"
-                        text_color: rgba('#008D36')
-                        icon_size: "16sp"
-                        size_hint: (1, .95)
-                    MDLabel:
-                        size_hint: (1, .05)
-                MDGridLayout:
-                    size_hint: (.5, 1)
-                    rows:2
-
-                    MDLabel:
-                        size_hint: (1, .6)
-                        text: "NFT Minter"
-                        theme_text_color: "Custom"
-                        text_color: rgba('#202443')
-                        halign: 'center'
-                        font_size: '22sp'
-                    MDLabel:
-                        size_hint: (1, .4)
-
-
-                MDLabel:
-                    size_hint: (.25, 1)
-            MDLabel:
-                size_hint: (1, .06)
-            MDGridLayout:
-                size_hint: (1, .14)
-                cols: 3
-                MDLabel:
-                    size_hint: (.25, 1)
-                    text: "Enter URI Link"
-                MDTextField:
-                    mode: "filled"
-                    line_color_focus: rgba('#008D36')
-                    hint_text_color_focus: rgba('#008D36')
-                    fill_color_normal: rgba('#dadeed')
-                    fill_color_focus: rgba('#e9ebf5')
-                    size_hint: (.7, 1)
-                    id: uri
-                    multiline:False
-                MDLabel:
-                    size_hint: (.05, 1)
-            MDLabel:
-                size_hint: (1, 0.05)
-            MDGridLayout:
-                size_hint: (1, .14)
-                cols: 3
-
-                MDLabel:
-                    size_hint: (.25, 1)
-                    text: "Enter Taxon"
-                MDTextField:
-                    mode: "filled"
-                    line_color_focus: rgba('#008D36')
-                    hint_text_color_focus: rgba('#008D36')
-                    fill_color_normal: rgba('#dadeed')
-                    fill_color_focus: rgba('#e9ebf5')
-                    size_hint: (.7, 1)
-                    id: taxon
-                    multiline:False
-                MDLabel:
-                    size_hint: (.05, 1)
-            MDLabel:
-                size_hint: (1, .05)
-            MDGridLayout:
-                cols: 3
-                size_hint: (1, .1)
-                MDLabel:
-                    size_hint: (.33, 1)
-                MDButton:
-                    style: "filled"
-                    size_hint: (.6, None)
-                    height: "52dp"
-                    radius: [24]
-                    md_bg_color: rgba('#505CA9')
-                    on_release: root.mint()
-                    MDButtonIcon:
-                        icon: "brush"
-                        icon_color: rgba('#f9b233')
-                    MDButtonText:
-                        text: "Mint NFT"
-                        text_color: rgba('#008D36')
-                MDLabel:
-                    size_hint: (.33, 1)
-            MDLabel:
-                size_hint: (1, 0.06)
-            MDLabel:
-                size_hint: (1, .05)
-                id: input_error
-                font_style: "Body"
-                halign: "center"
-                theme_text_color: "Primary"
-            MDLabel:
-                size_hint: (1, .24)
+        ContentScroll:
+            ContentSection:
+                SectionHeader:
+                    text: "NFT Minter"
+                ContentCard:
+                    md_bg_color: CAL_BG_LIGHT
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        padding: [SP_MD, SP_MD]
+                        spacing: SP_SM
+                        MDLabel:
+                            text_size: self.width, None
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            text: "Create an NFT on XRPL"
+                            font_style: "Title"
+                            theme_text_color: "Custom"
+                            text_color: CAL_TEXT_DARK
+                            halign: "center"
+                            size_hint_y: None
+                            adaptive_height: True
+                
+                SectionHeader:
+                    text: "NFT Details"
+                ContentCard:
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        padding: [SP_MD, SP_MD]
+                        spacing: SP_MD
+                        
+                        MDTextField:
+                            id: nft_uri
+                            hint_text: "Enter URI Link"
+                            mode: "filled"
+                            line_color_focus: rgba('#008D36')
+                            hint_text_color_focus: rgba('#008D36')
+                            fill_color_normal: rgba('#dadeed')
+                            fill_color_focus: rgba('#e9ebf5')
+                            size_hint_y: None
+                            height: r.scale_dp(56)
+                            multiline: False
+                            helper_text: "URL pointing to NFT metadata"
+                            helper_text_mode: "on_focus"
+                        
+                        MDTextField:
+                            id: nft_taxon
+                            hint_text: "Enter Taxon (Collection ID)"
+                            mode: "filled"
+                            line_color_focus: rgba('#008D36')
+                            hint_text_color_focus: rgba('#008D36')
+                            fill_color_normal: rgba('#dadeed')
+                            fill_color_focus: rgba('#e9ebf5')
+                            size_hint_y: None
+                            height: r.scale_dp(56)
+                            multiline: False
+                            helper_text: "Optional: Group similar NFTs"
+                            helper_text_mode: "on_focus"
+                        
+                        MDLabel:
+                            text_size: self.width, None
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            size_hint_y: None
+                            height: r.scale_dp(10)
+                        
+                        PrimaryButtonFixed:
+                            width: dp(BTN_W_MD)
+                            pos_hint: {"center_x": 0.5}
+                            on_release: root.mint()
+                            MDButtonIcon:
+                                icon: "brush"
+                                icon_color: CAL_YELLOW
+                            MDButtonText:
+                                text: "Mint NFT"
+                                text_color: CAL_GREEN
+                        
+                        MDLabel:
+                            text_size: self.width, None
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            id: input_error
+                            text: ""
+                            font_style: "Body"
+                            halign: "center"
+                            theme_text_color: "Custom"
+                            text_color: rgba('#e74c3c')
+                            size_hint_y: None
+                            adaptive_height: True
         PrimaryBottomBar:

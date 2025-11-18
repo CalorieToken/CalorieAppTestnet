@@ -83,7 +83,7 @@ class MnemonicDisplayScreen(Screen):
         """Copy mnemonic to clipboard."""
         if self.mnemonic:
             mnemonic_text = " ".join(self.mnemonic)
-            Clipboard.copy(mnemonic_text)
+            secure_copy(mnemonic_text, clear_after=30.0)
 
             # Optional: show confirmation if label exists
             if "copy_status" in self.ids:
@@ -98,7 +98,7 @@ class MnemonicDisplayScreen(Screen):
     def copy_private_key(self):
         """Copy private key to clipboard."""
         if self.wallet and getattr(self.wallet, "private_key", None):
-            Clipboard.copy(self.wallet.private_key)
+            secure_copy(self.wallet.private_key, clear_after=30.0)
 
     def copy_keypair(self):
         """Copy both public and private keys as a pair to clipboard."""
@@ -110,7 +110,7 @@ class MnemonicDisplayScreen(Screen):
             keypair_text = (
                 f"Public Key: {self.wallet.public_key}\nPrivate Key: {self.wallet.private_key}"
             )
-            Clipboard.copy(keypair_text)
+            secure_copy(keypair_text, clear_after=30.0)
 
     def continue_process(self):
         """Handle continue button - either start verification or complete process."""

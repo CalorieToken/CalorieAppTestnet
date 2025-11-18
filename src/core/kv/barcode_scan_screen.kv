@@ -1,0 +1,61 @@
+#:import r src.utils.responsive
+<BarcodeScanScreen>:
+    ResponsiveContainer:
+        orientation: "vertical"
+        canvas.before:
+            Color:
+                rgba: rgba('#bfc6e0')
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        AppHeader:
+            id: app_header
+            title: "Barcode Scan (Pilot)"
+        ContentScroll:
+            ContentSection:
+                SectionHeader:
+                    text: "Scan or Enter Barcode"
+                Widget:
+                    size_hint_y: None
+                    height: SP_XS
+                ContentCard:
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        padding: [SP_MD, SP_MD]
+                        spacing: SP_SM
+                        MDTextField:
+                            id: barcode_input
+                            hint_text: "Barcode (EAN/UPC)"
+                            input_filter: 'int'
+                            helper_text: "Type or paste a barcode for lookup"
+                            helper_text_mode: "on_focus"
+                        MDBoxLayout:
+                            adaptive_height: True
+                            spacing: SP_SM
+                            MDButton:
+                                text: "Lookup"
+                                on_release: root.lookup_barcode()
+                            MDButton:
+                                text: "Record to CalorieDB"
+                                on_release: root.record_to_caloriedb()
+                SectionHeader:
+                    text: "Result"
+                Widget:
+                    size_hint_y: None
+                    height: SP_XS
+                ContentCard:
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        padding: [SP_MD, SP_MD]
+                        spacing: SP_SM
+                        MDLabel:
+                            text_size: self.width, None
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            id: result_label
+                            text: root.result_text if root.result_text else "Awaiting lookup..."
+                            shorten: True
+                            shorten_from: "right"
+                            theme_text_color: "Custom"
+                            text_color: CAL_TEXT_DARK
+        PrimaryBottomBar:

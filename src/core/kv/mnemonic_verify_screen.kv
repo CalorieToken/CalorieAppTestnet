@@ -1,5 +1,6 @@
+#:import r src.utils.responsive
 <MnemonicVerifyScreen>:
-    MDBoxLayout:
+    ResponsiveContainer:
         orientation: "vertical"
         canvas.before:
             Color:
@@ -7,56 +8,24 @@
             Rectangle:
                 pos: self.pos
                 size: self.size
-        MDBoxLayout:
-            size_hint: (1, None)
-            height: "56dp"
-            orientation: "horizontal"
-            padding: ["8dp", "8dp"]
-            spacing: "8dp"
-            canvas.before:
-                Color:
-                    rgba: rgba('#505CA9')
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
-            MDLabel:
-                size_hint: (None, None)
-                size: ("44dp", "44dp")
-            MDLabel:
-                id: header_label
-                text: "Verify Recovery Phrase"
-                theme_text_color: "Custom"
-                text_color: rgba('#ffffff')
-                halign: 'center'
-                valign: 'center'
-                font_size: '18sp'
-                size_hint_x: 1
-            MDCard:
-                size_hint: (None, None)
-                size: ("40dp", "40dp")
-                radius: [20,]
-                md_bg_color: rgba('#e8ebf5')
-                elevation: 0
-                padding: "4dp"
-                pos_hint: {"center_y": 0.5}
-                Image:
-                    source: 'assets/images/CalorieLogoTranspa.png'
-                    size_hint: (1, 1)
-                    mipmap: True
+        AppHeader:
+            title: "Verify Recovery Phrase"
         MDScrollView:
             size_hint: (1, .75)
             do_scroll_x: False
             do_scroll_y: True
             bar_color: rgba('#f9b233')
-            
             MDGridLayout:
                 cols: 1
-                padding: "10dp"
+                padding: ["10dp", "10dp"]
                 spacing: "10dp"
                 size_hint_y: None
                 height: self.minimum_height
 
                 MDLabel:
+                    text_size: self.width, None
+                    size_hint_y: None
+                    height: self.texture_size[1]
                     text: "Enter each word in order"
                     font_style: "Title"
                     theme_text_color: "Custom"
@@ -74,6 +43,8 @@
                     MDTextField:
                         id: word_01
                         hint_text: "1."
+                        helper_text: "Enter the first word from your recovery phrase"
+                        helper_text_mode: "on_focus"
                         mode: "filled"
                         line_color_focus: rgba('#008D36')
                         hint_text_color_focus: rgba('#008D36')
@@ -86,6 +57,8 @@
                     MDTextField:
                         id: word_02
                         hint_text: "2."
+                        helper_text: "Word 2"
+                        helper_text_mode: "on_focus"
                         mode: "filled"
                         line_color_focus: rgba('#008D36')
                         hint_text_color_focus: rgba('#008D36')
@@ -97,6 +70,8 @@
                     MDTextField:
                         id: word_03
                         hint_text: "3."
+                        helper_text: "Word 3"
+                        helper_text_mode: "on_focus"
                         mode: "filled"
                         line_color_focus: rgba('#008D36')
                         hint_text_color_focus: rgba('#008D36')
@@ -108,6 +83,8 @@
                     MDTextField:
                         id: word_04
                         hint_text: "4."
+                        helper_text: "Word 4"
+                        helper_text_mode: "on_focus"
                         mode: "filled"
                         line_color_focus: rgba('#008D36')
                         hint_text_color_focus: rgba('#008D36')
@@ -119,6 +96,8 @@
                     MDTextField:
                         id: word_05
                         hint_text: "5."
+                        helper_text: "Word 5"
+                        helper_text_mode: "on_focus"
                         mode: "filled"
                         line_color_focus: rgba('#008D36')
                         hint_text_color_focus: rgba('#008D36')
@@ -130,6 +109,8 @@
                     MDTextField:
                         id: word_06
                         hint_text: "6."
+                        helper_text: "Word 6"
+                        helper_text_mode: "on_focus"
                         mode: "filled"
                         line_color_focus: rgba('#008D36')
                         hint_text_color_focus: rgba('#008D36')
@@ -141,6 +122,8 @@
                     MDTextField:
                         id: word_07
                         hint_text: "7."
+                        helper_text: "Word 7"
+                        helper_text_mode: "on_focus"
                         mode: "filled"
                         line_color_focus: rgba('#008D36')
                         hint_text_color_focus: rgba('#008D36')
@@ -152,6 +135,8 @@
                     MDTextField:
                         id: word_08
                         hint_text: "8."
+                        helper_text: "Word 8"
+                        helper_text_mode: "on_focus"
                         mode: "filled"
                         line_color_focus: rgba('#008D36')
                         hint_text_color_focus: rgba('#008D36')
@@ -163,6 +148,8 @@
                     MDTextField:
                         id: word_09
                         hint_text: "9."
+                        helper_text: "Word 9"
+                        helper_text_mode: "on_focus"
                         mode: "filled"
                         line_color_focus: rgba('#008D36')
                         hint_text_color_focus: rgba('#008D36')
@@ -174,6 +161,8 @@
                     MDTextField:
                         id: word_10
                         hint_text: "10."
+                        helper_text: "Word 10"
+                        helper_text_mode: "on_focus"
                         mode: "filled"
                         line_color_focus: rgba('#008D36')
                         hint_text_color_focus: rgba('#008D36')
@@ -185,6 +174,8 @@
                     MDTextField:
                         id: word_11
                         hint_text: "11."
+                        helper_text: "Word 11"
+                        helper_text_mode: "on_focus"
                         mode: "filled"
                         line_color_focus: rgba('#008D36')
                         hint_text_color_focus: rgba('#008D36')
@@ -196,6 +187,8 @@
                     MDTextField:
                         id: word_12
                         hint_text: "12."
+                        helper_text: "Word 12"
+                        helper_text_mode: "on_focus"
                         mode: "filled"
                         line_color_focus: rgba('#008D36')
                         hint_text_color_focus: rgba('#008D36')
@@ -205,6 +198,9 @@
                         height: "48dp"
 
                 MDLabel:
+                    text_size: self.width, None
+                    size_hint_y: None
+                    height: self.texture_size[1]
                     id: error_label
                     text: ""
                     theme_text_color: "Error"
@@ -215,9 +211,12 @@
                 MDGridLayout:
                     cols: 3
                     size_hint_y: None
-                    height: "60dp"
+                    height: "52dp"
 
                     MDLabel:
+                        text_size: self.width, None
+                        size_hint_y: None
+                        height: self.texture_size[1]
                         size_hint: (4, 1)
                     MDButton:
                         id: verify_button
@@ -234,9 +233,15 @@
                             text: "Verify & Continue"
                             text_color: rgba('#008D36')
                     MDLabel:
+                        text_size: self.width, None
+                        size_hint_y: None
+                        height: self.texture_size[1]
                         size_hint: (4, 1)
 
                 MDLabel:
+                    text_size: self.width, None
+                    size_hint_y: None
+                    height: self.texture_size[1]
                     size_hint_y: None
                     height: "20dp"
 
@@ -252,7 +257,7 @@
                     size: self.size
 
             MDIconButton:
-                icon: "arrow-left"
+                accessible_name: "Back"
                 theme_icon_size: "Custom"
                 icon_size: "24sp"
                 theme_icon_color: "Custom"
@@ -267,6 +272,11 @@
                         pos: self.pos[0] + dp(5), self.pos[1] + dp(5)
                         size: self.size[0] - dp(10), self.size[1] - dp(10)
                         radius: [dp(8)]
+                MDButtonIcon:
+                    icon: "arrow-left"
             MDLabel:
+                text_size: self.width, None
+                size_hint_y: None
+                height: self.texture_size[1]
                 size_hint: (.85, 1)
 

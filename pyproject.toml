@@ -3,6 +3,55 @@ line-length = 100
 target-version = ["py311", "py312"]
 exclude = ".git|__pycache__|build|dist"
 
+[project]
+name = "calorieapp"
+version = "1.1.0"
+description = "Mobile cryptocurrency wallet and food tracking application for CalorieToken on XRPL"
+readme = "README.md"
+requires-python = ">=3.12"
+license = {text = "Custom Dual License - See LICENSE file"}
+authors = [
+    {name = "CalorieToken", email = "info@calorietoken.net"}
+]
+maintainers = [
+    {name = "CalorieToken Development Team", email = "info@calorietoken.net"}
+]
+keywords = [
+    "blockchain",
+    "cryptocurrency", 
+    "wallet",
+    "xrpl",
+    "calorie",
+    "food-tracking",
+    "mobile",
+    "kivy",
+    "kivymd",
+    "testnet"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: End Users/Desktop",
+    "License :: Other/Proprietary License",
+    "Operating System :: OS Independent",
+    "Operating System :: Android",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Office/Business :: Financial",
+    "Topic :: Office/Business :: Financial :: Cryptocurrency Wallet",
+    "Topic :: Health :: Nutrition",
+    "Environment :: Mobile",
+]
+
+[project.urls]
+Homepage = "https://calorietoken.net"
+Repository = "https://github.com/CalorieToken/CalorieAppTestnet"
+Documentation = "https://github.com/CalorieToken/CalorieAppTestnet/blob/main/docs/README.md"
+"Bug Tracker" = "https://github.com/CalorieToken/CalorieAppTestnet/issues"
+Whitepaper = "https://calorietoken.net/index.php/whitepaper/"
+Twitter = "https://twitter.com/CalorieToken"
+Telegram = "https://t.me/joinchat/8jIusxwzMVI0NGVk"
+Discord = "https://discord.gg/hcjJgdyDGd"
+
 [tool.coverage.run]
 branch = true
 source = ["src"]

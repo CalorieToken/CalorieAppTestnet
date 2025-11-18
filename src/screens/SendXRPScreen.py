@@ -10,6 +10,8 @@ from kivy.uix.screenmanager import Screen
 from kivymd.uix.label import MDLabel
 
 from src.utils.dialogs import show_confirm_dialog, show_error_dialog, show_info_dialog
+from src.utils.performance.resource_guard import resource_guard
+from src.utils.performance import debounce
 
 import bcrypt
 from Crypto.Cipher import AES
@@ -75,21 +77,18 @@ class SendXRPScreen(Screen):
         except Exception:
             self.public_key = None
 
-        if not self.public_key:
-            return
-
-        # Derive classic address from public key
-        try:
-            test_wallet_address = derive_classic_address(self.public_key)
-            self.xrp_address.text = test_wallet_address
-        except Exception:
-            self.xrp_address.text = ""
+        # Derive classic address from public key (if we have one)
+        if self.public_key:
+            try:
+                test_wallet_address = derive_classic_address(self.public_key)
+                self.xrp_address.text = test_wallet_address
+            except Exception:
+                self.xrp_address.text = ""
 
         # Check if we're in offline mode or if we have no connection
         try:
-            from src.core.app import OFFLINE_MODE
-
-            offline_mode = OFFLINE_MODE
+            from src.core import app as app_module
+            offline_mode = getattr(app_module, 'OFFLINE_MODE', False)
         except Exception:
             offline_mode = False
 
@@ -97,11 +96,16 @@ class SendXRPScreen(Screen):
         if not is_online() or offline_mode:
             # Set offline status immediately for faster loading
             self.xrp_balance.text = "Offline Mode"
-            # Clear transaction history
+            # Clear transaction history and show offline message
             for i in range(1, 21):
                 lbl = self._get_tx_label(i)
                 if lbl:
                     lbl.text = "Offline Mode"
+            return  # Skip balance checking in offline mode
+        
+        # Only proceed with balance checking if we have a public key
+        if not self.public_key:
+            return
         else:
             # Online mode - start balance checking with robust client
             self.check_balance(dt=30)
@@ -176,44 +180,113 @@ class SendXRPScreen(Screen):
                 # Network error - assume valid format and let transaction attempt proceed
                 return (True, None, "network_error")
 
+    @debounce(delay=0.5)
     def send_xrp(self):
-        amount = self.ids["amount_input"].text
+        amount_text = self.ids["amount_input"].text
         destination = self.ids["destination_input"].text
-
-        # Prevent sending to self (same sender and destination)
+        
+        # Inline validation with helper text feedback
+        has_errors = False
+        
+        # Validate amount
         try:
-            if destination and self.xrp_address and destination.strip() == self.xrp_address.text.strip():
-                self.show_error_message("Destination cannot be your own address.")
-                return
-        except Exception:
-            pass
-
-        # Check for a valid amount
-        try:
-            amount = float(amount)
-            if amount <= 0:
-                raise ValueError
+            if not amount_text or not amount_text.strip():
+                self.amount_input.helper_text = "Amount is required"
+                self.amount_input.error = True
+                has_errors = True
+            else:
+                amount = float(amount_text)
+                if amount <= 0:
+                    self.amount_input.helper_text = "Amount must be positive"
+                    self.amount_input.error = True
+                    has_errors = True
+                else:
+                    # Check sufficient balance
+                    try:
+                        current_balance = float(self.xrp_balance.text.split()[0]) if self.xrp_balance.text != "Offline Mode" else 0
+                        if amount > current_balance:
+                            self.amount_input.helper_text = f"Insufficient balance (available: {current_balance} XRP)"
+                            self.amount_input.error = True
+                            has_errors = True
+                        else:
+                            self.amount_input.helper_text = ""
+                            self.amount_input.error = False
+                    except (ValueError, IndexError):
+                        self.amount_input.helper_text = "Cannot verify balance"
+                        self.amount_input.error = True
+                        has_errors = True
         except ValueError:
-            self.show_error_message("Enter a valid amount.")
+            self.amount_input.helper_text = "Enter a valid number"
+            self.amount_input.error = True
+            has_errors = True
+        
+        # Validate destination address
+        if not destination or not destination.strip():
+            self.destination_input.helper_text = "Destination address is required"
+            self.destination_input.error = True
+            has_errors = True
+        elif not destination.startswith('r'):
+            self.destination_input.helper_text = "XRPL addresses must start with 'r'"
+            self.destination_input.error = True
+            has_errors = True
+        elif len(destination) < 25 or len(destination) > 35:
+            self.destination_input.helper_text = "Invalid address length (should be 25-35 characters)"
+            self.destination_input.error = True
+            has_errors = True
+        else:
+            # Prevent sending to self
+            try:
+                if self.xrp_address and destination.strip() == self.xrp_address.text.strip():
+                    self.destination_input.helper_text = "Cannot send to your own address"
+                    self.destination_input.error = True
+                    has_errors = True
+                else:
+                    self.destination_input.helper_text = ""
+                    self.destination_input.error = False
+            except Exception:
+                pass
+        
+        # Stop if validation failed
+        if has_errors:
+            from src.utils.enhanced_dialogs import show_validation_error
+            show_validation_error(
+                "Please fix the validation errors before proceeding.",
+                details="Check the highlighted fields for specific error messages."
+            )
             return
-
+        
+        amount = float(amount_text)
+        
+        amount = float(amount_text)
+        
         # Check for a valid destination address
         is_valid_format, account_exists, error_msg = self.check_address(destination)
 
         if not is_valid_format:
-            self.show_error_message(f"Invalid destination address.\n{error_msg}")
+            from src.utils.enhanced_dialogs import show_validation_error
+            show_validation_error(
+                "Invalid destination address.",
+                details=error_msg or "Please verify the address format."
+            )
+            self.destination_input.helper_text = "Invalid address format"
+            self.destination_input.error = True
             return
 
         # Warn user if sending to unfunded account (but allow it)
         if account_exists is False and error_msg == "unfunded":
             # Check if amount is sufficient to activate account (1 XRP minimum on testnet)
             if amount < 1:
-                self.show_error_message(
-                    f"Destination account is not yet activated.\n\n"
-                    f"The first payment to a new account must be at least 1 XRP to activate it.\n\n"
-                    f"You are trying to send {amount} XRP.\n\n"
-                    f"Please send at least 1 XRP or choose a different destination."
+                from src.utils.enhanced_dialogs import show_validation_error
+                show_validation_error(
+                    "Destination account is not yet activated.",
+                    details=(
+                        f"The first payment to a new account must be at least 1 XRP to activate it.\n\n"
+                        f"You are trying to send {amount} XRP.\n\n"
+                        f"Please send at least 1 XRP or choose a different destination."
+                    )
                 )
+                self.amount_input.helper_text = "Minimum 1 XRP required for new accounts"
+                self.amount_input.error = True
                 return
             else:
                 # Amount is sufficient - proceed with helpful message in confirmation
@@ -221,11 +294,35 @@ class SendXRPScreen(Screen):
         else:
             self.unfunded_destination = False
 
+        # Use enhanced confirmation dialog
+        from src.utils.enhanced_dialogs import confirm_transaction
+        
+        warning = None
+        if self.unfunded_destination:
+            warning = "⚠️ This will activate a new account (≥ 1 XRP required). This transaction cannot be undone."
+        else:
+            warning = "This transaction cannot be undone."
+        
+        confirm_transaction(
+            amount=str(amount),
+            currency="XRP",
+            destination=destination,
+            warning=warning,
+            on_confirm=self._show_password_confirmation,
+            on_cancel=None
+        )
+    
+    def _show_password_confirmation(self):
+        """Show password input after user confirms transaction details."""
         # Define the password input field with toggle visibility
         self.password_field_container = create_password_field_with_toggle(
             hint_text="Enter your password"
         )
         self.password_field = self.password_field_container.password_field
+
+        # Get values from input fields
+        amount = self.ids["amount_input"].text
+        destination = self.ids["destination_input"].text
 
         # Build concise, M3-style content
         Amount = MDLabel(text=f"Amount: {amount}")
@@ -262,6 +359,12 @@ class SendXRPScreen(Screen):
         )
 
     def perform_send(self, entered_password):
+        # Check XRPL transaction rate limit first
+        allowed, retry_after = resource_guard.check("xrpl_tx")
+        if not allowed:
+            self.password_field.hint_text = f"Rate limited. Try in {int(retry_after)}s"
+            self.password_field.text = ""
+            return
         # Load the password hash from the file
         wallet_data = shelve.open(WALLET_DATA_PATH)
         hashed_password = wallet_data.get("password")
@@ -344,26 +447,73 @@ class SendXRPScreen(Screen):
                     tx_result = tx_response.result["meta"].get("TransactionResult", "Unknown")
                     if tx_result == "tesSUCCESS":
                         print("✅ Transaction successful!")
+                        # Save values before clearing fields
+                        sent_amount = self.amount_input.text
+                        sent_destination = self.destination_input.text
                         # Dismiss the password dialog first
                         self.dialog.dismiss()
-                        # Show success message to user
-                        self.show_success_message("Transaction completed successfully!")
+                        # Show success message to user using enhanced dialog
+                        from src.utils.enhanced_dialogs import show_success
+                        show_success(
+                            "Transaction Completed",
+                            f"Successfully sent {sent_amount} XRP to {sent_destination[:8]}...{sent_destination[-8:]}"
+                        )
+                        # Clear input fields
+                        self.amount_input.text = ""
+                        self.destination_input.text = ""
+                        # Optional CalorieDB ↔ XRPL linking
+                        try:
+                            import os
+                            from kivy.app import App
+                            if os.environ.get("CALORIE_LINKING_MODE") in ("1","true","TRUE"):
+                                app = App.get_running_app()
+                                tx_hash = None
+                                try:
+                                    tx_hash = tx_response.result.get("hash") or tx_response.result.get("tx_json", {}).get("hash")
+                                except Exception:
+                                    tx_hash = None
+                                if tx_hash:
+                                    record = {
+                                        "type": "xrp_payment",
+                                        "amount_drops": str(int(float(self.amount_input.text) * 1000000)),
+                                        "amount_xrp": self.amount_input.text,
+                                        "destination": self.destination_input.text,
+                                        "account": test_wallet_address,
+                                    }
+                                    try:
+                                        app.link_calorie_record_to_tx(record, tx_hash)
+                                    except Exception:
+                                        pass
+                        except Exception:
+                            pass
                     else:
                         print(f"❌ Transaction failed with error: {tx_result}")
                         # Dismiss the password dialog first
                         self.dialog.dismiss()
-                        self.show_error_message(f"Transaction failed: {tx_result}")
+                        from src.utils.enhanced_dialogs import show_transaction_error
+                        show_transaction_error(
+                            f"Transaction failed: {tx_result}",
+                            details="The XRPL network rejected this transaction. Please verify your balance and try again."
+                        )
                 else:
                     print("❓ Transaction submitted - status unknown")
                     # Dismiss the password dialog first
                     self.dialog.dismiss()
-                    self.show_error_message("Transaction submitted but status unclear")
+                    from src.utils.enhanced_dialogs import show_warning
+                    show_warning(
+                        "Transaction Status Unknown",
+                        "Transaction was submitted but the final status could not be confirmed. Please check your transaction history."
+                    )
 
             except Exception as tx_error:
                 print(f"❌ Transaction submission failed: {tx_error}")
                 # Dismiss the password dialog first
                 self.dialog.dismiss()
-                self.show_error_message(f"Failed to submit transaction: {str(tx_error)}")
+                from src.utils.enhanced_dialogs import show_transaction_error
+                show_transaction_error(
+                    "Failed to submit transaction",
+                    details=str(tx_error)
+                )
                 return
 
             # No explicit shelve handle to close here; contexts already closed

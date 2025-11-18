@@ -11,6 +11,7 @@ from kivy.core.clipboard import Clipboard
 from kivy.uix.screenmanager import Screen
 
 from src.utils.dialogs import show_error_dialog, show_info_dialog
+from src.utils.clipboard_utils import secure_copy
 from src.utils.storage_paths import WALLET_DATA_PATH
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -148,7 +149,7 @@ class MnemonicImportScreen(Screen):
     def copy_private_key(self):
         """Copy private key to clipboard."""
         if self.imported_wallet:
-            Clipboard.copy(self.imported_wallet.private_key)
+            secure_copy(self.imported_wallet.private_key, clear_after=30.0)
             self.ids.copy_status.text = "📋 Private key copied!"
             Clock.schedule_once(lambda dt: setattr(self.ids.copy_status, "text", ""), 3)
 

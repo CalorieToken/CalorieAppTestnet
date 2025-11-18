@@ -17,6 +17,39 @@ class SettingsScreen(Screen):
     def on_pre_enter(self, *args):
         # Populate the accounts list each time we enter
         self.refresh_account_list()
+        # Load settings toggles from storage
+        try:
+            with shelve.open(WALLET_DATA_PATH) as wallet_data:
+                require_pw = wallet_data.get("settings.require_password_on_start", False)
+                hide_bal = wallet_data.get("settings.hide_balances", False)
+                offline = wallet_data.get("settings.offline_mode", False)
+            # Update toggles if present
+            if self.ids.get("require_password_switch") is not None:
+                self.ids.require_password_switch.active = bool(require_pw)
+            if self.ids.get("hide_balances_switch") is not None:
+                self.ids.hide_balances_switch.active = bool(hide_bal)
+            if self.ids.get("offline_switch") is not None:
+                self.ids.offline_switch.active = bool(offline)
+        except Exception:
+            pass
+
+    # --- Helpers to persist/load simple settings ---
+    def _save_setting(self, key, value):
+        try:
+            with shelve.open(WALLET_DATA_PATH) as wallet_data:
+                settings = wallet_data.get("settings", {}) or {}
+                settings[key] = value
+                wallet_data["settings"] = settings
+        except Exception:
+            pass
+
+    def _load_setting(self, key, default=None):
+        try:
+            with shelve.open(WALLET_DATA_PATH) as wallet_data:
+                settings = wallet_data.get("settings", {}) or {}
+                return settings.get(key, default)
+        except Exception:
+            return default
 
     def refresh_account_list(self):
         accounts_list = self.ids.get("accounts_list")
@@ -72,6 +105,132 @@ class SettingsScreen(Screen):
                 )
             )
             accounts_list.add_widget(item)
+
+        # --- Settings handlers ---
+        def on_require_password_toggle(self, active: bool):
+            try:
+                with shelve.open(WALLET_DATA_PATH) as wallet_data:
+                    wallet_data["settings.require_password_on_start"] = bool(active)
+                show_info_dialog("Security Updated", "Password requirement on startup has been updated.")
+            except Exception:
+                pass
+
+        def on_hide_balances_toggle(self, active: bool):
+            try:
+                with shelve.open(WALLET_DATA_PATH) as wallet_data:
+                    wallet_data["settings.hide_balances"] = bool(active)
+                # Apply to wallet screen immediately if available
+                try:
+                    wallet_screen = self.manager.get_screen("wallet_screen") if self.manager else None
+                    if wallet_screen and hasattr(wallet_screen, "set_hide_balances"):
+                        wallet_screen.set_hide_balances(bool(active))
+                except Exception:
+                    pass
+                show_info_dialog("Privacy Updated", "Balance visibility setting updated.")
+            except Exception:
+                pass
+
+        def on_offline_mode_toggle(self, active: bool):
+            try:
+                with shelve.open(WALLET_DATA_PATH) as wallet_data:
+                    wallet_data["settings.offline_mode"] = bool(active)
+                show_info_dialog("Network Mode", "Offline mode preference saved. Please restart to fully apply.")
+            except Exception:
+                pass
+
+        def clear_cache(self):
+            import os
+            import shutil
+
+            removed = 0
+            try:
+                root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+                for dirpath, dirnames, filenames in os.walk(root_dir):
+                    # Remove __pycache__
+                    if "__pycache__" in dirnames:
+                        cache_path = os.path.join(dirpath, "__pycache__")
+                        try:
+                            shutil.rmtree(cache_path, ignore_errors=True)
+                            removed += 1
+                        except Exception:
+                            pass
+                show_info_dialog("Cache Cleared", f"Cleared {removed} cache folder(s).")
+            except Exception:
+                show_info_dialog("Cache", "Unable to clear cache. You can safely ignore this.")
+
+        def test_webcam(self):
+            try:
+                if self.manager:
+                    self.manager.current = "camera_scan_screen"
+            except Exception:
+                pass
+
+    # --- New settings actions ---
+    def set_autolock_timeout(self, seconds: int):
+        self._save_setting("auto_lock_timeout", int(seconds))
+        try:
+            show_info_dialog("Security", f"Auto-lock set to {int(seconds)} seconds.")
+        except Exception:
+            pass
+
+    def on_hide_balances(self, active: bool):
+        self._save_setting("hide_balances", 1 if active else 0)
+        try:
+            show_info_dialog("Privacy", "Balances will be hidden" if active else "Balances will be visible")
+        except Exception:
+            pass
+
+    def on_camera_enabled(self, active: bool):
+        self._save_setting("camera_enabled", 1 if active else 0)
+        try:
+            show_info_dialog("Permissions", "Camera scanning enabled" if active else "Camera scanning disabled")
+        except Exception:
+            pass
+
+    def cycle_xrpl_node(self):
+        # Simple cycle between known servers
+        servers = [
+            "https://testnet.xrpl-labs.com",
+            "https://s.altnet.rippletest.net:51234",
+            "https://testnet.xrplapi.com",
+        ]
+        current = self._load_setting("xrpl_server", servers[0])
+        try:
+            idx = (servers.index(current) + 1) % len(servers)
+        except ValueError:
+            idx = 0
+        new_server = servers[idx]
+        self._save_setting("xrpl_server", new_server)
+        try:
+            show_info_dialog("Network", f"Switched XRPL server to:\n{new_server}")
+        except Exception:
+            pass
+
+    def export_logs(self):
+        # Minimal log export stub
+        try:
+            os.makedirs("logs", exist_ok=True)
+            with open(os.path.join("logs", "app.log"), "a", encoding="utf-8") as f:
+                f.write("Log export marker from SettingsScreen.export_logs()\n")
+            show_info_dialog("Maintenance", "Logs exported to logs/app.log")
+        except Exception:
+            pass
+
+    def clear_cache(self):
+        # Minimal cache clear: remove __pycache__ and *.pyc in src/
+        import shutil
+        import glob
+        try:
+            for path in glob.glob("src/**/__pycache__", recursive=True):
+                shutil.rmtree(path, ignore_errors=True)
+            for pyc in glob.glob("**/*.pyc", recursive=True):
+                try:
+                    os.remove(pyc)
+                except Exception:
+                    pass
+            show_info_dialog("Maintenance", "Cache cleared")
+        except Exception:
+            pass
 
     # --- Rename flow ---
     def open_rename_dialog(self, index: int):

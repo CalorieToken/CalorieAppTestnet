@@ -1,8 +1,7 @@
+#:import r src.utils.responsive
 <WalletScreen>:
-
     xrp_balance: xrp_balance
-
-    MDBoxLayout:
+    ResponsiveContainer:
         orientation: "vertical"
         canvas.before:
             Color:
@@ -18,16 +17,24 @@
             do_scroll_x: False
             do_scroll_y: True
             ContentSection:
-
-                # Account Address Card
+                SectionHeader:
+                    text: "Account"
+                Widget:
+                    size_hint_y: None
+                    height: SP_XS
+                # Account Address Card (content-driven height)
                 ContentCard:
-                    height: "120dp"
-                    md_bg_color: rgba('#e8ebf5')
+                    size_hint_y: None
+                    height: self.minimum_height
+                    md_bg_color: CAL_BG_LIGHT
                     MDBoxLayout:
                         orientation: "vertical"
-                        spacing: "8dp"
-                        padding: ("8dp", "8dp", "8dp", "8dp")
+                        spacing: SP_SM
+                        padding: [SP_SM, SP_SM, SP_SM, SP_SM]
                         MDLabel:
+                            text_size: self.width, None
+                            size_hint_y: None
+                            height: self.texture_size[1]
                             text: "Account Address"
                             font_style: "Label"
                             theme_text_color: "Custom"
@@ -38,7 +45,7 @@
                         # Address display + copy button
                         MDBoxLayout:
                             orientation: "horizontal"
-                            spacing: "8dp"
+                            spacing: SP_SM
                             size_hint_y: None
                             height: "32dp"
                             ClickableLabel:
@@ -52,21 +59,32 @@
                                 shorten_from: "center"
                                 on_release: app.manager.get_screen('wallet_screen').open_account_selector()
                             MDIconButton:
-                                icon: "content-copy"
+                                accessible_name: "Copy address"
                                 theme_icon_color: "Custom"
                                 icon_color: rgba('#f9b233')
                                 size_hint: (None, None)
                                 size: ("40dp", "40dp")
                                 on_release: root.copy_address()
+                                MDButtonIcon:
+                                    icon: "content-copy"
 
                 # XRP Balance Card
+                SectionHeader:
+                    text: "Balance"
+                Widget:
+                    size_hint_y: None
+                    height: SP_XS
                 ContentCard:
-                    height: "110dp"
+                    size_hint_y: None
+                    height: self.minimum_height
                     md_bg_color: rgba('#e8f5ed')
                     MDBoxLayout:
                         orientation: "vertical"
-                        spacing: "6dp"
+                        spacing: SP_XS
                         MDLabel:
+                            text_size: self.width, None
+                            size_hint_y: None
+                            height: self.texture_size[1]
                             text: "XRP Balance"
                             font_style: "Label"
                             theme_text_color: "Custom"
@@ -75,10 +93,13 @@
                             height: "22dp"
                         MDBoxLayout:
                             orientation: "horizontal"
-                            spacing: "12dp"
+                            spacing: SP_MD
                             size_hint_y: None
-                            height: "46dp"
+                            height: "48dp"
                             MDLabel:
+                                text_size: self.width, None
+                                size_hint_y: None
+                                height: self.texture_size[1]
                                 id: xrp_balance
                                 text: "0.00"
                                 font_style: "Title"
@@ -88,20 +109,27 @@
                                 valign: "center"
                             MDBoxLayout:
                                 orientation: "horizontal"
-                                spacing: "6dp"
+                                spacing: SP_XS
                                 size_hint_x: None
-                                width: "88dp"
+                                width: dp(88)
                                 MDIconButton:
-                                    icon: "send"
+                                    accessible_name: "Send XRP"
                                     theme_icon_color: "Custom"
                                     icon_color: rgba('#505CA9')
                                     on_press: root.send_xrp_screen()
+                                    MDButtonIcon:
+                                        icon: "send"
                                 MDIconButton:
-                                    icon: "arrow-left-right-bold-outline"
+                                    accessible_name: "Open DEX Trader"
                                     theme_icon_color: "Custom"
                                     icon_color: rgba('#008D36')
                                     on_press: root.dextradescreen()
+                                    MDButtonIcon:
+                                        icon: "arrow-left-right-bold-outline"
                         MDLabel:
+                            text_size: self.width, None
+                            size_hint_y: None
+                            height: self.texture_size[1]
                             text: "Reserve: 1 XRP"
                             font_style: "Label"
                             theme_text_color: "Custom"
@@ -110,25 +138,36 @@
                             height: "16dp"
 
                 # Trustlines Card (header + list)
+                SectionHeader:
+                    text: "Trustlines"
+                Widget:
+                    size_hint_y: None
+                    height: SP_XS
                 ContentCard:
-                    height: "180dp"
-                    md_bg_color: rgba('#ffffff')
+                    # Dynamic height; trustlines scroll caps internal height
+                    size_hint_y: None
+                    height: self.minimum_height
+                    md_bg_color: CAL_WHITE
                     MDBoxLayout:
                         orientation: "vertical"
-                        spacing: "6dp"
+                        spacing: SP_XS
                         MDBoxLayout:
                             orientation: "horizontal"
                             size_hint_y: None
                             height: "40dp"
-                            spacing: "8dp"
+                            spacing: SP_SM
                             MDIcon:
                                 icon: "link-variant"
                                 theme_text_color: "Custom"
-                                text_color: rgba('#505CA9')
-                                icon_size: "22sp"
+                                text_color: CAL_BLUE
+                                theme_icon_size: "Custom"
+                                icon_size: ICON_SM
                                 size_hint: (None, None)
                                 size: ("28dp", "32dp")
                             MDLabel:
+                                text_size: self.width, None
+                                size_hint_y: None
+                                height: self.texture_size[1]
                                 text: "Trustlines"
                                 font_style: "Label"
                                 theme_text_color: "Custom"
@@ -137,18 +176,22 @@
                                 valign: "center"
                             MDBoxLayout:
                                 size_hint_x: None
-                                width: "96dp"
-                                spacing: "4dp"
+                                width: dp(96)
+                                spacing: SP_XS
                                 MDIconButton:
-                                    icon: "plus-circle"
+                                    accessible_name: "Add trustline"
                                     theme_icon_color: "Custom"
                                     icon_color: rgba('#008D36')
                                     on_press: root.add_trustline_screen()
+                                    MDButtonIcon:
+                                        icon: "plus-circle"
                                 MDIconButton:
-                                    icon: "refresh"
+                                    accessible_name: "Refresh trustlines"
                                     theme_icon_color: "Custom"
                                     icon_color: rgba('#505CA9')
                                     on_press: root.refresh_trustlines()
+                                    MDButtonIcon:
+                                        icon: "refresh"
                         MDScrollView:
                             id: trustlines_scroll
                             do_scroll_x: False
@@ -157,12 +200,17 @@
                             MDGridLayout:
                                 id: trustlines_container
                                 cols: 1
-                                padding: "4dp"
-                                spacing: "4dp"
+                                padding: SP_XS
+                                spacing: SP_XS
                                 size_hint_y: None
-                                height: self.minimum_height
+                                height: min(self.minimum_height, dp(240))
 
                 # Recent Transactions Card (reusable)
+                SectionHeader:
+                    text: "Recent Activity"
+                Widget:
+                    size_hint_y: None
+                    height: SP_XS
                 TransactionsCard:
                     id: transactions_card
         PrimaryBottomBar:

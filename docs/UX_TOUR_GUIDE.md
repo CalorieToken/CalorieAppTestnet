@@ -1,34 +1,211 @@
-# UX Tour Automated Testing Guide
+# Complete UX Tour System - User Guide
 
-## Overview
+**Updated:** 2025-11-18  
+**System Version:** 2.0 (Multi-phase with Best Practice Validation)
 
-The UX Tour is an automated end-to-end UI/UX testing framework that validates all app screens, flows, and components. It captures screenshots and generates detailed test reports.
+## 🎯 Overview
 
-## Running the Tour
+The Complete UX Tour (`complete_ux_tour.py`) is an automated end-to-end testing system that validates **every** screen, feature, and interaction in CalorieAppTestnet. It provides comprehensive analysis with best practice validation across 9 reference domains.
 
-### Local Execution
+**⚠️ Note:** This replaces the older `ux_tour.py` system with enhanced capabilities.
 
-```powershell
-# Run the full tour with online connectivity
-python scripts/ux_tour.py
+## ✨ Key Features
 
-# Run with offline mode testing only
-$env:OFFLINE_MODE="1"; python scripts/ux_tour.py
+### Comprehensive Coverage
+- **13 Testing Phases** covering all app functionality
+- **Branch Testing** for alternative user flows (create vs import, etc.)
+- **Triple Validation** per phase: Functionality → Performance → Appearance
+- **9 Reference Domains**: Kivy, KivyMD, Material Design 3, UI Guidelines, XRPL, IPFS, BigchainDB, FoodRepo, Bitcoin
+
+### Automated Analysis
+- Issue categorization (Functional, Layout, Performance, Errors)
+- Best practice validation with reference citations
+- Compliance scoring (target >80% per domain)
+- Fix recommendations with quick-fix suggestions
+- Per-phase analysis reports
+
+### Output Structure
+```
+docs/ux_tours/{tour_id}/
+├── screenshots/     # Before/after for every action
+├── logs/           # Detailed execution logs
+├── reports/        # Action summaries & metrics
+└── analysis/       # Per-phase analysis + recommendations
+    ├── phase_1_analysis.json      # Machine-readable
+    └── phase_1_SUMMARY.md         # Human-readable
 ```
 
-### Output
+## 📋 Complete Phase List
 
-Reports and screenshots are saved to `docs/ui_tour/<timestamp>/`:
-- `test_report.txt` - Summary of all tests with pass/fail status
-- `*.png` - Screenshots of each screen and test state
+### Phase 1: Onboarding / New User Flow
+**Branches:** create_new, import_existing  
+**Tests:** IntroScreen → FirstUseScreen → AccountChoiceScreen → MnemonicDisplayScreen → MnemonicVerifyScreen → FirstAccountSetupScreen → WalletScreen
 
-## Test Coverage
+### Phase 2: Account Management & Multi-Account
+**Branches:** single_account, multi_account  
+**Tests:** Account creation, switching, naming, management
 
-### Online Path Tests (84 tests)
-- **Wallet Screen**: Header, address, balance, buttons, account selector
-- **Send XRP**: Form inputs, hints, validation, confirmation dialog, transactions
-- **Settings**: Header, account list, refresh button
-- **Token Send**: Dynamic screen creation, form fields, hints
+### Phase 3: Wallet Core
+**Tests:** Balance display, transaction history, refresh operations
+
+### Phase 4: Transactions
+**Branches:** sendxrp, send_test_tokens, trustlines  
+**Tests:**
+- SendXRPScreen
+- SendTestTokenScreen (CAL, Lipisa)
+- AddTrustlineScreen
+
+### Phase 5: NFT Mint / Display
+**Tests:** NFT minting interface, display gallery, metadata
+
+### Phase 6: DEX / Trading
+**Tests:** DEXTradeScreen, token swaps, order book
+
+### Phase 7: Food Tracking UI
+**Tests:** FoodTrackScreen, calorie logging, meal tracking
+
+### Phase 7b: QR/Barcode Scanning
+**Branches:** qr_scan, barcode_scan  
+**Tests:**
+- BarcodeScanScreen
+- CameraScanScreen
+
+### Phase 8: Settings / Preferences / Theme
+**Tests:** SettingsScreen, theme switching, preferences
+
+### Phase 9: Web3 Browser & WebView
+**Branches:** web3_browser, webview  
+**Tests:**
+- Web3BrowserScreen
+- WebViewScreen
+
+### Phase 10: Accessibility & Responsive
+**Tests:** Touch targets (48dp), contrast, screen readers, responsive layouts
+
+### Phase 11: XRPL Network Resilience
+**Tests:** Connection failover, retry logic, offline handling
+
+### Phase 12: Persistence / Data Integrity
+**Tests:** App restart, data recovery, wallet database integrity
+
+### Phase 13: Final Analysis & Reporting
+**Tests:** Comprehensive compliance report, final recommendations
+
+## 🚀 Usage
+
+### Basic Execution
+```powershell
+# Run one phase
+python -B scripts/complete_ux_tour.py
+
+# Review analysis
+cat docs/ux_tours/tour_*/analysis/phase_*_SUMMARY.md
+
+# Fix high-priority issues
+# (see recommendations in analysis)
+
+# Run next phase
+python -B scripts/complete_ux_tour.py
+```
+
+### Environment Variables
+
+#### Visual Mode (Default: ON)
+```powershell
+# Enable visual window (slower but visible)
+$env:TOUR_VISUAL="1"
+python -B scripts/complete_ux_tour.py
+
+# Disable for faster headless execution
+$env:TOUR_VISUAL="0"
+python -B scripts/complete_ux_tour.py
+```
+
+#### Slow Motion (Default: OFF)
+```powershell
+# Add 0.4s delay between actions for manual observation
+$env:TOUR_SLOWMO="1"
+python -B scripts/complete_ux_tour.py
+```
+
+#### Phone Size Enforcement (Default: OFF)
+```powershell
+# Force phone-sized window (414x896 - iPhone 11 DP)
+$env:TOUR_FORCE_PHONE="1"
+$env:TOUR_PHONE_WIDTH="414"
+$env:TOUR_PHONE_HEIGHT="896"
+python -B scripts/complete_ux_tour.py
+```
+
+### Capturing Output
+```powershell
+# Log to file with timestamp
+python -B scripts/complete_ux_tour.py 2>&1 | Tee-Object -FilePath "ux_tour_$(Get-Date -Format 'yyyyMMdd_HHmmss').log"
+```
+
+## 📊 Analysis Reports
+
+### Compliance Scorecard (NEW in v2.0)
+Each phase generates compliance scores:
+- **Overall Compliance:** >80% target
+- **UI/UX:** Material Design 3 adherence
+- **XRPL:** Transaction reliability
+- **Performance:** Response times <3s
+- **Accessibility:** Touch targets, contrast
+
+### Markdown Summary Format
+```markdown
+# Phase 1 - Analysis Summary
+
+## 📊 Compliance Scorecard
+- **Overall Compliance:** 85.2%
+- **UI/UX Compliance:** 88.0%
+- **XRPL Best Practices:** 90.5%
+- **Performance:** 78.3%
+- **Accessibility:** 82.1%
+
+## Required Fixes
+### 🔴 High Priority
+- **Issue description**
+  - Recommendation: Specific fix
+  - Reference: `docs/reference/file.md#section`
+  - Quick Fixes: [actionable steps]
+```
+
+## 🔧 Fix Workflow
+
+1. **Review Analysis**: `cat docs/ux_tours/tour_*/analysis/phase_1_SUMMARY.md`
+2. **Prioritize**: Focus on 🔴 High Priority issues
+3. **Implement**: Use reference citations and quick fixes
+4. **Verify**: Re-run phase to confirm fixes
+5. **Continue**: Proceed to next phase when compliance >80%
+
+## 🎯 Success Criteria
+
+- ✅ All 13 phases executed
+- ✅ Overall compliance >80%
+- ✅ No HIGH severity issues
+- ✅ All critical screens tested
+- ✅ All branches covered
+
+## 📚 Reference Documentation
+
+Validation checks reference:
+- `docs/reference/kivy_best_practices.md`
+- `docs/reference/kivymd_best_practices.md`
+- `docs/reference/material_design3_best_practices.md`
+- `docs/reference/ui_guidelines.md`
+- `docs/reference/xrpl_best_practices.md`
+- `docs/reference/ipfs_best_practices.md`
+- `docs/reference/bigchaindb_best_practices.md`
+- `docs/reference/foodrepo_api_best_practices.md`
+- `docs/reference/bitcoin_dev_resources.md`
+
+---
+
+## 🕰️ Legacy System (ux_tour.py)
+
+The original `ux_tour.py` is still available for quick validation:
 - **Add Trustline**: Currency/issuer inputs, limit field
 - **NFT Mint**: URI and taxon inputs
 - **DEX Trade**: Screen rendering and content

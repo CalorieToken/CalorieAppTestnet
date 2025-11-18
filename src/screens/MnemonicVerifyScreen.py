@@ -103,11 +103,17 @@ class MnemonicVerifyScreen(Screen):
     def show_success(self):
         """Show success and navigate to naming screen"""
         # Use centralized info dialog and then continue
-        show_info_dialog(
-            title="✅ Verified!",
-            text="Your mnemonic phrase is correct!\n\nNow let's give this account a name.",
-            on_close=lambda: self.continue_to_naming(None),
-        )
+        # Add slight delay to ensure dialog renders before any automated actions
+        from kivy.clock import Clock
+        
+        def _show_dialog(_):
+            show_info_dialog(
+                title="✅ Verified!",
+                text="Your mnemonic phrase is correct!\n\nNow let's give this account a name.",
+                on_close=lambda: Clock.schedule_once(lambda dt: self.continue_to_naming(None), 0.1),
+            )
+        
+        Clock.schedule_once(_show_dialog, 0.1)
 
     def continue_to_naming(self, dialog):
         """Continue to account naming screen"""

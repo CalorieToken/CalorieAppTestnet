@@ -17,6 +17,10 @@ ECPy>=1.2.5
 # Networking
 requests>=2.31.0
 
+# Decentralized Storage / DB (optional enable DECENTRALIZED_MODE=1)
+ipfshttpclient>=0.8.0
+bigchaindb-driver>=0.6.3
+
 # Android Compatibility (for buildozer)
 plyer>=2.1.0
 

@@ -5,18 +5,15 @@ Welcome to the CalorieApp Testnet documentation. This directory contains compreh
 ## 📚 Documentation Index
 
 ### User Guides
+- **[Official Documentation Index](OFFICIAL_PROJECT_DOCS.md)** - Canonical entry point
 - **[Quick Start Guide](QUICK_START.md)** - Get up and running quickly
 - **[README](../README.md)** - Project overview and features
-- **[Project Status](PROJECT_STATUS.md)** - Current development status
 - **[Changelog](CHANGELOG.md)** - Version history and changes
 - **[Contributing Guide](CONTRIBUTING.md)** - How to contribute
 - **[Roadmap](TODO.md)** - Development roadmap
 
-### Developer Guides
+### Developer Guides (Public-safe)
 - **[UX Tour Guide](UX_TOUR_GUIDE.md)** - Automated UI/UX testing framework ⭐
-- **[UX Tour Implementation](UX_TOUR_COMPLETE.md)** - Testing metrics and coverage ⭐
-- **[Repository Organization](REPOSITORY_ORGANIZATION.md)** - Best practices for project structure ⭐ NEW
-- **[Token System Guide](TOKEN_SYSTEM_GUIDE.md)** - Adding custom XRPL tokens
 - **[Transaction Display Guide](TRANSACTION_DISPLAY_GUIDE.md)** - Transaction formatting
 - **[Faucet Troubleshooting](FAUCET_TROUBLESHOOTING.md)** - Testnet faucet issues
 
@@ -27,6 +24,15 @@ Welcome to the CalorieApp Testnet documentation. This directory contains compreh
 - **[Multi-Faucet Implementation](MULTI_FAUCET_IMPLEMENTATION.md)** - Faucet system details
 - **[Wallet Switching & Transaction History](WALLET_SWITCHING_TRANSACTION_HISTORY_FIXES.md)** - Bug fixes
 - **[Final Bug Fix Summary](FINAL_BUG_FIX_SUMMARY.md)** - Resolved issues
+
+### Reference (External)
+- **UI Frameworks:** [Kivy](https://kivy.org/doc/stable/), [KivyMD](https://kivymd.readthedocs.io/), [Material Design 3](https://m3.material.io/)
+- **Blockchain:** [XRPL Docs](https://xrpl.org/)
+- **Official CalorieToken Links:** https://calorietoken.net
+
+### Legal & Licensing
+- **[Trademark Guidelines](TRADEMARK.md)** - CalorieToken® trademark usage policy ⚠️
+- **[License](../LICENSE)** - Custom dual license terms
 
 ### Archive
 The `archive/` directory contains historical completion reports and development progress documentation for reference.
@@ -85,5 +91,5 @@ CalorieApp Testnet is licensed under a CUSTOM (dual) License.
 
 ---
 
-**Last Updated:** November 17, 2025  
+**Last Updated:** November 18, 2025  
 **Version:** 1.1.0

@@ -1,5 +1,6 @@
 # Kivy libraries for the GUI.
 import logging
+import os
 
 # Encryption libraries for password and key encryption.
 import bcrypt
@@ -16,6 +17,7 @@ from kivymd.uix.textfield import MDTextField
 
 from src.utils.currency_utils import decode_currency_code
 from src.utils.dialogs import show_confirm_dialog
+from src.utils.performance import debounce, async_operation, lazy_property
 
 logging.basicConfig(level=logging.WARNING)
 import shelve
@@ -88,6 +90,7 @@ class WalletScreen(Screen):
         self.private_key: str | None = None
         self.account_name: str | None = None
         self.account_dialog = None
+        self.hide_balances = False
 
     def set_address_text(self, address):
         """Helper to set address text on the MDLabel"""
@@ -95,6 +98,40 @@ class WalletScreen(Screen):
             label = self.ids.get("xrp_address_label")
             if label:
                 label.text = address
+        except Exception:
+            pass
+    
+    @lazy_property
+    def balance_label(self):
+        return self.ids.get("xrp_balance")
+
+    def _update_balance_ui(self, result):
+        """Callback to update UI after async balance check.
+
+        Result can be a dict returned by the background task or None (legacy path).
+        We defensively re-read current state if result is missing.
+        """
+        try:
+            if isinstance(result, dict) and 'balance' in result:
+                if self.balance_label:
+                    self.balance_label.text = result['balance']
+            else:
+                # Fallback: leave existing text untouched or set generic if empty
+                if self.balance_label and not self.balance_label.text:
+                    self.balance_label.text = "--"
+        except Exception:
+            pass
+
+    def set_hide_balances(self, hide: bool):
+        self.hide_balances = bool(hide)
+        try:
+            bal = self.ids.get("xrp_balance")
+            if bal:
+                if self.hide_balances:
+                    bal.text = "\u2022\u2022\u2022\u2022"  # ••••
+                else:
+                    # Leave actual balance; will be refreshed on next update
+                    pass
         except Exception:
             pass
 
@@ -225,6 +262,10 @@ class WalletScreen(Screen):
             content_container.add_widget(root_box)
             self.account_dialog.add_widget(content_container)
             self.account_dialog.open()
+
+            # Auto-dismiss overlay during automated UX tour to avoid obstructing screenshots
+            if os.environ.get("UX_TEST_MODE") == "1":
+                Clock.schedule_once(self._auto_dismiss_account_dialog, 0.3)
         except Exception as e:
             print(f"[UI] Failed to open account selector dialog: {e}")
             from src.utils.dialogs import show_error_dialog
@@ -242,6 +283,14 @@ class WalletScreen(Screen):
         except Exception:
             pass
         self.select_account_by_index(index)
+
+    def _auto_dismiss_account_dialog(self, *args):
+        try:
+            if self.account_dialog:
+                self.account_dialog.dismiss()
+                self.account_dialog = None
+        except Exception:
+            pass
 
     def _select_legacy_key_dialog(self, key: str):
         try:
@@ -404,6 +453,7 @@ class WalletScreen(Screen):
             Clock.schedule_once(lambda dt: self.refresh_trustlines(), 0.5)
         Clock.unschedule(self.check_balance)
 
+    @async_operation(callback='_update_balance_ui')
     def check_balance(self, dt):
         # Check offline mode
         try:
@@ -757,6 +807,8 @@ class WalletScreen(Screen):
             # Nothing else to close here (using context manager)
         except Exception as e:
             self.xrp_balance.text = "Error: Could not get balance"
+        # Return current balance text for async callback usage
+        return {"balance": getattr(self.xrp_balance, 'text', '')}
 
     def refresh_account_data(self):
         """Refresh current account selection and UI from storage.

@@ -24,6 +24,7 @@ from xrpl.wallet import Wallet
 from src.utils.storage_paths import WALLET_DATA_PATH
 from src.utils.faucet_manager import generate_multi_faucet_wallet
 from src.utils.mnemonic_manager import generate_wallet_with_mnemonic, mnemonic_manager
+from src.utils.clipboard_utils import secure_copy
 
 JSON_RPC_URL = "https://testnet.xrpl-labs.com"  # Use XRPL Labs testnet (more reliable)
 client = JsonRpcClient(JSON_RPC_URL)
@@ -94,7 +95,7 @@ Wallet Details:
         """Copy mnemonic to clipboard."""
         if self.current_mnemonic:
             mnemonic_text = " ".join(self.current_mnemonic)
-            Clipboard.copy(mnemonic_text)
+            secure_copy(mnemonic_text, clear_after=30.0)
             print("✅ Mnemonic copied to clipboard!")
 
     def verify_mnemonic_dialog(self, parent_dialog):
@@ -283,9 +284,8 @@ This verification ensures you can recover your wallet later."""
     def copy_mnemonic(self, mnemonic):
         """Copy mnemonic to clipboard."""
         mnemonic_text = " ".join(mnemonic)
-        from kivy.core.clipboard import Clipboard
-
-        Clipboard.copy(mnemonic_text)
+        from kivy.core.clipboard import Clipboard  # retained import for consistency
+        secure_copy(mnemonic_text, clear_after=30.0)
         print("✅ Mnemonic copied to clipboard!")
 
     def close_dialog_and_continue(self, dialog):
@@ -295,8 +295,7 @@ This verification ensures you can recover your wallet later."""
 
     def copy_keys(self, private_key, public_key):
         # Copy the private and public keys to the clipboard
-        cb = Clipboard
-        cb.copy("Private_Key: " + private_key + "\n" + "Public_Key: " + public_key)
+        secure_copy("Private_Key: " + private_key + "\n" + "Public_Key: " + public_key, clear_after=30.0)
 
     def proceed(self, dialog):
         dialog.dismiss()

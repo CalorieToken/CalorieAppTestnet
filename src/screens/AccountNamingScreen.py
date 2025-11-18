@@ -167,11 +167,17 @@ class AccountNamingScreen(Screen):
 
     def show_success(self):
         """Show success message and navigate"""
-        show_info_dialog(
-            title="Success!",
-            text="Account saved successfully!\n\nYou can now use your wallet.",
-            on_close=lambda: self.continue_to_wallet(None),
-        )
+        # Display a non-blocking success dialog (if available) but do not
+        # require user interaction to proceed. Immediately navigate to wallet.
+        try:
+            show_info_dialog(
+                title="Success!",
+                text="Account saved successfully!\n\nOpening your wallet...",
+            )
+        except Exception:
+            pass
+        # Proceed directly
+        self.continue_to_wallet(None)
 
     def continue_to_wallet(self, dialog):
         """Continue to wallet screen"""
@@ -183,14 +189,15 @@ class AccountNamingScreen(Screen):
             self.ids.account_name_input.text = ""
 
         # Auto-fund via faucet for first account or any newly generated extra wallet
-        if (
-            self.is_first_account or self.created_new_wallet
-        ) and fund_existing_address_sync is not None:
+        if (self.is_first_account or self.created_new_wallet) and fund_existing_address_sync is not None:
+            # Navigate immediately, perform funding in background
+            self.manager.current = "wallet_screen"
+            wallet_screen = self.manager.get_screen("wallet_screen")
+            if hasattr(wallet_screen, "refresh_account_data"):
+                wallet_screen.refresh_account_data()
             self._start_funding_then_navigate()
         else:
-            # Navigate to wallet screen immediately
             self.manager.current = "wallet_screen"
-            # Refresh wallet screen to show new account
             wallet_screen = self.manager.get_screen("wallet_screen")
             if hasattr(wallet_screen, "refresh_account_data"):
                 wallet_screen.refresh_account_data()
@@ -214,12 +221,7 @@ class AccountNamingScreen(Screen):
 
         address = getattr(self.wallet, "classic_address", None)
         if not address or fund_existing_address_sync is None:
-            # If no address or helper missing, navigate immediately
-            progress_dialog.dismiss()
-            self.manager.current = "wallet_screen"
-            wallet_screen = self.manager.get_screen("wallet_screen")
-            if hasattr(wallet_screen, "refresh_account_data"):
-                wallet_screen.refresh_account_data()
+            # If no address or helper missing, nothing further to do
             return
 
         # Run the funding in a thread to avoid blocking UI
@@ -243,12 +245,7 @@ class AccountNamingScreen(Screen):
             # Optionally inform user of funding status
             show_info_dialog(title="Wallet Ready", text=f"{status}\n\nOpening your wallet...")
 
-            # Navigate to wallet and refresh
-            self.manager.current = "wallet_screen"
-            wallet_screen = self.manager.get_screen("wallet_screen")
-            if hasattr(wallet_screen, "refresh_account_data"):
-                wallet_screen.refresh_account_data()
-            # Trigger an immediate balance check if available
+            # Trigger an immediate balance check if available (wallet already shown)
             try:
                 from kivy.clock import Clock as _Clock
 

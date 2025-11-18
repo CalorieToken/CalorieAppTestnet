@@ -1,5 +1,6 @@
-<SettingsScreen>
-    MDBoxLayout:
+#:import r src.utils.responsive
+<SettingsScreen>:
+    ResponsiveContainer:
         orientation: "vertical"
         canvas.before:
             Color:
@@ -10,51 +11,403 @@
         AppHeader:
             id: app_header
             title: "Settings"
-        MDGridLayout:
-            cols: 1
-            size_hint: (1, .75)
-            MDLabel:
-                text: "Accounts"
-                font_style: "Title"
-                theme_text_color: "Custom"
-                text_color: rgba('#202443')
-                halign: 'center'
-                size_hint: (1, .12)
-
-            ContentCard:
-                md_bg_color: rgba('#dadeed')
-                elevation: 2
-                size_hint: (0.92, .55)
-                pos_hint: {"center_x": .5}
-
-                MDBoxLayout:
-                    orientation: "vertical"
-                    padding: "8dp"
-                    spacing: "4dp"
-
+        ContentScroll:
+            ContentSection:
+                # Accounts Section
+                SectionHeader:
+                    text: "Accounts"
+                Widget:
+                    size_hint_y: None
+                    height: SP_XS
+                ContentCard:
+                    md_bg_color: rgba('#dadeed')
+                    size_hint_y: None
+                    height: self.minimum_height
                     MDScrollView:
                         MDList:
                             id: accounts_list
 
-            MDGridLayout:
-                cols: 3
-                size_hint: (1, .13)
+                # Appearance Section
+                SectionHeader:
+                    text: "Appearance"
+                Widget:
+                    size_hint_y: None
+                    height: SP_XS
+                ContentCard:
+                    md_bg_color: CAL_WHITE
+                    size_hint_y: None
+                    height: self.minimum_height
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        padding: [SP_MD, SP_MD]
+                        spacing: SP_SM
+                        MDBoxLayout:
+                            size_hint_y: None
+                            height: "44dp"
+                            spacing: SP_SM
+                            MDLabel:
+                                text: "Dark Theme"
+                                theme_text_color: "Custom"
+                                text_color: CAL_TEXT_DARK
+                                halign: "left"
+                            MDSwitch:
+                                id: dark_switch
+                                active: app.theme_cls.theme_style == "Dark"
+                        MDBoxLayout:
+                            size_hint_y: None
+                            height: "44dp"
+                            spacing: SP_SM
+                            MDLabel:
+                                text: "Accent Color"
+                                theme_text_color: "Custom"
+                                text_color: CAL_TEXT_DARK
+                                halign: "left"
+                            MDButton:
+                                style: "filled" if app.theme_cls.primary_palette == "Green" else "outlined"
+                                on_release: app.set_primary_palette("Green")
+                                MDButtonText:
+                                    text: "Green"
+                            MDButton:
+                                style: "filled" if app.theme_cls.primary_palette == "Blue" else "outlined"
+                                on_release: app.set_primary_palette("Blue")
+                                MDButtonText:
+                                    text: "Blue"
+                            MDButton:
+                                style: "filled" if app.theme_cls.primary_palette == "Teal" else "outlined"
+                                on_release: app.set_primary_palette("Teal")
+                                MDButtonText:
+                                    text: "Teal"
 
-                MDLabel:
-                    size_hint: (4, 1)
-                MDButton:
-                    style: "filled"
-                    size_hint: (2, None)
-                    height: "52dp"
-                    radius: [24]
-                    md_bg_color: rgba('#505CA9')
-                    on_release: root.refresh_account_list()
-                    MDButtonIcon:
-                        icon: "refresh"
-                        icon_color: rgba('#f9b233')
-                    MDButtonText:
-                        text: "Refresh"
-                        text_color: rgba('#008D36')
-                MDLabel:
-                    size_hint: (4, 1)
+                # Security Section
+                SectionHeader:
+                    text: "Security"
+                Widget:
+                    size_hint_y: None
+                    height: SP_XS
+                ContentCard:
+                    md_bg_color: CAL_WHITE
+                    size_hint_y: None
+                    height: self.minimum_height
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        padding: [SP_MD, SP_MD]
+                        spacing: SP_SM
+                        MDBoxLayout:
+                            size_hint_y: None
+                            height: "44dp"
+                            MDLabel:
+                                text: "Require Password on Startup"
+                                theme_text_color: "Custom"
+                                text_color: CAL_TEXT_DARK
+                                halign: "left"
+                                text_size: self.width, None
+                            MDSwitch:
+                                id: require_password_switch
+                                active: False
+                                on_active: root.on_require_password_toggle(self.active)
+
+                # Privacy Section
+                SectionHeader:
+                    text: "Privacy"
+                Widget:
+                    size_hint_y: None
+                    height: SP_XS
+                ContentCard:
+                    md_bg_color: CAL_WHITE
+                    size_hint_y: None
+                    height: self.minimum_height
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        padding: [SP_MD, SP_MD]
+                        spacing: SP_SM
+                        MDBoxLayout:
+                            size_hint_y: None
+                            height: "44dp"
+                            MDLabel:
+                                text: "Hide Balances"
+                                theme_text_color: "Custom"
+                                text_color: CAL_TEXT_DARK
+                                halign: "left"
+                            MDSwitch:
+                                id: hide_balances_switch
+                                active: False
+                                on_active: root.on_hide_balances_toggle(self.active)
+
+                # Network Section
+                SectionHeader:
+                    text: "Network"
+                Widget:
+                    size_hint_y: None
+                    height: SP_XS
+                ContentCard:
+                    md_bg_color: CAL_WHITE
+                    size_hint_y: None
+                    height: self.minimum_height
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        padding: [SP_MD, SP_MD]
+                        spacing: SP_XS
+                        MDBoxLayout:
+                            size_hint_y: None
+                            height: "44dp"
+                            MDLabel:
+                                text: "Offline Mode"
+                                theme_text_color: "Custom"
+                                text_color: CAL_TEXT_DARK
+                                halign: "left"
+                            MDSwitch:
+                                id: offline_switch
+                                active: False
+                                on_active: root.on_offline_mode_toggle(self.active)
+                        MDLabel:
+                            text: "Note: Restart required to fully apply network mode."
+                            theme_text_color: "Secondary"
+                            size_hint_y: None
+                            height: "18dp"
+                            text_size: self.width, None
+
+                # Auto-Lock (merged into single Security section above)
+                SectionHeader:
+                    text: "Session Security"
+                Widget:
+                    size_hint_y: None
+                    height: SP_XS
+                ContentCard:
+                    md_bg_color: CAL_WHITE
+                    size_hint_y: None
+                    height: self.minimum_height
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        padding: [SP_MD, SP_MD]
+                        spacing: SP_SM
+                        MDBoxLayout:
+                            size_hint_y: None
+                            height: "44dp"
+                            spacing: SP_SM
+                            MDLabel:
+                                text: f"Auto-lock: {root._load_setting('auto_lock_timeout', 60)}s"
+                                theme_text_color: "Custom"
+                                text_color: CAL_TEXT_DARK
+                                halign: "left"
+                                shorten: True
+                                shorten_from: "right"
+                            MDSlider:
+                                id: autolock_slider
+                                min: 15
+                                max: 300
+                                value: int(root._load_setting('auto_lock_timeout', 60))
+                                step: 15
+                                on_touch_up: root.set_autolock_timeout(int(self.value))
+
+                # Permissions
+                SectionHeader:
+                    text: "Permissions"
+                Widget:
+                    size_hint_y: None
+                    height: SP_XS
+                ContentCard:
+                    md_bg_color: CAL_WHITE
+                    size_hint_y: None
+                    height: self.minimum_height
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        padding: [SP_MD, SP_MD]
+                        spacing: SP_SM
+                        MDBoxLayout:
+                            size_hint_y: None
+                            height: "44dp"
+                            MDLabel:
+                                text: "Enable Camera Scanning"
+                                theme_text_color: "Custom"
+                                text_color: CAL_TEXT_DARK
+                                halign: "left"
+                                text_size: self.width, None
+                            MDSwitch:
+                                id: camera_enabled_switch
+                                active: bool(root._load_setting('camera_enabled', 1))
+                                on_active: root.on_camera_enabled(self.active)
+
+                # Server Selection
+                SectionHeader:
+                    text: "XRPL Server"
+                Widget:
+                    size_hint_y: None
+                    height: SP_XS
+                ContentCard:
+                    md_bg_color: CAL_WHITE
+                    size_hint_y: None
+                    height: self.minimum_height
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        padding: [SP_MD, SP_MD]
+                        spacing: SP_SM
+                        MDBoxLayout:
+                            size_hint_y: None
+                            height: "44dp"
+                            MDLabel:
+                                text: f"XRPL Server: {root._load_setting('xrpl_server', 'https://testnet.xrpl-labs.com')}"
+                                theme_text_color: "Custom"
+                                text_color: CAL_TEXT_DARK
+                                halign: "left"
+                                shorten: True
+                                shorten_from: "right"
+                            PrimaryButton:
+                                size_hint: (None, None)
+                                width: dp(160)
+                                height: "44dp"
+                                on_release: root.cycle_xrpl_node()
+                                MDButtonIcon:
+                                    icon: "swap-horizontal"
+                                MDButtonText:
+                                    text: "Switch Server"
+
+                # Maintenance Actions
+                SectionHeader:
+                    text: "Maintenance"
+                Widget:
+                    size_hint_y: None
+                    height: SP_XS
+                ContentCard:
+                    md_bg_color: CAL_BG_LIGHT
+                    size_hint_y: None
+                    height: self.minimum_height
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        padding: [SP_SM, SP_SM]
+                        spacing: SP_SM
+                        PrimaryButtonFixed:
+                            width: dp(BTN_W_MD)
+                            on_release: root.export_logs()
+                            MDButtonIcon:
+                                icon: "file-export"
+                                icon_color: CAL_YELLOW
+                            MDButtonText:
+                                text: "Export Logs"
+                                text_color: CAL_GREEN
+                        PrimaryButtonFixed:
+                            width: dp(BTN_W_MD)
+                            on_release: root.clear_cache()
+                            MDButtonIcon:
+                                icon: "broom"
+                                icon_color: CAL_YELLOW
+                            MDButtonText:
+                                text: "Clear Cache"
+                                text_color: CAL_GREEN
+
+                # Wallet Connection
+                SectionHeader:
+                    text: "Wallet Connection"
+                Widget:
+                    size_hint_y: None
+                    height: SP_XS
+                ContentCard:
+                    md_bg_color: CAL_WHITE
+                    size_hint_y: None
+                    height: self.minimum_height
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        padding: [SP_MD, SP_MD]
+                        spacing: SP_SM
+                        MDLabel:
+                            text: f"Status: {'Connected' if app.wallet_connector.is_connected() else 'Not Connected'}"
+                            theme_text_color: "Custom"
+                            text_color: CAL_TEXT_DARK
+                            size_hint_y: None
+                            height: "22dp"
+                            shorten: True
+                            shorten_from: "right"
+                        MDLabel:
+                            text: (app.get_wallet_session_info().get('address') or 'Address: (pending)') if app.wallet_connector.is_connected() else 'Address: -'
+                            theme_text_color: "Custom"
+                            text_color: CAL_TEXT_DARK
+                            size_hint_y: None
+                            height: "20dp"
+                            shorten: True
+                            shorten_from: "center"
+                        MDBoxLayout:
+                            size_hint_y: None
+                            height: "52dp"
+                            spacing: SP_SM
+                            PrimaryButton:
+                                size_hint: (None, None)
+                                width: dp(160)
+                                height: "52dp"
+                                on_release: app.connect_wallet() if not app.wallet_connector.is_connected() else app.disconnect_wallet()
+                                MDButtonIcon:
+                                    icon: "link" if not app.wallet_connector.is_connected() else "link-off"
+                                MDButtonText:
+                                    text: "Connect Wallet" if not app.wallet_connector.is_connected() else "Disconnect"
+                            PrimaryButton:
+                                size_hint: (None, None)
+                                width: dp(BTN_W_LG)
+                                height: "52dp"
+                                on_release: app.request_xaman_test_sign() if app.wallet_connector.is_connected() else None
+                                disabled: not app.wallet_connector.is_connected()
+                                MDButtonIcon:
+                                    icon: "signature"
+                                MDButtonText:
+                                    text: "Sign Test Payload"
+
+                # Account Maintenance
+                ContentCard:
+                    md_bg_color: CAL_BG_LIGHT
+                    size_hint_y: None
+                    height: self.minimum_height
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        padding: [SP_SM, SP_SM]
+                        spacing: SP_SM
+                        MDLabel:
+                            text: "Account List Maintenance"
+                            theme_text_color: "Custom"
+                            text_color: CAL_TEXT_DARK
+                            halign: "left"
+                        PrimaryButton:
+                            size_hint: (None, None)
+                            width: dp(140)
+                            height: "44dp"
+                            on_release: root.refresh_account_list()
+                            MDButtonIcon:
+                                icon: "refresh"
+                                icon_color: CAL_YELLOW
+                            MDButtonText:
+                                text: "Refresh"
+                                text_color: CAL_GREEN
+
+                # Hardware & Cache
+                SectionHeader:
+                    text: "Hardware & Cache"
+                Widget:
+                    size_hint_y: None
+                    height: SP_XS
+                ContentCard:
+                    md_bg_color: CAL_BG_LIGHT
+                    size_hint_y: None
+                    height: self.minimum_height
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        padding: [SP_MD, SP_MD]
+                        spacing: SP_SM
+                        MDBoxLayout:
+                            size_hint_y: None
+                            height: "52dp"
+                            spacing: SP_SM
+                            PrimaryButtonFixed:
+                                width: dp(BTN_W_LG)
+                                on_release: root.test_webcam()
+                                MDButtonIcon:
+                                    icon: "camera"
+                                    icon_color: CAL_YELLOW
+                                MDButtonText:
+                                    text: "Test Webcam"
+                                    text_color: CAL_GREEN
+                            PrimaryButtonFixed:
+                                width: dp(BTN_W_LG)
+                                on_release: root.clear_cache()
+                                MDButtonIcon:
+                                    icon: "broom"
+                                    icon_color: CAL_YELLOW
+                                MDButtonText:
+                                    text: "Clear Cache"
+                                    text_color: CAL_GREEN
         PrimaryBottomBar:

@@ -1,5 +1,5 @@
 <AccountNamingScreen>:
-    MDBoxLayout:
+    ResponsiveContainer:
         orientation: "vertical"
         canvas.before:
             Color:
@@ -41,6 +41,8 @@
             MDTextField:
                 id: account_name_input
                 hint_text: "Enter account name (e.g., Main Wallet, Trading Account)..."
+                helper_text: "Choose a descriptive name to identify this wallet account"
+                helper_text_mode: "on_focus"
                 mode: "filled"
                 line_color_focus: rgba('#008D36')
                 hint_text_color_focus: rgba('#008D36')
@@ -60,7 +62,7 @@
                 MDButton:
                     style: "filled"
                     size_hint: (2, None)
-                    height: "52dp"
+                    height: str(r.scale_dp(52))
                     radius: [24]
                     md_bg_color: rgba('#505CA9')
                     on_release: root.save_account()

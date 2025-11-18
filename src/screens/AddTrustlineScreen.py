@@ -142,7 +142,11 @@ class AddTrustlineScreen(Screen):
 
         # Validate
         if not currency_code or not issuer_address:
-            show_error_dialog("Invalid Input", "Please provide currency code and issuer address.")
+            from src.utils.enhanced_dialogs import show_validation_error
+            show_validation_error(
+                "Missing Required Fields",
+                details="Please provide both currency code and issuer address."
+            )
             return
 
         # Validate currency code: 3-12 ASCII or 40-hex
@@ -151,14 +155,26 @@ class AddTrustlineScreen(Screen):
         is_hex40 = bool(re.fullmatch(r"[0-9A-Fa-f]{40}", currency_code))
         is_ascii = bool(re.fullmatch(r"[A-Za-z0-9]{3,12}", currency_code))
         if not (is_hex40 or is_ascii):
-            show_error_dialog(
-                "Invalid Currency Code", "Enter a 3-12 char code (A-Z0-9) or a 40-char hex code."
+            from src.utils.enhanced_dialogs import show_validation_error
+            show_validation_error(
+                "Invalid Currency Code",
+                details="Currency code must be either:\n• 3-12 characters (letters and numbers only)\n• 40-character hexadecimal code"
             )
             return
 
-        if not issuer_address.startswith("r") or len(issuer_address) < 25:
-            show_error_dialog(
-                "Invalid Issuer Address", "Issuer must start with 'r' and be a valid XRPL address."
+        if not issuer_address.startswith("r"):
+            from src.utils.enhanced_dialogs import show_validation_error
+            show_validation_error(
+                "Invalid Issuer Address",
+                details="XRPL addresses must start with 'r'"
+            )
+            return
+        
+        if len(issuer_address) < 25 or len(issuer_address) > 35:
+            from src.utils.enhanced_dialogs import show_validation_error
+            show_validation_error(
+                "Invalid Issuer Address",
+                details="XRPL address length must be 25-35 characters"
             )
             return
 
@@ -287,6 +303,8 @@ class AddTrustlineScreen(Screen):
             size_hint_y=None,
             height="56dp",
             input_filter="float",
+            helper_text="Enter a positive number or leave empty for 1 billion",
+            helper_text_mode="on_focus",
         )
         content_box.add_widget(limit_field)
 
@@ -310,16 +328,34 @@ class AddTrustlineScreen(Screen):
         )
 
     def proceed_with_limit(self, limit_text):
-        """Validate limit and show password dialog"""
+        """Validate limit and show password dialog with enhanced feedback"""
         if not self.selected_currency:
-            self.show_error_message("No currency selected")
+            from src.utils.enhanced_dialogs import show_error
+            show_error("No Currency Selected", "Please select a currency before proceeding.")
             return
+        
+        # Validate limit
         try:
             limit = float(limit_text) if limit_text.strip() else 1000000000
             if limit <= 0:
-                raise ValueError
+                # Show error in dialog field
+                if hasattr(self, "dialog") and self.dialog:
+                    # Find the text field and set error
+                    for widget in self.dialog.children:
+                        if hasattr(widget, "children"):
+                            for child in widget.children:
+                                if isinstance(child, MDTextField):
+                                    child.error = True
+                                    child.helper_text = "Limit must be a positive number"
+                                    child.helper_text_mode = "on_error"
+                from src.utils.enhanced_dialogs import show_validation_error
+                show_validation_error(
+                    "Invalid Trust Limit",
+                    details="The trust limit must be a positive number greater than 0."
+                )
+                return
         except ValueError:
-            # Show error in dialog
+            # Show error in dialog field
             if hasattr(self, "dialog") and self.dialog:
                 # Find the text field and set error
                 for widget in self.dialog.children:
@@ -327,17 +363,33 @@ class AddTrustlineScreen(Screen):
                         for child in widget.children:
                             if isinstance(child, MDTextField):
                                 child.error = True
-                                child.helper_text = "Please enter a valid positive number"
+                                child.helper_text = "Please enter a valid number"
                                 child.helper_text_mode = "on_error"
+            from src.utils.enhanced_dialogs import show_validation_error
+            show_validation_error(
+                "Invalid Trust Limit",
+                details="Please enter a valid numeric value for the trust limit."
+            )
             return
 
-        # Close limit dialog and show password dialog
+        # Close limit dialog
         if self.dialog:
             self.dialog.dismiss()
 
         code_val = self.selected_currency["code"]
         issuer_val = self.selected_currency["issuer"]
-        self.show_password_dialog(code_val, issuer_val, str(limit))
+        
+        # Show enhanced confirmation dialog
+        from src.utils.enhanced_dialogs import confirm_transaction
+        confirm_transaction(
+            amount=str(limit),
+            currency=decode_currency_code(code_val),
+            destination=f"{issuer_val[:10]}...{issuer_val[-8:]}",
+            warning="⚠️ This will create a trustline allowing the issuer to send you up to this amount. This transaction cannot be undone.",
+            on_confirm=lambda: self.show_password_dialog(code_val, issuer_val, str(limit)),
+            on_cancel=None,
+            title="Confirm Trustline Creation"
+        )
 
     def add_trustline(self):
         """Legacy method - now handled through currency selection"""
@@ -584,10 +636,13 @@ class AddTrustlineScreen(Screen):
                 ):
                     # Save trustline to database
                     self.save_trustline(currency_code, issuer_address, limit)
-                    self.show_success_message(
-                        f"Trustline created successfully!\n\n"
-                        f"Currency: {currency_code}\n"
-                        f"Issuer: {issuer_address[:10]}...{issuer_address[-10:]}\n\n"
+                    
+                    from src.utils.enhanced_dialogs import show_success
+                    show_success(
+                        "Trustline Created",
+                        f"Successfully created trustline for {decode_currency_code(currency_code)}\n\n"
+                        f"Issuer: {issuer_address[:10]}...{issuer_address[-10:]}\n"
+                        f"Limit: {limit}\n\n"
                         f"Transaction Fee: {fee_xrp:.6f} XRP"
                     )
                     # Return to wallet screen after 2 seconds
@@ -598,16 +653,23 @@ class AddTrustlineScreen(Screen):
                     error_msg = response.result.get("meta", {}).get(
                         "TransactionResult", "Unknown error"
                     )
-                    self.show_error_message(
-                        f"Transaction failed: {error_msg}\n\nFee charged: {fee_xrp:.6f} XRP"
+                    from src.utils.enhanced_dialogs import show_transaction_error
+                    show_transaction_error(
+                        f"Transaction failed: {error_msg}",
+                        details=f"Fee charged: {fee_xrp:.6f} XRP"
                     )
 
             except Exception as e:
-                self.show_error_message(f"Failed to submit transaction: {str(e)}")
+                from src.utils.enhanced_dialogs import show_transaction_error
+                show_transaction_error(
+                    "Failed to submit transaction",
+                    details=str(e)
+                )
 
         except Exception as e:
             wallet_data.close()
-            self.show_error_message(f"Error: {str(e)}")
+            from src.utils.enhanced_dialogs import show_error
+            show_error("Error", str(e))
 
     def perform_trustline_removal(self, currency_code, issuer_address, entered_password):
         """Remove a trustline by setting its limit to 0 (requires zero balance)"""
@@ -699,9 +761,12 @@ class AddTrustlineScreen(Screen):
                 ):
                     # Remove from local db cache if present
                     self.remove_trustline_local(currency_code, issuer_address)
-                    self.show_success_message(
-                        f"Trustline removal submitted. If your balance was 0, the trustline will be deleted.\n\n"
-                        f"Currency: {currency_code}\nIssuer: {issuer_address[:10]}...{issuer_address[-10:]}\n\n"
+                    
+                    from src.utils.enhanced_dialogs import show_success
+                    show_success(
+                        "Trustline Removed",
+                        f"Successfully removed trustline for {decode_currency_code(currency_code)}\\n\\n"
+                        f"Issuer: {issuer_address[:10]}...{issuer_address[-10:]}\\n\\n"
                         f"Transaction Fee: {fee_xrp:.6f} XRP"
                     )
                     Clock.schedule_once(lambda dt: self.go_back(), 2.0)
@@ -709,11 +774,17 @@ class AddTrustlineScreen(Screen):
                     error_msg = response.result.get("meta", {}).get(
                         "TransactionResult", "Unknown error"
                     )
-                    self.show_error_message(
-                        f"Transaction failed: {error_msg}\n\nFee charged: {fee_xrp:.6f} XRP"
+                    from src.utils.enhanced_dialogs import show_transaction_error
+                    show_transaction_error(
+                        f"Transaction failed: {error_msg}",
+                        details=f"Fee charged: {fee_xrp:.6f} XRP"
                     )
             except Exception as e:
-                self.show_error_message(f"Failed to submit transaction: {str(e)}")
+                from src.utils.enhanced_dialogs import show_transaction_error
+                show_transaction_error(
+                    "Failed to submit transaction",
+                    details=str(e)
+                )
         except Exception as e:
             try:
                 wallet_data.close()

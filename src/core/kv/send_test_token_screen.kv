@@ -1,10 +1,11 @@
+##:import r src.utils.responsive
 <SendTestTokenScreen>
     xrp_address: xrp_address
     token_balance: token_balance
     amount_token_input: amount_token_input
     destination_input: destination_input
 
-    MDBoxLayout:
+    ResponsiveContainer:
         orientation: "vertical"
         canvas.before:
             Color:
@@ -29,20 +30,26 @@
                         size_hint_y: None
                         height: self.minimum_height
                         MDLabel:
+                            text_size: self.width, None
+                            size_hint_y: None
+                            height: self.texture_size[1]
                             text: "Your Address"
                             font_style: "Label"
                             theme_text_color: "Custom"
                             text_color: rgba('#202443')
                             size_hint_y: None
-                            height: "20dp"
+                            adaptive_height: True
                         MDLabel:
+                            text_size: self.width, None
+                            size_hint_y: None
+                            height: self.texture_size[1]
                             id: xrp_address
                             font_style: "Body"
                             theme_text_color: "Custom"
                             text_color: rgba('#202443')
                             halign: "center"
                             size_hint_y: None
-                            height: "24dp"
+                            adaptive_height: True
 
                 # Amount and Destination Card
                 ContentCard:
@@ -63,6 +70,8 @@
                             id: amount_token_input
                             multiline: False
                             hint_text: 'Amount (Token)'
+                            helper_text: "Enter token amount to send"
+                            helper_text_mode: "on_focus"
                         MDTextField:
                             mode: "filled"
                             line_color_focus: rgba('#008D36')
@@ -72,10 +81,12 @@
                             id: destination_input
                             multiline: False
                             hint_text: 'Destination Address'
+                            helper_text: "Enter recipient's XRPL address (starts with 'r')"
+                            helper_text_mode: "on_focus"
                         MDButton:
                             style: "filled"
                             size_hint: (1, None)
-                            height: "52dp"
+                            height: r.scale_dp(52)
                             radius: [24]
                             md_bg_color: rgba('#505CA9')
                             on_release: root.send_token()
@@ -97,20 +108,26 @@
                         size_hint_y: None
                         height: self.minimum_height
                         MDLabel:
+                            text_size: self.width, None
+                            size_hint_y: None
+                            height: self.texture_size[1]
                             text: "Token Balance"
                             font_style: "Label"
                             theme_text_color: "Custom"
                             text_color: rgba('#008D36')
                             size_hint_y: None
-                            height: "20dp"
+                            adaptive_height: True
                         MDLabel:
+                            text_size: self.width, None
+                            size_hint_y: None
+                            height: self.texture_size[1]
                             id: token_balance
                             font_style: "Title"
                             theme_text_color: "Custom"
                             text_color: rgba('#006b2d')
                             halign: "center"
                             size_hint_y: None
-                            height: "28dp"
+                            adaptive_height: True
 
                 # Transactions Card (reusable)
                 TransactionsCard:

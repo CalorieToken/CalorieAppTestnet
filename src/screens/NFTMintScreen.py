@@ -9,7 +9,14 @@ from kivy.uix.screenmanager import Screen
 from kivymd.uix.label import MDLabel
 from kivymd.uix.textfield import MDTextField
 
-from src.utils.dialogs import show_confirm_dialog, show_error_dialog
+from src.utils.performance import debounce
+from src.utils.dialogs import show_confirm_dialog
+from src.utils.enhanced_dialogs import (
+    EnhancedDialog,
+    show_validation_error,
+    show_success,
+    show_transaction_error,
+)
 
 logging.basicConfig(level=logging.WARNING)
 import shelve
@@ -38,30 +45,74 @@ client = JsonRpcClient(JSON_RPC_URL)
 class NFTMintScreen(Screen):
 
     def on_enter(self, *args):
-        self.input_error.text = ""
+        error_label = self.ids.get("input_error")
+        if error_label:
+            error_label.text = ""
 
+    @debounce(delay=0.5)
     def mint(self):
-        uri = self.ids["uri"].text
-        taxon = self.ids["taxon"].text
+        uri_field = self.ids.get("nft_uri")
+        taxon_field = self.ids.get("nft_taxon")
+        uri = uri_field.text if uri_field else ""
+        taxon = taxon_field.text if taxon_field else ""
 
-        # Basic validation
-        if not uri or not uri.strip():
-            show_error_dialog("Invalid URI", "Please enter a valid NFT URI.")
-            return
+        # Inline validation with helper text
+        errors = []
+        # URI must be http(s) URL
+        import re
+        if not uri or not uri.strip() or not re.match(r"^https?://", uri.strip()):
+            if uri_field:
+                uri_field.error = True
+                uri_field.helper_text = "Enter a valid http(s) URL"
+                uri_field.helper_text_mode = "on_error"
+            errors.append("Invalid NFT URI (must start with http:// or https://)")
+        else:
+            if uri_field:
+                uri_field.error = False
+                uri_field.helper_text = "URL pointing to NFT metadata"
+                uri_field.helper_text_mode = "on_focus"
+
+        # Taxon must be non-negative integer
         try:
             taxon_int = int(taxon)
             if taxon_int < 0:
                 raise ValueError
+            if taxon_field:
+                taxon_field.error = False
+                taxon_field.helper_text = "Optional: Group similar NFTs"
+                taxon_field.helper_text_mode = "on_focus"
         except Exception:
-            show_error_dialog("Invalid Taxon", "Taxon must be a non-negative integer.")
+            if taxon_field:
+                taxon_field.error = True
+                taxon_field.helper_text = "Enter a non-negative integer"
+                taxon_field.helper_text_mode = "on_error"
+            errors.append("Taxon must be a non-negative integer")
+
+        if errors:
+            show_validation_error("Invalid NFT Details", "\n".join([f"• {e}" for e in errors]))
             return
 
+        # Pre-confirmation dialog (text-only)
+        message = f"You are about to mint an NFT on XRPL.\n\nURI: {uri}\nTaxon: {taxon}\n\nThis action cannot be undone."
+        EnhancedDialog.show_confirm(
+            title="Confirm NFT Mint",
+            message=message,
+            on_confirm=self._show_password_confirmation,
+            on_cancel=None,
+            confirm_text="Continue",
+            cancel_text="Cancel",
+        )
+
+    def _show_password_confirmation(self, *args):
         # Define the password input field with toggle visibility
         from src.utils.password_field_utils import create_password_field_with_toggle
         self.password_field_container = create_password_field_with_toggle(
             hint_text="Enter your password"
         )
         self.password_field = self.password_field_container.password_field
+
+        uri = self.ids.get("nft_uri").text if self.ids.get("nft_uri") else ""
+        taxon = self.ids.get("nft_taxon").text if self.ids.get("nft_taxon") else ""
 
         uri_label = MDLabel(text=f"URI: {uri}")
         uri_label.font_size = "13sp"
@@ -161,22 +212,28 @@ class NFTMintScreen(Screen):
                     flags=8,
                     last_ledger_sequence=current_validated_ledger + 8,
                     sequence=test_wallet.sequence,
-                    uri=xrpl.utils.str_to_hex(self.uri.text),
-                    nftoken_taxon=taxon_int,
+                    uri=xrpl.utils.str_to_hex(self.ids["nft_uri"].text),
+                    nftoken_taxon=int(self.ids["nft_taxon"].text),
                 )
                 # Sign the transaction
 
                 tx_response = submit_and_wait(my_tx_payment, client, test_wallet)
 
-                # Submit and send the transaction
-
-                send_reliable_submission(my_tx_payment_signed, client)
-
-                self.dialog.dismiss()
+                # Close dialog and show success (optimistic)
+                if hasattr(self, "dialog") and self.dialog:
+                    self.dialog.dismiss()
                 self.wallet_data.close()
+                show_success("NFT Mint Submitted", "Your mint transaction has been submitted. Check history for final status.")
         except XRPLBinaryCodecException as e:
             self.wallet_data.close()
             self.password_field.hint_text = "XRPLBinaryCodecException Error"
+        except Exception as e:
+            try:
+                if hasattr(self, "wallet_data"):
+                    self.wallet_data.close()
+            except Exception:
+                pass
+            show_transaction_error(f"Failed to mint NFT: {str(e)}")
 
     def walletscreen(self):
         self.manager.current = "wallet_screen"

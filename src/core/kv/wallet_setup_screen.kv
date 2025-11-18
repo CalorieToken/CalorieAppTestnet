@@ -1,5 +1,8 @@
 <WalletSetupScreen>:   
     MDBoxLayout:
+#:import r src.utils.responsive
+<WalletSetupScreen>
+    ResponsiveContainer:
         orientation: "vertical"
         canvas.before:
             Color:
@@ -15,6 +18,9 @@
             size_hint: (1, .75)
 
             MDLabel:
+                text_size: self.width, None
+                size_hint_y: None
+                height: self.texture_size[1]
                 text: "Wallet Setup"
                 font_style: "Title"
                 halign: "center"
@@ -23,6 +29,9 @@
                 size_hint: (1, .2)
 
             MDLabel:
+                text_size: self.width, None
+                size_hint_y: None
+                height: self.texture_size[1]
                 size_hint: (1, .1)
 
             MDGridLayout:
@@ -30,13 +39,16 @@
                 size_hint: (1, .15)
 
                 MDLabel:
+                    text_size: self.width, None
+                    size_hint_y: None
+                    height: self.texture_size[1]
                     size_hint: (4, 1)
                 MDButton:
                     id: ws_create_wallet_button
                     style: "filled"
                     size_hint: (None, None)
-                    width: dp(200)
-                    height: "52dp"
+                    width: r.scale_dp(BTN_W_XL)
+                    height: r.scale_dp(52)
                     radius: [24]
                     md_bg_color: rgba('#505CA9')
                     on_release: root.create_wallet_screen()
@@ -47,9 +59,15 @@
                         text: "Create wallet"
                         text_color: rgba('#008D36')
                 MDLabel:
+                    text_size: self.width, None
+                    size_hint_y: None
+                    height: self.texture_size[1]
                     size_hint: (4, 1)
 
             MDLabel:
+                text_size: self.width, None
+                size_hint_y: None
+                height: self.texture_size[1]
                 size_hint: (1, .1)
 
             MDGridLayout:
@@ -57,13 +75,16 @@
                 size_hint: (1, .15)
 
                 MDLabel:
+                    text_size: self.width, None
+                    size_hint_y: None
+                    height: self.texture_size[1]
                     size_hint: (4, 1)
                 MDButton:
                     id: ws_import_wallet_button
                     style: "filled"
                     size_hint: (None, None)
-                    width: dp(200)
-                    height: "52dp"
+                    width: r.scale_dp(BTN_W_XL)
+                    height: r.scale_dp(52)
                     radius: [24]
                     md_bg_color: rgba('#505CA9')
                     on_release: root.import_wallet_screen()
@@ -74,8 +95,14 @@
                         text: "Import wallet"
                         text_color: rgba('#008D36')
                 MDLabel:
+                    text_size: self.width, None
+                    size_hint_y: None
+                    height: self.texture_size[1]
                     size_hint: (4, 1)
             MDLabel:
+                text_size: self.width, None
+                size_hint_y: None
+                height: self.texture_size[1]
                 size_hint: (1, .3)
 
         BackBottomBar:

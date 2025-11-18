@@ -1,5 +1,6 @@
+#:import r src.utils.responsive
 <FirstUseScreen>:
-    MDBoxLayout:
+    ResponsiveContainer:
         orientation: "vertical"
         canvas.before:
             Color:
@@ -10,78 +11,77 @@
         AppHeader:
             id: app_header
             title: "Create Password"
-        MDGridLayout:
-            cols: 1
-            size_hint: (1, .75)
-            MDLabel:
-            MDLabel:
-                id: helper_label
-                text: "Create a password for your account"
-                font_style: "Title"
-                halign: "center"
-                theme_text_color: "Custom"
-                text_color: rgba('#202443')
-            MDLabel:
-            MDTextField:
-                mode: "filled"
-                line_color_focus: rgba('#008D36')
-                hint_text_color_focus: rgba('#008D36')
-                fill_color_normal: rgba('#dadeed')
-                fill_color_focus: rgba('#e9ebf5')
-                id: password
-                hint_text: "Enter your password"
-                font_style: "Body"
-                helper_text: "Password will be used to encrypt your private keys."
-                helper_text_mode: "on_focus"
-            MDLabel:
-            MDTextField:
-                mode: "filled"
-                line_color_focus: rgba('#008D36')
-                hint_text_color_focus: rgba('#008D36')
-                fill_color_normal: rgba('#dadeed')
-                fill_color_focus: rgba('#e9ebf5')
-                id: confirm_password
-                hint_text: "Confirm your password"
-                font_style: "Body"
-                helper_text: "Re-enter your password."
-                helper_text_mode: "on_focus"
-            MDLabel:
-            MDGridLayout:
-                cols: 3
-                size_hint: (1, .2)
+        ContentScroll:
+            ContentSection:
                 MDLabel:
-                    size_hint: (4, 1)
-                MDButton:
-                    id: create_button
-                    style: "filled"
-                    size_hint: (None, None)
-                    width: dp(220)
-                    height: "52dp"
-                    radius: [24]
-                    md_bg_color: rgba('#505CA9')
-                    on_release: root.create_password()
-                    MDButtonIcon:
-                        icon: "lock-check"
-                        icon_color: rgba('#f9b233')
-                    MDButtonText:
-                        text: "Create Password"
-                        text_color: rgba('#008D36')
-                MDLabel:
-                    size_hint: (4, 1)
-            MDLabel:
-            MDLabel:
-            MDLabel:
-        # Simple bottom bar without deprecated TopAppBar
-        MDBoxLayout:
-            size_hint: (1, .08)
-            md_bg_color: rgba('#505CA9')
-            padding: ["8dp", 0]
-            canvas.before:
-                Color:
-                    rgba: rgba('#505CA9')
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
-            MDLabel:
-                text: ""
+                    id: helper_label
+                    text: "Create a password for your account"
+                    font_style: "Title"
+                    halign: "center"
+                    theme_text_color: "Custom"
+                    text_color: rgba('#202443')
+                    size_hint_y: None
+                    height: str(r.scale_dp(40))
+                    text_size: self.width, None
+                Widget:
+                    size_hint_y: None
+                    height: SP_SM
+                MDTextField:
+                    mode: "filled"
+                    line_color_focus: rgba('#008D36')
+                    hint_text_color_focus: rgba('#008D36')
+                    fill_color_normal: rgba('#dadeed')
+                    fill_color_focus: rgba('#e9ebf5')
+                    id: password_input
+                    hint_text: "Enter your password"
+                    font_style: "Body"
+                    size_hint_y: None
+                    height: str(r.scale_dp(56))
+                    helper_text: "Password will be used to encrypt your private keys."
+                    helper_text_mode: "on_focus"
+                    password: True
+                    on_text: root.on_password_text(self.text)
+                Widget:
+                    size_hint_y: None
+                    height: SP_XS
+                MDTextField:
+                    mode: "filled"
+                    line_color_focus: rgba('#008D36')
+                    hint_text_color_focus: rgba('#008D36')
+                    fill_color_normal: rgba('#dadeed')
+                    fill_color_focus: rgba('#e9ebf5')
+                    id: confirm_password_input
+                    hint_text: "Confirm your password"
+                    font_style: "Body"
+                    size_hint_y: None
+                    height: str(r.scale_dp(56))
+                    helper_text: "Re-enter your password."
+                    helper_text_mode: "on_focus"
+                Widget:
+                    size_hint_y: None
+                    height: SP_SM
+                MDBoxLayout:
+                    size_hint_y: None
+                    height: str(r.scale_dp(56))
+                    padding: [0, 0]
+                    MDButton:
+                        id: create_button
+                        style: "filled"
+                        size_hint: (None, None)
+                        width: r.scale_dp(BTN_W_XXL)
+                        height: str(r.scale_dp(52))
+                        radius: [24]
+                        md_bg_color: rgba('#505CA9')
+                        on_release: root.create_password()
+                        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                        MDButtonIcon:
+                            icon: "lock-check"
+                            icon_color: rgba('#f9b233')
+                        MDButtonText:
+                            text: "Create Password"
+                            text_color: rgba('#008D36')
+                Widget:
+                    size_hint_y: None
+                    height: SP_LG
+        PrimaryBottomBar:
 

@@ -70,6 +70,21 @@ class ConditionalNavigationDrawer(MDNavigationDrawer):
                 "text": "DEX Trade",
                 "callback": app.navigate_to_dex_trade,
             },
+            {
+                "icon": "web",
+                "text": "Web3 Browser (Beta)",
+                "callback": app.navigate_to_web3_browser,
+            },
+            {
+                "icon": "barcode-scan",
+                "text": "Barcode Scan (Pilot)",
+                "callback": app.navigate_to_barcode_scan,
+            },
+            {
+                "icon": "camera",
+                "text": "Camera Scan (Pilot)",
+                "callback": app.navigate_to_camera_scan,
+            },
             {"icon": "food", "text": "Food Tracker", "callback": app.navigate_to_food_track},
             {
                 "icon": "application-settings",
@@ -171,6 +186,9 @@ DRAWER_ENABLED_SCREENS = {
     "nftmint_screen",
     "createimportwallet_screen",
     "dextrade_screen",
+    "web3_browser_screen",
+    "barcode_scan_screen",
+    "camera_scan_screen",
     "foodtrack_screen",
     "settings_screen",
 }

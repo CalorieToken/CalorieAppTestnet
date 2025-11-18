@@ -24,8 +24,8 @@ class LoginScreen(Screen):
         self.password_visible = not self.password_visible
 
         # Toggle the password field visibility
-        if hasattr(self.ids, "password"):
-            self.ids.password.password = not self.password_visible
+        if hasattr(self.ids, "password_input"):
+            self.ids.password_input.password = not self.password_visible
 
         # Update the eye icon
         if hasattr(self.ids, "password_toggle_icon"):
@@ -45,10 +45,10 @@ class LoginScreen(Screen):
         wallet_data.close()
 
         # Check if the password is correct
-        password = self.ids.password.text.encode("utf-8")
+        password = self.ids.password_input.text.encode("utf-8")
         if not bcrypt.checkpw(password, hashed_password):
 
-            self.password.hint_text = "Wrong password, try again"
+            self.ids.password_input.hint_text = "Wrong password, try again"
             return
 
         # Navigate based on new accounts model (preferred) or legacy

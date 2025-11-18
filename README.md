@@ -5,9 +5,29 @@
 [![UX Tour](https://github.com/CalorieToken/CalorieAppTestnet/actions/workflows/ux_tour.yml/badge.svg)](https://github.com/CalorieToken/CalorieAppTestnet/actions/workflows/ux_tour.yml)
 [![Version](https://img.shields.io/badge/version-1.1.0-blue.svg)](https://github.com/CalorieToken/CalorieAppTestnet)
 [![Python](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![License](https://img.shields.io/badge/license-Custom%20Dual-orange.svg)](LICENSE)
+[![Website](https://img.shields.io/badge/website-calorietoken.net-green.svg)](https://calorietoken.net)
+[![XRPL](https://img.shields.io/badge/XRPL-Mainnet%20%26%20Testnet-blue.svg)](https://xrpl.org/)
 
-A mobile-first cryptocurrency wallet and food tracking application built with KivyMD, featuring robust XRPL integration and conditional navigation.
+A mobile-first cryptocurrency wallet and food tracking application for **CalorieToken** on the XRP Ledger, built with KivyMD.
+
+## 🪙 CalorieToken Integration
+
+**Official CalorieToken XRPL Token:**
+- **Currency:** Calorie
+- **Ticker:** $CAL
+- **Issuer:** `rNqGa93B8ewQP9mUwpwqA19SApbf62U7PY`
+- **Network:** XRP Ledger Mainnet (Testnet for development)
+- **Website:** [calorietoken.net](https://calorietoken.net)
+- **Whitepaper:** [Read here](https://calorietoken.net/index.php/whitepaper/)
+
+> **"Aiming to be the world's food token"**  
+> CalorieToken targets the worldwide food & beverage industry with blockchain-based payment solutions.
+
+**Learn More:**
+- [Official Documentation Index](docs/OFFICIAL_PROJECT_DOCS.md)
+- [Trademark Guidelines](docs/TRADEMARK.md) - Usage policies
+- [CalorieToken Website](https://calorietoken.net) - Official resources
 
 ## 🌟 Features
 
@@ -84,32 +104,13 @@ CalorieAppTestnet/
 └── tests/               # 🧪 Unit tests
 ```
 
-**Note**: We follow industry best practices with a clean root directory. See [Repository Organization](docs/REPOSITORY_ORGANIZATION.md) for details.
+**Note**: We follow industry best practices with a clean root directory. Additional internal references are intentionally withheld until stable release.
 
-### Modular KV Layout (2025 Modernization)
-The legacy monolithic `calorieapptestnet.kv` (≈4,400 lines) has been fully removed and replaced with a **modular KV system** located in `src/core/kv/`:
-
-```
-src/core/kv/
-   base.kv                  # RootLayout + shared drawer item classes
-   wallet_screen.kv         # Wallet UI
-   send_xrp_screen.kv       # XRP send flow
-   settings_screen.kv       # Settings
-   login_screen.kv          # Authentication
-   ... (20+ additional screen .kv files)
-```
-
-Loading order is deterministic:
-1. `base.kv` first (shared classes)
-2. All other `*.kv` files alphabetically
-
-Benefits:
-- Cleaner diffs & easier collaboration
-- Eliminates duplicate widget warnings
-- Faster targeted layout iteration
-- Simplifies future theming upgrades
-
-No fallback to the old monolithic file remains; if a new screen is added, just create a `snake_case_screen.kv` in this directory.
+### Layout Organization (Modernized)
+The UI is organized into maintainable, screen-focused KV files with a clear loading order. This approach improves iteration speed and keeps layouts consistent without exposing internal file structure. The modernized setup enables:
+- Cleaner diffs and easier collaboration
+- Reduced duplication and warnings
+- Faster targeted layout updates
 
 ### Conditional Navigation System
 The app features an intelligent navigation system that creates navigation drawers only for screens that need them:
@@ -235,29 +236,62 @@ CalorieAppTestnet/
 - **`PasswordFieldWithToggle`**: Enhanced password input with visibility toggle
 - **`robust_submit_and_wait`**: Transaction submission with retry logic
 
+### Development Viewport & Responsive Overrides
+During active development and automated UX tours we often want a consistent, phone-sized viewport while still preserving full adaptive behavior for tablets and desktops in production.
+
+Environment overrides (all optional):
+
+| Variable | Example | Purpose |
+|----------|---------|---------|
+| `DEV_PHONE_VIEWPORT` | `390x844` | Forces window size (if `APP_FORCE_WIDTH/HEIGHT` not set) to a modern phone logical resolution (portrait enforced). |
+| `FORCE_SIZE_CLASS` | `sm` / `phone` | Pins responsive size class regardless of window width (use `phone` as alias for `sm`). |
+| `TOUR_FORCE_PHONE` | `1` | In UX tour runs auto-sets `DEV_PHONE_VIEWPORT=390x844` and `FORCE_SIZE_CLASS=sm` if unset. |
+| `TOUR_PHONE_WIDTH` / `TOUR_PHONE_HEIGHT` | `414` / `896` | Fine-grained control for UX tour window size when `TOUR_FORCE_PHONE` is enabled. |
+
+Example (PowerShell):
+```powershell
+$env:DEV_PHONE_VIEWPORT="390x844"; $env:FORCE_SIZE_CLASS="sm"; python -B scripts/complete_ux_tour.py
+```
+
+Production builds simply omit these variables and the app reverts to automatic breakpoint detection (`xs`, `sm`, `md`, `lg`, `xl`). The responsive system caches scaling factors to minimize recomputation while keeping layout adjustments correct on window resize.
+
+Breakpoints remain unchanged ensuring cross-platform compatibility; overrides are strictly opt-in for development convenience.
+
+### Debug Overlay
+Enable visual debugging of the responsive system with:
+```powershell
+$env:DEBUG_RESPONSIVE="1"; python main.py
+```
+
+This displays a small badge in the top-right corner showing:
+- Current size class (xs/sm/md/lg/xl)
+- Lock icon (🔒) when `FORCE_SIZE_CLASS` is active
+- DP and font scale factors
+- Current window dimensions
+
+The overlay updates in real-time during window resizes and is automatically removed in production (when `DEBUG_RESPONSIVE` is unset).
+
+### CI Testing Strategy
+Automated UX validation runs are supported to help catch regressions across device sizes. Details of internal test tooling are intentionally minimized here for security and competitive reasons. See `docs/UX_TOUR_GUIDE.md` for a public overview of the process.
+
 ## 🧪 Testing
 
 ### Automated UX Tour
-The app includes a comprehensive automated testing framework that validates all screens, flows, and features:
+We use an automated UX tour to validate major screens and flows and to generate visual reports for review. High-level, public-safe documentation is available here:
 
-- **97 Tests**: Complete coverage of all UI components and flows
-- **100% Pass Rate**: All tests passing in latest run
-- **Screenshots**: Automated capture of all screens for visual verification
-- **CI Integration**: Runs automatically on every PR and commit
+- [UX Tour Guide](docs/UX_TOUR_GUIDE.md)
 
-Run the UX tour locally:
-```bash
-python scripts/ux_tour.py
-```
-
-Reports and screenshots are saved to `docs/ui_tour/<timestamp>/`
-
-For more information, see the [UX Tour Guide](docs/UX_TOUR_GUIDE.md).
+Implementation details and internal scripts are withheld to protect the project’s integrity until formal release.
 
 See also:
 - [Project Status](docs/PROJECT_STATUS.md) - Current development state
 - [Changelog](docs/CHANGELOG.md) - Version history
 - [Roadmap](docs/TODO.md) - Future plans
+
+### UI/UX References (Public)
+- KivyMD Documentation: https://kivymd.readthedocs.io/
+- Kivy Documentation: https://kivy.org/doc/stable/
+- Material Design 3: https://m3.material.io/
 
 ### Manual Testing
 The app has been extensively tested with:
@@ -278,7 +312,15 @@ We welcome contributions! Please read our [Contributing Guide](docs/CONTRIBUTING
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under a **Custom Dual License** - see the [LICENSE](LICENSE) file for details.
+
+**Summary:**
+- **Personal Use:** Permitted for educational, research, and non-commercial purposes
+- **Commercial/Public Use:** Requires explicit written permission from CalorieToken
+
+**Contact for commercial licensing:** info@calorietoken.net
+
+**Trademark Notice:** CalorieToken® and related branding are registered trademarks. See [TRADEMARK.md](docs/TRADEMARK.md).
 
 ## 🌐 XRPL Testnet
 
@@ -286,17 +328,41 @@ This application uses the XRPL Testnet for development and testing. Testnet XRP 
 
 ## 🔗 Links
 
+### Official CalorieToken Resources
+- [CalorieToken Website](https://calorietoken.net)
+- [Whitepaper](https://calorietoken.net/index.php/whitepaper/)
+- [Twitter/X](https://twitter.com/CalorieToken)
+- [Telegram Community](https://t.me/joinchat/8jIusxwzMVI0NGVk)
+- [Discord Developers](https://discord.gg/hcjJgdyDGd)
+- [All Links (Linktree)](https://linktr.ee/CalorieToken)
+
+### Technical Documentation
 - [XRPL Documentation](https://xrpl.org/)
 - [KivyMD Documentation](https://kivymd.readthedocs.io/)
 - [Buildozer Documentation](https://buildozer.readthedocs.io/)
 
+### Trading & Token Info
+- [Sologenic DEX](https://sologenic.org/trade?network=mainnet&market=43616C6F72696500000000000000000000000000%2BrNqGa93B8ewQP9mUwpwqA19SApbf62U7PY%2FXRP)
+- [XPMarket](https://xpmarket.com/token/Calorie-rNqGa93B8ewQP9mUwpwqA19SApbf62U7PY)
+- [LiveCoinWatch](https://www.livecoinwatch.com/price/Calorie-CAL)
+
 ## 🆘 Support
 
-For issues and questions:
-- Open an issue on GitHub
-- Check the documentation
-- Review existing issues and solutions
+**For App/Development Issues:**
+- Open an issue on [GitHub](https://github.com/CalorieToken/CalorieAppTestnet/issues)
+- Check the [documentation](docs/README.md)
+- Join [Discord Developers Server](https://discord.gg/hcjJgdyDGd)
+
+**For CalorieToken Project:**
+- Email: info@calorietoken.net
+- Telegram: [Community Chat](https://t.me/joinchat/8jIusxwzMVI0NGVk)
+- Twitter: [@CalorieToken](https://twitter.com/CalorieToken)
 
 ---
 
-**Built with ❤️ for the XRPL community**
+**Built with ❤️ for CalorieToken and the XRPL community**
+
+---
+
+**CalorieToken® | Chamber of Commerce KVK: 84216352**  
+*Trademark registered with EUIPO | See [TRADEMARK.md](docs/TRADEMARK.md) for usage guidelines*

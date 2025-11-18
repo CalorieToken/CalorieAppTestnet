@@ -13,6 +13,7 @@ from xrpl.wallet import Wallet
 
 from src.utils.dialogs import show_error_dialog
 from src.utils.storage_paths import WALLET_DATA_PATH
+from src.utils.clipboard_utils import secure_copy
 
 
 class KeypairImportScreen(Screen):
@@ -116,7 +117,7 @@ class KeypairImportScreen(Screen):
     def copy_private_key(self):
         try:
             if "private_key_input" in self.ids and self.ids.private_key_input.text:
-                Clipboard.copy(self.ids.private_key_input.text.strip())
+                secure_copy(self.ids.private_key_input.text.strip(), clear_after=30.0)
                 if "key_action_status" in self.ids:
                     self.ids.key_action_status.text = "📋 Copied private key"
         except Exception:
