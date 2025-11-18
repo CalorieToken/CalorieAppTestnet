@@ -1,0 +1,155 @@
+#:import r src.utils.responsive
+<SendXRPScreen>:
+    xrp_address: xrp_address
+    xrp_balance: xrp_balance
+    amount_input: amount_input
+    destination_input: destination_input
+    ResponsiveContainer:
+        orientation: "vertical"
+        canvas.before:
+            Color:
+                rgba: rgba('#bfc6e0')
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        AppHeader:
+            id: app_header
+            title: "Send XRP"
+        ContentScroll:
+            ContentSection:
+                SectionHeader:
+                    text: "Your Address"
+                Widget:
+                    size_hint_y: None
+                    height: SP_XS
+                # Address Card
+                ContentCard:
+                    md_bg_color: CAL_WHITE
+                    size_hint_y: None
+                    height: self.minimum_height
+                    MDBoxLayout:
+                        id: address_box
+                        orientation: "vertical"
+                        spacing: SP_XS
+                        size_hint_y: None
+                        height: self.minimum_height
+                        MDLabel:
+                            text_size: self.width, None
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            text: "Your Address"
+                            font_style: "Label"
+                            theme_text_color: "Custom"
+                            text_color: rgba('#202443')
+                            height: "20dp"
+                        MDLabel:
+                            text_size: self.width, None
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            id: xrp_address
+                            font_style: "Body"
+                            theme_text_color: "Custom"
+                            text_color: rgba('#202443')
+                            halign: "center"
+                            size_hint_y: None
+                            height: "24dp"
+
+                SectionHeader:
+                    text: "Transfer Details"
+                Widget:
+                    size_hint_y: None
+                    height: SP_XS
+                # Amount and Destination Card
+                ContentCard:
+                    md_bg_color: CAL_WHITE
+                    size_hint_y: None
+                    height: self.minimum_height
+                    MDBoxLayout:
+                        id: amount_box
+                        orientation: "vertical"
+                        spacing: SP_MD
+                        size_hint_y: None
+                        height: self.minimum_height
+                        MDTextField:
+                            mode: "filled"
+                            line_color_focus: rgba('#008D36')
+                            hint_text_color_focus: rgba('#008D36')
+                            fill_color_normal: rgba('#dadeed')
+                            fill_color_focus: rgba('#e9ebf5')
+                            id: amount_input
+                            multiline: False
+                            input_filter: 'float'
+                            input_filter_min: 0
+                            input_filter_max: 999999999999.999999
+                            hint_text: 'Amount (XRP)'
+                            helper_text: "Enter the amount of XRP to send"
+                            helper_text_mode: "on_focus"
+                        MDTextField:
+                            mode: "filled"
+                            line_color_focus: rgba('#008D36')
+                            hint_text_color_focus: rgba('#008D36')
+                            fill_color_normal: rgba('#dadeed')
+                            fill_color_focus: rgba('#e9ebf5')
+                            id: destination_input
+                            multiline: False
+                            hint_text: 'Destination Address'
+                            helper_text: "Enter the recipient's XRPL address (starts with 'r')"
+                            helper_text_mode: "on_focus"
+                        PrimaryButton:
+                            size_hint: (1, None)
+                            height: "48dp"
+                            on_release: root.send_xrp()
+                            MDButtonIcon:
+                                icon: "send"
+                                icon_color: CAL_YELLOW
+                            MDButtonText:
+                                text: "Send XRP"
+                                text_color: CAL_GREEN
+
+                SectionHeader:
+                    text: "Balance"
+                Widget:
+                    size_hint_y: None
+                    height: SP_XS
+                # Balance Card
+                ContentCard:
+                    md_bg_color: rgba('#e8f5ed')
+                    size_hint_y: None
+                    height: self.minimum_height
+                    MDBoxLayout:
+                        id: balance_box
+                        orientation: "vertical"
+                        spacing: SP_XS
+                        size_hint_y: None
+                        height: self.minimum_height
+                        MDLabel:
+                            text_size: self.width, None
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            text: "XRP Balance"
+                            font_style: "Label"
+                            theme_text_color: "Custom"
+                            text_color: rgba('#008D36')
+                            size_hint_y: None
+                            height: "20dp"
+                        MDLabel:
+                            text_size: self.width, None
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            id: xrp_balance
+                            font_style: "Title"
+                            theme_text_color: "Custom"
+                            text_color: rgba('#006b2d')
+                            halign: "center"
+                            size_hint_y: None
+                            height: "28dp"
+
+                SectionHeader:
+                    text: "Recent Activity"
+                Widget:
+                    size_hint_y: None
+                    height: SP_XS
+                # Transactions Card (reusable)
+                TransactionsCard:
+                    id: transactions_card
+        PrimaryBottomBar:

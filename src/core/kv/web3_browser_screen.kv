@@ -1,0 +1,115 @@
+#:import r src.utils.responsive
+<Web3BrowserScreen>:
+    ResponsiveContainer:
+        orientation: "vertical"
+        canvas.before:
+            Color:
+                rgba: CAL_BG_LIGHT
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        AppHeader:
+            id: app_header
+            title: "Web3 Browser (Beta)"
+        ContentScroll:
+            ContentSection:
+                SectionHeader:
+                    text: "Wallet Session"
+                Widget:
+                    size_hint_y: None
+                    height: SP_XS
+                ContentCard:
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        padding: [SP_MD, SP_MD]
+                        spacing: SP_SM
+                        MDLabel:
+                            text_size: self.width, None
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            text: f"Status: {'Connected' if app.wallet_connector.is_connected() else 'Not Connected'}"
+                            shorten: True
+                            shorten_from: "right"
+                            theme_text_color: "Custom"
+                            text_color: CAL_TEXT_DARK
+                            size_hint_y: None
+                            height: "20dp"
+                        MDBoxLayout:
+                            size_hint_y: None
+                            height: "52dp"
+                            spacing: SP_SM
+                            PrimaryButton:
+                                size_hint: (None, None)
+                                width: dp(160)
+                                height: "52dp"
+                                on_release: app.connect_wallet() if not app.wallet_connector.is_connected() else app.disconnect_wallet()
+                                MDButtonIcon:
+                                    icon: "link" if not app.wallet_connector.is_connected() else "link-off"
+                                MDButtonText:
+                                    text: "Connect" if not app.wallet_connector.is_connected() else "Disconnect"
+                            PrimaryButton:
+                                size_hint: (None, None)
+                                width: dp(BTN_W_XL)
+                                height: "52dp"
+                                on_release: app.request_xaman_test_sign() if app.wallet_connector.is_connected() else None
+                                disabled: not app.wallet_connector.is_connected()
+                                MDButtonIcon:
+                                    icon: "signature"
+                                MDButtonText:
+                                    text: "Sign Test"
+                SectionHeader:
+                    text: "Open dApp"
+                Widget:
+                    size_hint_y: None
+                    height: SP_XS
+                ContentCard:
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        padding: [SP_MD, SP_MD]
+                        spacing: SP_SM
+                        MDTextField:
+                            id: url_input
+                            hint_text: "Enter dApp URL (https://...)"
+                            helper_text: "Enter HTTPS URL of Web3 dApp to connect"
+                            helper_text_mode: "on_focus"
+                            mode: "filled"
+                            fill_color_normal: CAL_BG_MID
+                            fill_color_focus: CAL_BG_LIGHT
+                            line_color_focus: CAL_GREEN
+                            hint_text_color_focus: CAL_GREEN
+                        PrimaryButton:
+                            size_hint: (None, None)
+                            height: r.scale_dp(52)
+                            width: r.scale_dp(96)
+                            on_release: root.open_url(url_input.text)
+                            MDButtonIcon:
+                                icon: "open-in-new"
+                            MDButtonText:
+                                text: "Open"
+                SectionHeader:
+                    text: "XRPL Shortcuts"
+                Widget:
+                    size_hint_y: None
+                    height: SP_XS
+                ContentCard:
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        padding: [SP_MD, SP_MD]
+                        spacing: SP_SM
+                        MDBoxLayout:
+                            size_hint_y: None
+                            height: r.scale_dp(44)
+                            spacing: SP_SM
+                            SecondaryButton:
+                                on_release: root.open_xrpl_testnet_tools()
+                                MDButtonText:
+                                    text: "Explorer"
+                            SecondaryButton:
+                                on_release: root.open_url("https://hooks-testnet-v3.xrpl-labs.com/")
+                                MDButtonText:
+                                    text: "Hooks"
+                            SecondaryButton:
+                                on_release: root.open_url("https://xrpl.org/intro-to-dev-tools.html")
+                                MDButtonText:
+                                    text: "Dev Tools"
+        PrimaryBottomBar:

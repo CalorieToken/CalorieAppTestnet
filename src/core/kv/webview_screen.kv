@@ -1,0 +1,52 @@
+#:import r src.utils.responsive
+<WebViewScreen>:
+    name: "webview_screen"
+    ResponsiveContainer:
+        orientation: "vertical"
+        canvas.before:
+            Color:
+                rgba: CAL_BG_LIGHT
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        AppHeader:
+            title: "In-App WebView"
+        ContentScroll:
+            ContentSection:
+                SectionHeader:
+                    text: "Status"
+                Widget:
+                    size_hint_y: None
+                    height: SP_XS
+                ContentCard:
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        padding: [SP_MD, SP_MD]
+                        spacing: SP_SM
+                        MDLabel:
+                            id: status_label
+                            text: "WebView Feature Placeholder"
+                            text_size: self.width, None
+                            halign: "center"
+                            theme_text_color: "Secondary"
+                        MDLabel:
+                            text: "Set WEBVIEW_ENABLED=1 to test simulated mode"
+                            text_size: self.width, None
+                            theme_text_color: "Hint"
+                            halign: "center"
+                SectionHeader:
+                    text: "Actions"
+                Widget:
+                    size_hint_y: None
+                    height: SP_XS
+                ContentCard:
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        padding: [SP_MD, SP_MD]
+                        spacing: SP_SM
+                        MDLabel:
+                            text: "Use the bottom navigation to explore other features."
+                            text_size: self.width, None
+                            halign: "center"
+                            theme_text_color: "Hint"
+        PrimaryBottomBar:

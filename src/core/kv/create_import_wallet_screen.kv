@@ -1,0 +1,89 @@
+#:import r src.utils.responsive
+<CreateImportWalletScreen>
+    ResponsiveContainer:
+        orientation: "vertical"
+        canvas.before:
+            Color:
+                rgba: rgba('#bfc6e0')
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        AppHeader:
+            id: app_header
+            title: "Add Another Account"
+        # Adaptive scrollable content using shared components
+        ContentScroll:
+            ContentSection:
+                MDLabel:
+                    text_size: self.width, None
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    text: "Add Another XRPL Account"
+                    font_style: "Title"
+                    halign: "center"
+                    theme_text_color: "Custom"
+                    text_color: rgba('#202443')
+                    size_hint_y: None
+                    height: r.scale_dp(40)
+                MDBoxLayout:
+                    size_hint_y: None
+                    height: "4dp"
+                ContentCard:
+                    md_bg_color: CAL_BG_LIGHT
+                    size_hint_y: None
+                    height: self.minimum_height
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        padding: [SP_MD, SP_MD]
+                        spacing: SP_MD
+                        MDBoxLayout:
+                            size_hint_y: None
+                            height: r.scale_dp(56)
+                            spacing: SP_SM
+                            MDLabel:
+                                text_size: self.width, None
+                                size_hint_y: None
+                                height: self.texture_size[1]
+                                size_hint_x: 1
+                            PrimaryButtonFixed:
+                                id: create_wallet_button
+                                width: r.scale_dp(BTN_W_XL)
+                                on_release: root.create_extrawallet_screen()
+                                MDButtonIcon:
+                                    icon: "wallet-plus"
+                                    icon_color: CAL_YELLOW
+                                MDButtonText:
+                                    text: "Create wallet"
+                                    text_color: CAL_GREEN
+                            MDLabel:
+                                text_size: self.width, None
+                                size_hint_y: None
+                                height: self.texture_size[1]
+                                size_hint_x: 1
+                        MDBoxLayout:
+                            size_hint_y: None
+                            height: r.scale_dp(56)
+                            spacing: SP_SM
+                            MDLabel:
+                                text_size: self.width, None
+                                size_hint_y: None
+                                height: self.texture_size[1]
+                                size_hint_x: 1
+                            PrimaryButtonFixed:
+                                id: import_wallet_button
+                                width: r.scale_dp(BTN_W_XL)
+                                on_release: root.import_extrawallet_screen()
+                                MDButtonIcon:
+                                    icon: "wallet"
+                                    icon_color: CAL_YELLOW
+                                MDButtonText:
+                                    text: "Import wallet"
+                                    text_color: CAL_GREEN
+                            MDLabel:
+                                text_size: self.width, None
+                                size_hint_y: None
+                                height: self.texture_size[1]
+                                size_hint_x: 1
+
+        PrimaryBottomBar:
+    

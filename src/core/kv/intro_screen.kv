@@ -1,0 +1,60 @@
+#:import r src.utils.responsive
+<IntroScreen>:
+    ResponsiveContainer:
+        orientation: "vertical"
+        canvas.before:
+            Color:
+                rgba: rgba('#bfc6e0')
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        AppHeader:
+            id: app_header
+            title: "CalorieApp"
+        ContentScroll:
+            ContentSection:
+                ContentCard:
+                    md_bg_color: CAL_BG_LIGHT
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        padding: [r.scale_dp(SP_LG), r.scale_dp(SP_LG)]
+                        spacing: r.scale_dp(SP_MD)
+                        MDLabel:
+                            # Use a universally supported font_style across size classes
+                            font_style: "Title"
+                            text: "Welcome to CalorieApp"
+                            halign: "center"
+                            theme_text_color: "Custom"
+                            text_color: rgba('#202443')
+                            size_hint_y: None
+                            height: str(r.scale_dp(40))
+                        MDLabel:
+                            text: "Track your calories across meals"
+                            halign: "center"
+                            theme_text_color: "Custom"
+                            text_color: rgba('#202443')
+                            size_hint_y: None
+                            height: str(r.scale_dp(24))
+                            text_size: self.width, None
+                        MDLabel:
+                            text: "Calorie is building a global food token"
+                            halign: "center"
+                            theme_text_color: "Custom"
+                            text_color: rgba('#202443')
+                            size_hint_y: None
+                            height: str(r.scale_dp(24))
+                            text_size: self.width, None
+                        Widget:
+                            size_hint_y: None
+                            height: r.scale_dp(SP_SM)
+                        PrimaryButtonFixed:
+                            width: r.scale_dp(BTN_W_MD)
+                            on_release: root.next()
+                            MDButtonIcon:
+                                icon: "page-next-outline"
+                                icon_color: CAL_YELLOW
+                            MDButtonText:
+                                text: "Get Started"
+                                text_color: CAL_GREEN
+        PrimaryBottomBar:
+

@@ -1,0 +1,222 @@
+#:import r src.utils.responsive
+<MnemonicImportScreen>:
+    ResponsiveContainer:
+        orientation: "vertical"
+        canvas.before:
+            Color:
+                rgba: rgba('#bfc6e0')
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        AppHeader:
+            id: app_header
+            title: "Import from Phrase"
+        ContentScroll:
+            ContentSection:
+                MDLabel:
+                    text_size: self.width, None
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    text: "Enter each word in order"
+                    font_style: "Title"
+                    theme_text_color: "Custom"
+                    text_color: rgba('#202443')
+                    halign: "center"
+                    size_hint_y: None
+                    height: r.scale_dp(30)
+
+                MDGridLayout:
+                    cols: 2
+                    spacing: "10dp"
+                    size_hint_y: None
+                    adaptive_height: True
+                    
+                    MDTextField:
+                        id: word_01
+                        hint_text: "1."
+                        helper_text: "Enter word 1"
+                        helper_text_mode: "on_focus"
+                        mode: "filled"
+                        line_color_focus: rgba('#008D36')
+                        hint_text_color_focus: rgba('#008D36')
+                        fill_color_normal: rgba('#dadeed')
+                        fill_color_focus: rgba('#e9ebf5')
+                        size_hint_y: None
+                        height: r.scale_dp(48)
+                        on_text: root.on_first_word_text(self.text)
+                        
+                    MDTextField:
+                        id: word_02
+                        hint_text: "2."
+                        helper_text: "Enter word 2"
+                        helper_text_mode: "on_focus"
+                        mode: "filled"
+                        line_color_focus: rgba('#008D36')
+                        hint_text_color_focus: rgba('#008D36')
+                        fill_color_normal: rgba('#dadeed')
+                        fill_color_focus: rgba('#e9ebf5')
+                        size_hint_y: None
+                        height: r.scale_dp(48)
+                        
+                    MDTextField:
+                        id: word_03
+                        hint_text: "3."
+                        helper_text: "Enter word 3"
+                        helper_text_mode: "on_focus"
+                        mode: "filled"
+                        line_color_focus: rgba('#008D36')
+                        hint_text_color_focus: rgba('#008D36')
+                        fill_color_normal: rgba('#dadeed')
+                        fill_color_focus: rgba('#e9ebf5')
+                        size_hint_y: None
+                        height: r.scale_dp(48)
+                        
+                    MDTextField:
+                        id: word_04
+                        hint_text: "4."
+                        helper_text: "Enter word 4"
+                        helper_text_mode: "on_focus"
+                        mode: "filled"
+                        line_color_focus: rgba('#008D36')
+                        hint_text_color_focus: rgba('#008D36')
+                        fill_color_normal: rgba('#dadeed')
+                        fill_color_focus: rgba('#e9ebf5')
+                        size_hint_y: None
+                        height: r.scale_dp(48)
+                        
+                    MDTextField:
+                        id: word_05
+                        hint_text: "5."
+                        helper_text: "Enter word 5"
+                        helper_text_mode: "on_focus"
+                        mode: "filled"
+                        line_color_focus: rgba('#008D36')
+                        hint_text_color_focus: rgba('#008D36')
+                        fill_color_normal: rgba('#dadeed')
+                        fill_color_focus: rgba('#e9ebf5')
+                        size_hint_y: None
+                        height: r.scale_dp(48)
+                        
+                    MDTextField:
+                        id: word_06
+                        hint_text: "6."
+                        helper_text: "Enter word 6"
+                        helper_text_mode: "on_focus"
+                        mode: "filled"
+                        line_color_focus: rgba('#008D36')
+                        hint_text_color_focus: rgba('#008D36')
+                        fill_color_normal: rgba('#dadeed')
+                        fill_color_focus: rgba('#e9ebf5')
+                        size_hint_y: None
+                        height: r.scale_dp(48)
+                        
+                    MDTextField:
+                        id: word_07
+                        hint_text: "7."
+                        helper_text: "Enter word 7"
+                        helper_text_mode: "on_focus"
+                        mode: "filled"
+                        line_color_focus: rgba('#008D36')
+                        hint_text_color_focus: rgba('#008D36')
+                        fill_color_normal: rgba('#dadeed')
+                        fill_color_focus: rgba('#e9ebf5')
+                        size_hint_y: None
+                        height: r.scale_dp(48)
+                        
+                    MDTextField:
+                        id: word_08
+                        hint_text: "8."
+                        helper_text: "Enter word 8"
+                        helper_text_mode: "on_focus"
+                        mode: "filled"
+                        line_color_focus: rgba('#008D36')
+                        hint_text_color_focus: rgba('#008D36')
+                        fill_color_normal: rgba('#dadeed')
+                        fill_color_focus: rgba('#e9ebf5')
+                        size_hint_y: None
+                        height: r.scale_dp(48)
+                        
+                    MDTextField:
+                        id: word_09
+                        hint_text: "9."
+                        helper_text: "Enter word 9"
+                        helper_text_mode: "on_focus"
+                        mode: "filled"
+                        line_color_focus: rgba('#008D36')
+                        hint_text_color_focus: rgba('#008D36')
+                        fill_color_normal: rgba('#dadeed')
+                        fill_color_focus: rgba('#e9ebf5')
+                        size_hint_y: None
+                        height: r.scale_dp(48)
+                        
+                    MDTextField:
+                        id: word_10
+                        hint_text: "10."
+                        helper_text: "Enter word 10"
+                        helper_text_mode: "on_focus"
+                        mode: "filled"
+                        line_color_focus: rgba('#008D36')
+                        hint_text_color_focus: rgba('#008D36')
+                        fill_color_normal: rgba('#dadeed')
+                        fill_color_focus: rgba('#e9ebf5')
+                        size_hint_y: None
+                        height: r.scale_dp(48)
+                        
+                    MDTextField:
+                        id: word_11
+                        hint_text: "11."
+                        helper_text: "Enter word 11"
+                        helper_text_mode: "on_focus"
+                        mode: "filled"
+                        line_color_focus: rgba('#008D36')
+                        hint_text_color_focus: rgba('#008D36')
+                        fill_color_normal: rgba('#dadeed')
+                        fill_color_focus: rgba('#e9ebf5')
+                        size_hint_y: None
+                        height: r.scale_dp(48)
+                        
+                    MDTextField:
+                        id: word_12
+                        hint_text: "12."
+                        helper_text: "Enter word 12"
+                        helper_text_mode: "on_focus"
+                        mode: "filled"
+                        line_color_focus: rgba('#008D36')
+                        hint_text_color_focus: rgba('#008D36')
+                        fill_color_normal: rgba('#dadeed')
+                        fill_color_focus: rgba('#e9ebf5')
+                        size_hint_y: None
+                        height: r.scale_dp(48)
+
+                MDLabel:
+                    text_size: self.width, None
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    id: status_label
+                    text: ""
+                    theme_text_color: "Secondary"
+                    halign: "center"
+                    size_hint_y: None
+                    height: r.scale_dp(30)
+
+                PrimaryButtonFixed:
+                    id: import_button
+                    width: r.scale_dp(BTN_W_LG)
+                    pos_hint: {"center_x": 0.5}
+                    on_release: root.import_wallet()
+                    MDButtonIcon:
+                        icon: "wallet"
+                        icon_color: CAL_YELLOW
+                    MDButtonText:
+                        text: "Import Wallet"
+                        text_color: CAL_GREEN
+
+                MDLabel:
+                    text_size: self.width, None
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    size_hint_y: None
+                    height: r.scale_dp(20)
+
+        PrimaryBottomBar:
+

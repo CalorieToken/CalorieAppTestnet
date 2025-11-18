@@ -1,0 +1,36 @@
+# Funding & Sponsorship Information for CalorieAppTestnet
+#
+# Support CalorieToken development via XRPL or traditional channels
+#
+# See: https://docs.github.com/articles/displaying-a-sponsor-button-in-your-repository
+
+# GitHub Sponsors
+github: # Add GitHub username if CalorieToken sets up GitHub Sponsors
+
+# Open Collective
+open_collective: # Add Open Collective username if applicable
+
+# Community Bridge
+community_bridge: # project-name
+
+# Patreon
+patreon: # Add Patreon username if applicable
+
+# Tidelift
+tidelift: # Add if package is on Tidelift
+
+# Ko-fi
+ko_fi: # Add Ko-fi username if applicable
+
+# Liberapay
+liberapay: # Add Liberapay username if applicable
+
+# IssueHunt
+issuehunt: # Add IssueHunt username if applicable
+
+# Custom donation links
+custom:
+  - "https://calorietoken.net/index.php/donate/"
+  - "XRPL Address: rNqGa93B8ewQP9mUwpwqA19SApbf62U7PY (CAL Token Issuer)"
+  - "Send XRP or Calorie tokens to support development"
+  - "Telegram: https://t.me/joinchat/8jIusxwzMVI0NGVk"

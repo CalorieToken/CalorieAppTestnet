@@ -1,0 +1,32 @@
+{
+  "TA1": {
+    "public_key": "ED065CC63EF495ED9B77D4C880502B0789BCEACF0BCE1C137877FB1C8010098FD3",
+    "private_key": "ED729D7BA62C0E52F8FBDB583BD81E4529ED3B4479E7C6AA667B7249463A634813",
+    "mnemonic": "adult cloth cat cabbage couple art boost behind arena common bicycle car"
+  },
+  "TA2": {
+    "public_key": "ED3751DA9A66B02726126E87D14CE9372C7050E1071B5148A5A14EE324B96EC289",
+    "private_key": "ED7443DD687C05A08DCC53809D3E0F12DA4D1F4B81E0B4C863E3B0F42A4F237789",
+    "mnemonic": "cheap bleak cook answer certain accident bunker cause announce brief carpet basic"
+  },
+  "TA3": {
+    "public_key": "ED18151E97440E7771E8AE2A5231681AB5E4B0D518371C7C1E94E961F4BC3A330A",
+    "private_key": "EDA751EC12C2799DAB71C969689B37E76A01B3052770356C2FD49E60D68B3953DE",
+    "mnemonic": "cash cat ask column chair benefit alcohol code canoe action can burden"
+  },
+  "TA4": {
+    "public_key": "EDA2324AAC20D892117C43F4AB95AB1FF6BDB065D097B086EC921BCD7864D159A8",
+    "private_key": "EDC30908A528DBFC30185C16DC98713DFCA8BE14156079F8A50AF1E44ADF8D7DAF",
+    "mnemonic": null
+  },
+  "TA5": {
+    "public_key": "ED3F2D4D9E6B5CF7979E121FE03F831FFAE6C3795C23D7E2C6609C588B8BAA6E81",
+    "private_key": "EDF99E04C30182F0BB1D094ABC4EC07D6EC4EDD6E6B70664954703BCB9AA6478E2",
+    "mnemonic": "clog chalk bean album avocado blind bird carbon adapt cannon career armed"
+  },
+  "TA6": {
+    "public_key": "ED4672FC2B932D5FB6EB9824FD025989552ADC5B2A4C66F017B3D5A4D61B9F077D",
+    "private_key": "EDAA1BF8F03B7B0C0CDC684F6C883A85BDEE463C5CFE6F91C8F193BE4027C22A4F",
+    "mnemonic": "apple age choose army calm cigar blue arrow action actor cluster clean"
+  }
+}

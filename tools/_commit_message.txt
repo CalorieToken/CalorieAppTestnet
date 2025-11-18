@@ -1,0 +1,8 @@
+docs: public-safe documentation refresh and legal hardening
+
+- Add official docs index and public status update
+- Sanitize README and docs index (remove private links)
+- Allowlist public UX tour guides; keep internals private
+- Update CHANGELOG for repository hardening (1.1.1)
+
+[date: 2025-11-18]

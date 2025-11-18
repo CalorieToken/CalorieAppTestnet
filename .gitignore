@@ -1,0 +1,258 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
+#   However, in case of collaboration, if having platform-specific dependencies or dependencies
+#   having no cross-platform support, pipenv may install dependencies that don't work, or not
+#   install all needed dependencies.
+#Pipfile.lock
+
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# Buildozer files
+.buildozer/
+bin/
+
+# Wallet data files (sensitive)
+wallet_data.dat
+wallet_data.bak
+wallet_data.dir
+*.dat
+*.bak
+*.dir
+
+# Temporary files
+*.tmp
+*.temp
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-*
+
+# Backup files
+*.backup
+*.bak
+*.old
+backups/
+
+# Log files
+*.log
+logs/
+crash*.txt
+
+# UX Tour outputs (keep latest only)
+docs/ui_tour/*/
+!docs/ui_tour/latest/
+
+# Analysis reports (INTERNAL - contain competitive implementation details)
+analysis/
+scripts/complete_ux_tour.py
+scripts/best_practice_validator.py
+docs/BEST_PRACTICE_INTEGRATION.md
+docs/CALORIETOKEN_INTEGRATION_SUMMARY.md
+docs/UX_TOUR_*.md
+# Public-safe UX tour docs (allowlist)
+!docs/UX_TOUR_GUIDE.md
+!docs/UX_TOUR_QUICK_REF.md
+!docs/UX_TOUR_V2_UPDATES.md
+docs/development-progress/
+temp_*.py
+temp_*.txt
+
+# Reference documentation (INTERNAL - competitive analysis)
+docs/reference/**
+
+# Internal analysis & automation docs (keep public docs minimal)
+docs/ux_tours/**
+docs/interactive_test/**
+docs/automated_improvements/**
+docs/flow_analysis/**
+docs/test_iterations/**
+docs/ux_optimization/**
+docs/visual_audit/**
+docs/COMPREHENSIVE_*.md
+docs/SESSION_PROGRESS_*.md
+docs/AUTOMATION_*.md
+docs/ITERATION_*.md
+docs/LAYOUT_FIXES_*.md
+docs/*ANALYSIS*.md
+docs/ACTUAL_STATUS_*.md
+docs/COMMUNITY_TEASER_*.md
+docs/ENHANCED_*.md
+
+# Internal architecture docs (competitive implementation details)
+docs/CALORIEDB_*.md
+docs/CALORIE_LEDGER_LINKING.md
+docs/DECENTRALIZED_DATA_ARCHITECTURE.md
+docs/BACKEND_SIGNING_SPEC.md
+docs/FOODREPO_*.md
+docs/WALLET_CONNECT_ROADMAP.md
+docs/XRPL_SAFE_MODE_GUIDE.md
+docs/RESOURCE_USAGE_POLICY.md
+docs/RESPONSIVE_SYSTEM_GUIDE.md
+docs/UI_STYLE_GUIDE.md
+docs/UX_OPTIMIZER_SUMMARY.md
+
+# Internal git/commit helpers
+GIT_COMMIT_GUIDE.md
+COMMIT_QUICK_REFERENCE.md
+COMPREHENSIVE_TODO_LIST.md
+RELEASE_STRATEGY_SUMMARY.md
+SOCIAL_MEDIA_ANNOUNCEMENT_KIT.md
+
+# Test outputs and artifacts
+test_*.py
+test_*.txt
+*_output.txt
+
+# Test artifacts
+.pytest_cache/
+htmlcov/
+.coverage
+coverage.xml
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Internal tooling (whitelist only runnable helpers)
+scripts/**
+!scripts/run.py
+!scripts/run.bat
+!scripts/run.sh
+!build_apk.bat
+!build_apk.sh

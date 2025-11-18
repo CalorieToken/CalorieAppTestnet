@@ -1,0 +1,130 @@
+#:import r src.utils.responsive
+<KeypairImportScreen>:
+    ResponsiveContainer:
+        orientation: "vertical"
+        canvas.before:
+            Color:
+                rgba: rgba('#bfc6e0')
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        AppHeader:
+            title: "Import Keys"
+        ContentScroll:
+            ContentSection:
+                SectionHeader:
+                    text: "Instructions"
+                ContentCard:
+                    md_bg_color: CAL_BG_LIGHT
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        padding: [SP_MD, SP_MD]
+                        spacing: SP_SM
+                        MDLabel:
+                            text: "Enter your Public and Private keys"
+                            text_size: self.width, None
+                            font_style: "Title"
+                            theme_text_color: "Custom"
+                            text_color: CAL_TEXT_DARK
+                            halign: "center"
+                SectionHeader:
+                    text: "Public Key"
+                ContentCard:
+                    md_bg_color: CAL_WHITE
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        padding: [SP_MD, SP_MD]
+                        spacing: SP_SM
+                        MDTextField:
+                            id: public_key_input
+                            hint_text: "Public Key"
+                            helper_text: "Enter your XRPL public key (starts with 'ED' or similar)"
+                            helper_text_mode: "on_focus"
+                            mode: "filled"
+                            line_color_focus: CAL_GREEN
+                            hint_text_color_focus: CAL_GREEN
+                            fill_color_normal: CAL_BG_MID
+                            fill_color_focus: CAL_BG_LIGHT
+                            multiline: False
+                        MDIconButton:
+                            theme_icon_color: "Custom"
+                            icon_color: CAL_BLUE
+                            on_press: root.paste_public_key()
+                            MDButtonIcon:
+                                icon: "content-paste"
+                        MDIconButton:
+                            theme_icon_color: "Custom"
+                            icon_color: CAL_YELLOW
+                            on_press: root.copy_public_key()
+                            MDButtonIcon:
+                                icon: "content-copy"
+                SectionHeader:
+                    text: "Private Key"
+                ContentCard:
+                    md_bg_color: CAL_WHITE
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        padding: [SP_MD, SP_MD]
+                        spacing: SP_SM
+                        MDTextField:
+                            id: private_key_input
+                            hint_text: "Private Key"
+                            helper_text: "Enter your XRPL private key (keep secure, never share)"
+                            password: True
+                            helper_text_mode: "on_focus"
+                            mode: "filled"
+                            line_color_focus: CAL_GREEN
+                            hint_text_color_focus: CAL_GREEN
+                            fill_color_normal: CAL_BG_MID
+                            fill_color_focus: CAL_BG_LIGHT
+                            multiline: False
+                        MDIconButton:
+                            theme_icon_color: "Custom"
+                            icon_color: CAL_BLUE
+                            on_press: root.paste_private_key()
+                            MDButtonIcon:
+                                icon: "content-paste"
+                        MDIconButton:
+                            theme_icon_color: "Custom"
+                            icon_color: CAL_YELLOW
+                            on_press: root.copy_private_key()
+                            MDButtonIcon:
+                                icon: "content-copy"
+                SectionHeader:
+                    text: "Status"
+                ContentCard:
+                    md_bg_color: CAL_BG_LIGHT
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        padding: [SP_MD, SP_MD]
+                        MDLabel:
+                            id: key_action_status
+                            text: ""
+                            theme_text_color: "Secondary"
+                            halign: "center"
+                            size_hint_y: None
+                            adaptive_height: True
+                SectionHeader:
+                    text: "Actions"
+                ContentCard:
+                    md_bg_color: CAL_BG_LIGHT
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        padding: [SP_MD, SP_MD]
+                        spacing: SP_SM
+                        MDLabel:
+                        PrimaryButton:
+                            id: import_button
+                            size_hint: (None, None)
+                            width: r.scale_dp(BTN_W_XXL)
+                            height: r.scale_dp(52)
+                            on_release: root.import_from_keypair()
+                            MDButtonIcon:
+                                icon: "key"
+                                icon_color: CAL_YELLOW
+                            MDButtonText:
+                                text: "Import Account"
+                                text_color: CAL_GREEN
+                        MDLabel:
+        PrimaryBottomBar:
+

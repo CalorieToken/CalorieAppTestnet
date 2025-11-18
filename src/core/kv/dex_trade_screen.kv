@@ -1,0 +1,74 @@
+#:import r src.utils.responsive
+<DEXTradeScreen>
+    ResponsiveContainer:
+        orientation: "vertical"
+        canvas.before:
+            Color:
+                rgba: CAL_BG_LIGHT
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        AppHeader:
+            id: app_header
+            title: "DEX Trade"
+        ContentScroll:
+            ContentSection:
+                SectionHeader:
+                    text: "DEX Trade"
+                ContentCard:
+                    size_hint_y: None
+                    height: self.minimum_height
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        padding: [SP_MD, SP_MD]
+                        spacing: SP_SM
+                        size_hint_y: None
+                        height: self.minimum_height
+                        MDTextField:
+                            id: base_input
+                            mode: "outlined"
+                            hint_text: "Base Currency (e.g., XRP)"
+                            helper_text: "Currency you want to sell"
+                            helper_text_mode: "persistent"
+                            max_text_length: 40
+                        
+                        MDTextField:
+                            id: quote_input
+                            mode: "outlined"
+                            hint_text: "Quote Currency (e.g., USD)"
+                            helper_text: "Currency you want to buy"
+                            helper_text_mode: "persistent"
+                            max_text_length: 40
+                        
+                        MDTextField:
+                            id: amount_input
+                            mode: "outlined"
+                            input_filter: "float"
+                            hint_text: "Amount"
+                            helper_text: "Amount of base currency to trade"
+                            helper_text_mode: "persistent"
+                        
+                        MDTextField:
+                            id: slippage_input
+                            mode: "outlined"
+                            input_filter: "float"
+                            hint_text: "Max Slippage % (default: 1)"
+                            helper_text: "Maximum price change tolerance (0-10%)"
+                            helper_text_mode: "persistent"
+                        
+                        PrimaryButtonFixed:
+                            width: dp(BTN_W_LG)
+                            on_release: root.validate_and_confirm_trade()
+                            MDButtonIcon:
+                                icon: "swap-horizontal"
+                            MDButtonText:
+                                text: "Execute Trade"
+                        
+                        SecondaryButtonFixed:
+                            width: dp(BTN_W_LG)
+                            on_release: app.navigate_to_wallet()
+                            MDButtonIcon:
+                                icon: "arrow-left"
+                            MDButtonText:
+                                text: "Back to Wallet"
+        PrimaryBottomBar:

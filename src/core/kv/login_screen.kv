@@ -1,0 +1,92 @@
+#:import r src.utils.responsive
+<LoginScreen>:
+    ResponsiveContainer:
+        orientation: "vertical"
+        canvas.before:
+            Color:
+                rgba: rgba('#bfc6e0')
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        AppHeader:
+            id: app_header
+            title: "Login"
+        ContentScroll:
+            ContentSection:
+                MDLabel:
+                    text_size: self.width, None
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    text: "Enter your password"
+                    font_style: "Title"
+                    halign: "center"
+                    theme_text_color: "Custom"
+                    text_color: rgba('#202443')
+                    size_hint_y: None
+                    height: SP_XL
+                Widget:
+                    size_hint_y: None
+                    height: SP_SM
+                # Password input with eye icon container
+                MDBoxLayout:
+                    orientation: "horizontal"
+                    size_hint_y: None
+                    height: r.scale_dp(56)
+                    spacing: "8dp"
+                    
+                    MDTextField:
+                        password: True
+                        mode: "filled"
+                        line_color_focus: rgba('#008D36')
+                        hint_text_color_focus: rgba('#008D36')
+                        fill_color_normal: rgba('#dadeed')
+                        fill_color_focus: rgba('#e9ebf5')
+                        id: password_input
+                        hint_text: "Enter your password"
+                        helper_text: "Enter the password you created during setup"
+                        helper_text_mode: "on_focus"
+                        font_style: "Body"
+                        size_hint_x: 0.85
+                    
+                    MDIconButton:
+                        accessible_name: "Toggle password visibility"
+                        id: password_toggle_icon
+                        theme_icon_color: "Custom"
+                        icon_color: rgba('#505CA9')
+                        size_hint_x: 0.15
+                        size_hint_y: None
+                        height: r.scale_dp(48)
+                        pos_hint: {"center_y": .5}
+                        on_release: root.toggle_password_visibility()
+                        MDButtonIcon:
+                            icon: "eye"
+                        
+                MDLabel:
+                    text_size: self.width, None
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    id: error_label
+                    size_hint_y: None
+                    height: SP_SM
+                Widget:
+                    size_hint_y: None
+                    height: SP_SM
+                MDBoxLayout:
+                    size_hint_y: None
+                    height: r.scale_dp(56)
+                    PrimaryButtonFixed:
+                        id: login_button
+                        width: dp(BTN_W_LG)
+                        on_release: root.check_login()
+                        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                        MDButtonIcon:
+                            icon: "login"
+                            icon_color: rgba('#f9b233')
+                        MDButtonText:
+                            text: "Log In"
+                            text_color: rgba('#008D36')
+                Widget:
+                    size_hint_y: None
+                    height: SP_LG
+        PrimaryBottomBar:
+

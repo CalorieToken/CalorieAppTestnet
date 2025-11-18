@@ -1,0 +1,28 @@
+# Top-level dependencies for CalorieAppTestnet
+# Run `pip-compile` to generate requirements.txt
+
+# Core UI
+kivy==2.3.0
+kivymd @ git+https://github.com/kivymd/KivyMD.git@master
+
+# XRPL
+xrpl-py>=2.7.0
+httpx
+websockets
+
+# Security
+cryptography>=41.0.0
+mnemonic
+ECPy>=1.2.5
+
+# Networking
+requests>=2.31.0
+
+# Android compatibility
+plyer>=2.1.0
+
+# Dev tools (optional)
+pytest>=7.4.0
+black
+flake8
+aiohttp

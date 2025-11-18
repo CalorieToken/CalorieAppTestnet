@@ -1,0 +1,36 @@
+# CalorieApp Requirements - KivyMD 2.0.dev (master branch)
+
+# Core Kivy and KivyMD
+kivy==2.3.0
+kivymd @ git+https://github.com/kivymd/KivyMD.git@master
+
+# XRPL Dependencies
+xrpl-py>=2.7.0
+httpx
+websockets
+
+# Cryptography and Security
+cryptography>=41.0.0
+mnemonic
+ECPy>=1.2.5
+
+# Networking
+requests>=2.31.0
+
+# Decentralized Storage / DB (optional enable DECENTRALIZED_MODE=1)
+ipfshttpclient>=0.8.0
+bigchaindb-driver>=0.6.3
+
+# Android Compatibility (for buildozer)
+plyer>=2.1.0
+
+# Development Dependencies (optional)
+pytest>=7.4.0
+black
+flake8
+aiohttp
+
+# Note: shelve and json are part of Python standard library
+# Note: pyjnius is installed automatically by buildozer when building for Android
+# Image generation utility (local social asset automation)
+pillow>=10.3.0

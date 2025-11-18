@@ -1,0 +1,92 @@
+#:import r src.utils.responsive
+<AddTrustlineScreen>:
+    ResponsiveContainer:
+        orientation: "vertical"
+        canvas.before:
+            Color:
+                rgba: rgba('#bfc6e0')
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        
+        AppHeader:
+            id: app_header
+            title: "Add Trustline"
+        
+        ContentScroll:
+            ContentSection:
+                MDLabel:
+                    text: "Create a trustline to receive test tokens"
+                    text_size: self.width, None
+                    font_style: "Body"
+                    theme_text_color: "Custom"
+                    text_color: rgba('#202443')
+                    halign: "center"
+                    size_hint_y: None
+                    height: r.scale_dp(30)
+                
+                Widget:
+                    size_hint_y: None
+                    height: SP_XS
+                
+                MDTextField:
+                    id: currency_code
+                    hint_text: "Currency Code (e.g., USD, EUR, TOKEN)"
+                    mode: "filled"
+                    line_color_focus: rgba('#008D36')
+                    hint_text_color_focus: rgba('#008D36')
+                    fill_color_normal: rgba('#dadeed')
+                    fill_color_focus: rgba('#e9ebf5')
+                    size_hint_y: None
+                    height: r.scale_dp(56)
+                    helper_text: "3-character currency code or custom name"
+                    helper_text_mode: "on_focus"
+                
+                MDTextField:
+                    id: issuer_address
+                    hint_text: "Issuer Address (starts with 'r')"
+                    mode: "filled"
+                    line_color_focus: rgba('#008D36')
+                    hint_text_color_focus: rgba('#008D36')
+                    fill_color_normal: rgba('#dadeed')
+                    fill_color_focus: rgba('#e9ebf5')
+                    size_hint_y: None
+                    height: r.scale_dp(56)
+                    helper_text: "The XRPL address that issues this token"
+                    helper_text_mode: "on_focus"
+                
+                MDTextField:
+                    id: limit_amount
+                    hint_text: "Trust Limit (optional, default: 1,000,000,000)"
+                    mode: "filled"
+                    line_color_focus: rgba('#008D36')
+                    hint_text_color_focus: rgba('#008D36')
+                    fill_color_normal: rgba('#dadeed')
+                    fill_color_focus: rgba('#e9ebf5')
+                    size_hint_y: None
+                    height: r.scale_dp(56)
+                    input_filter: "float"
+                    helper_text: "Maximum amount you can hold"
+                    helper_text_mode: "on_focus"
+                
+                Widget:
+                    size_hint_y: None
+                    height: SP_SM
+                
+                PrimaryButtonFixed:
+                    width: dp(BTN_W_LG)
+                    pos_hint: {"center_x": 0.5}
+                    on_release: root.add_trustline()
+                    MDButtonIcon:
+                        icon: "plus-circle"
+                        icon_color: CAL_YELLOW
+                    MDButtonText:
+                        text: "Create Trustline"
+                        text_color: CAL_GREEN
+                
+                Widget:
+                    size_hint_y: None
+                    height: SP_LG
+        
+        PrimaryBottomBar:
+

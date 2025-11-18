@@ -1,0 +1,139 @@
+#:import r src.utils.responsive
+<MnemonicDisplayScreen>:
+    ResponsiveContainer:
+        orientation: "vertical"
+        canvas.before:
+            Color:
+                rgba: rgba('#bfc6e0')
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        AppHeader:
+            id: app_header
+            title: "Recovery Phrase"
+        ContentScroll:
+            ContentSection:
+                SectionHeader:
+                    text: "Instructions"
+                Widget:
+                    size_hint_y: None
+                    height: SP_XS
+                ContentCard:
+                    md_bg_color: CAL_BG_MID
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        padding: [r.scale_dp(SP_MD), r.scale_dp(SP_MD)]
+                        spacing: r.scale_dp(SP_SM)
+                        MDLabel:
+                            text: "Write down these 12 words in order"
+                            text_size: self.width, None
+                            font_style: "Title"
+                            theme_text_color: "Custom"
+                            text_color: CAL_TEXT_DARK
+                            halign: "center"
+                            size_hint_y: None
+                            height: str(r.scale_dp(40))
+                SectionHeader:
+                    text: "Mnemonic Words"
+                Widget:
+                    size_hint_y: None
+                    height: SP_XS
+                ContentCard:
+                    md_bg_color: CAL_BG_MID
+                    MDBoxLayout:
+                        padding: [r.scale_dp(SP_LG), r.scale_dp(SP_LG)]
+                        MDGridLayout:
+                            id: mnemonic_grid
+                            cols: 2
+                            adaptive_height: True
+                            spacing: r.scale_dp(SP_MD)
+                SectionHeader:
+                    text: "Keypair"
+                Widget:
+                    size_hint_y: None
+                    height: SP_XS
+                ContentCard:
+                    md_bg_color: CAL_BG_MID
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        padding: [r.scale_dp(SP_MD), r.scale_dp(SP_MD)]
+                        spacing: r.scale_dp(SP_XS)
+                        MDLabel:
+                            id: public_key_label
+                            text: "Public Key:"
+                            theme_text_color: "Custom"
+                            text_color: CAL_BLUE
+                            size_hint_y: None
+                            height: "20dp"
+                            font_style: "Label"
+                        MDLabel:
+                            id: public_key_display
+                            text: ""
+                            theme_text_color: "Custom"
+                            text_color: CAL_TEXT_DARK
+                            size_hint_y: None
+                            height: "25dp"
+                            font_size: "9sp"
+                        MDLabel:
+                            id: private_key_label
+                            text: "Private Key:"
+                            theme_text_color: "Custom"
+                            text_color: CAL_BLUE
+                            size_hint_y: None
+                            height: "20dp"
+                            font_style: "Label"
+                        MDLabel:
+                            id: private_key_display
+                            text: ""
+                            theme_text_color: "Custom"
+                            text_color: CAL_TEXT_DARK
+                            size_hint_y: None
+                            height: "25dp"
+                            font_size: "9sp"
+                        MDBoxLayout:
+                            size_hint_y: None
+                            height: "40dp"
+                            Widget:  # Flexible spacer
+                            PrimaryButton:
+                                size_hint: (None, None)
+                                width: dp(140)
+                                height: "40dp"
+                                on_release: root.copy_keypair()
+                                MDButtonIcon:
+                                    icon: "content-copy"
+                                MDButtonText:
+                                    text: "Copy"
+                            Widget:  # Flexible spacer
+                SectionHeader:
+                    text: "Actions"
+                Widget:
+                    size_hint_y: None
+                    height: SP_XS
+                ContentCard:
+                    md_bg_color: CAL_BG_LIGHT
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        padding: [SP_MD, SP_MD]
+                        spacing: SP_SM
+                        PrimaryButtonFixed:
+                            width: r.scale_dp(BTN_W_LG)
+                            on_release: root.copy_mnemonic()
+                            pos_hint: {"center_x": 0.5}
+                            MDButtonIcon:
+                                icon: "content-copy"
+                                icon_color: CAL_YELLOW
+                            MDButtonText:
+                                text: "Copy 12 Words"
+                                text_color: CAL_GREEN
+                        PrimaryButtonFixed:
+                            width: r.scale_dp(BTN_W_LG)
+                            on_release: root.verify_mnemonic()
+                            pos_hint: {"center_x": 0.5}
+                            MDButtonIcon:
+                                icon: "check-circle"
+                                icon_color: CAL_YELLOW
+                            MDButtonText:
+                                text: "I Wrote It Down"
+                                text_color: CAL_GREEN
+        PrimaryBottomBar:
+

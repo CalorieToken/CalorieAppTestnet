@@ -1,0 +1,56 @@
+name: UX Tour Tests
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  ux-tour:
+    runs-on: windows-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Run UX Tour
+      run: python scripts/ux_tour.py
+      env:
+        OFFLINE_MODE: '0'
+    
+    - name: Upload test report
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: ux-tour-report
+        path: docs/ui_tour/**/test_report.txt
+    
+    - name: Upload screenshots
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: ux-tour-screenshots
+        path: docs/ui_tour/**/*.png
+    
+    - name: Check test results
+      run: |
+        $report = Get-Content -Path (Get-ChildItem -Path docs/ui_tour -Recurse -Filter test_report.txt | Select-Object -Last 1).FullName -Raw
+        if ($report -match "Failed: (\d+)") {
+          $failed = [int]$matches[1]
+          if ($failed -gt 0) {
+            Write-Error "UX Tour had $failed failing tests"
+            exit 1
+          }
+        }
+        Write-Output "All UX Tour tests passed!"

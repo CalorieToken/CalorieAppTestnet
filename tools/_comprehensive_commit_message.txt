@@ -1,0 +1,179 @@
+feat: comprehensive project backup - UX improvements, new features, legal hardening
+
+COMPREHENSIVE BACKUP COMMIT - November 18, 2025
+
+This commit secures all completed work and establishes legal/privacy protections
+for the CalorieApp project as we prepare for public release.
+
+═══════════════════════════════════════════════════════════════════════════════
+🎨 UX/UI IMPROVEMENTS (24 screens updated)
+═══════════════════════════════════════════════════════════════════════════════
+
+✅ Text Overflow Fixes
+- Applied `text_size: self.width, None` to all MDLabels across 24 KV files
+- Fixed wrapping on intro, wallet, onboarding, and transaction screens
+- Responsive text sizing for all screen sizes
+
+✅ Layout Consistency
+- Standardized spacing and sizing across all screens
+- Improved back button placement and sizing
+- Enhanced visual hierarchy in complex screens (DEX, NFT, Settings)
+
+✅ New Screens Added
+- BarcodeScanScreen + camera_scan_screen.kv (food scanning)
+- CameraScanScreen (QR code wallet integration)
+- Web3BrowserScreen + webview_screen.kv (future dApp support)
+
+✅ Enhanced Screens
+- WalletScreen: Improved balance display and transaction history
+- MnemonicVerifyScreen: Better word selection UX
+- Settings: Added new feature toggles and pro account options
+
+═══════════════════════════════════════════════════════════════════════════════
+🔧 NEW FEATURES & UTILITIES (26 new files)
+═══════════════════════════════════════════════════════════════════════════════
+
+🔐 Security Enhancements
+- clipboard_utils.py: Auto-clear clipboard after 30s (security)
+- caloriedb_encryption.py: Database encryption layer
+- Enhanced password fields with proper masking
+
+📊 CalorieDB System (Decentralized Food Database)
+- caloriedb.py, caloriedb_manager.py, caloriedb_config.py
+- calorie_linking.py: Link food data to XRPL
+- xrpl_caloriedb_sync.py: Sync mechanism
+- decentralized/: BigchainDB, IPFS integration (future)
+
+🍕 FoodRepo Integration
+- foodrepo_client.py, foodrepo_integration.py
+- Open food database connectivity
+
+💎 Pro Account System
+- pro_account.py, pro_issuer.py
+- Premium features framework
+
+🔗 Wallet Connect (Future)
+- wallet_connect/connector.py
+- wallet_connect/xaman_connector.py
+- Cross-wallet integration groundwork
+
+⚡ Performance Optimizations
+- performance/: data_cache, debouncer, resource_guard
+- Enhanced resource management
+
+🎯 UX Enhancements
+- accessibility.py: Screen reader support framework
+- responsive.py: Adaptive layouts
+- enhanced_dialogs.py: Better user feedback
+- ui_feedback.py: Visual feedback system
+
+═══════════════════════════════════════════════════════════════════════════════
+📚 DOCUMENTATION & LEGAL HARDENING
+═══════════════════════════════════════════════════════════════════════════════
+
+✅ Legal Protection
+- TRADEMARK.md: Official CalorieToken® usage guidelines (EUIPO registered)
+- LICENSE: Enhanced with trademark notices
+- .gitignore: Updated to protect competitive implementation details
+
+✅ Project Documentation
+- CHANGELOG.md: Full version history ([1.0.0], [1.1.0], [1.1.1])
+- OFFICIAL_PROJECT_DOCS.md: Public-safe documentation index
+- STATUS_UPDATE_2025-11-18.md: Public progress snapshot
+- ITERATIONS_6_7_8_9_COMPLETE.md: Development milestone tracker
+
+✅ UX Tour System
+- UX_TOUR_GUIDE.md: Interactive app tour documentation (updated)
+- UX_TOUR_V2_UPDATES.md: Latest tour improvements
+- UX_TOUR_QUICK_REF.md: Quick reference for developers
+- scripts/ux_tour.py: Tour automation script (updated)
+
+✅ Social Media Automation
+- tools/generate_social_posts.ps1: Platform-specific post generator
+- tools/copy_social_post.ps1: Clipboard helper
+- tools/README_SOCIAL_TOOLS.md: Complete workflow guide
+- docs/posts/: All platform posts + visual concepts
+  - Platform-specific text files (Twitter, Telegram, Discord, LinkedIn, etc.)
+  - VISUAL_CONCEPTS_2025-11-18.md: Design specs + AI prompts
+  - POSTING_GUIDE_WITH_VISUALS.md: Integrated workflow
+
+✅ GitHub Enhancements
+- .github/FUNDING.yml: XRPL donation support
+
+═══════════════════════════════════════════════════════════════════════════════
+🔄 CONFIGURATION UPDATES
+═══════════════════════════════════════════════════════════════════════════════
+
+- pyproject.toml: Updated metadata and CalorieToken branding
+- setup.py: Enhanced with official URLs and descriptions
+- requirements.txt: Dependencies for new features
+- README.md: Privacy-protected links, official docs index
+- docs/README.md: Public-safe documentation index
+
+═══════════════════════════════════════════════════════════════════════════════
+🗂️ DATA FILES
+═══════════════════════════════════════════════════════════════════════════════
+
+- config/test_accounts.json: Test account configurations
+- data/calorie_links.json: Food-to-token linking data
+
+═══════════════════════════════════════════════════════════════════════════════
+📊 FILES CHANGED SUMMARY
+═══════════════════════════════════════════════════════════════════════════════
+
+Modified (M):  51 files (screens, KV files, configs)
+Added (A):     66 files (utilities, docs, tools, screens)
+Total:         117 files changed
+
+Modified Breakdown:
+- 24 KV files (UI layouts)
+- 15 Python screen files
+- 5 config files
+- 4 documentation files
+- 3 core app files
+
+Added Breakdown:
+- 26 utility Python files
+- 20 documentation files
+- 7 social media post files
+- 5 PowerShell automation tools
+- 4 new screen files (Barcode, Camera, Web3, WebView)
+- 4 KV layout files
+
+═══════════════════════════════════════════════════════════════════════════════
+🔒 PRIVACY & SECURITY NOTES
+═══════════════════════════════════════════════════════════════════════════════
+
+EXCLUDED from this commit (via .gitignore):
+- Test outputs and debugging artifacts
+- Internal status/analysis documents
+- Competitive implementation architecture docs
+- Unfinished feature roadmaps
+- Development helper scripts
+
+REASON: Protect competitive advantage and avoid revealing incomplete features
+that could be copied before launch.
+
+═══════════════════════════════════════════════════════════════════════════════
+🎯 COMMIT PURPOSE
+═══════════════════════════════════════════════════════════════════════════════
+
+1. **Legal Protection**: Secure trademark and license status
+2. **Complete Backup**: Preserve all working code and features
+3. **Public Readiness**: Establish public-safe documentation
+4. **Community Engagement**: Enable social media announcements
+
+═══════════════════════════════════════════════════════════════════════════════
+🚀 NEXT STEPS
+═══════════════════════════════════════════════════════════════════════════════
+
+- Generate social media visuals using VISUAL_CONCEPTS_2025-11-18.md
+- Post announcements across platforms using tools/copy_social_post.ps1
+- Continue UX testing and refinement
+- Prepare for beta release
+
+═══════════════════════════════════════════════════════════════════════════════
+
+[date: 2025-11-18]
+[version: 1.1.1]
+[branch: chore/repo-hardening]

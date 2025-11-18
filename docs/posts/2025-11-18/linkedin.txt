@@ -1,0 +1,9 @@
+We’ve published a public‑safe documentation and legal readiness snapshot for CalorieApp Testnet.
+
+Highlights:
+• Official documentation index
+• Public overview of our automated UX tour
+• Trademark + licensing in place (Custom Dual License)
+
+Focus forward: beta stabilization, performance, and accessibility.
+Learn more: https://calorietoken.net

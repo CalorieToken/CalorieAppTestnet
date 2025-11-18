@@ -1,0 +1,71 @@
+#:import r src.utils.responsive
+<ImportChoiceScreen>:
+    ResponsiveContainer:
+        orientation: "vertical"
+        canvas.before:
+            Color:
+                rgba: rgba('#bfc6e0')
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        AppHeader:
+            id: app_header
+            title: "Import Account"
+        ContentScroll:
+            ContentSection:
+                SectionHeader:
+                    text: "Choose Import Method"
+                ContentCard:
+                    md_bg_color: CAL_BG_LIGHT
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        padding: [SP_MD, SP_MD]
+                        spacing: SP_MD
+                        MDBoxLayout:
+                            size_hint_y: None
+                            height: r.scale_dp(52)
+                            MDLabel:
+                                text_size: self.width, None
+                                size_hint_y: None
+                                height: self.texture_size[1]
+                            PrimaryButton:
+                                id: mnemonic_choice_button
+                                size_hint: (None, None)
+                                width: r.scale_dp(BTN_W_XXL)
+                                height: r.scale_dp(52)
+                                on_release: root.choose_mnemonic_import()
+                                MDButtonIcon:
+                                    icon: "form-textbox-password"
+                                    icon_color: CAL_YELLOW
+                                MDButtonText:
+                                    text: "Import from 12-Word Phrase"
+                                    text_color: CAL_GREEN
+                            MDLabel:
+                                text_size: self.width, None
+                                size_hint_y: None
+                                height: self.texture_size[1]
+                        MDBoxLayout:
+                            size_hint_y: None
+                            height: r.scale_dp(52)
+                            MDLabel:
+                                text_size: self.width, None
+                                size_hint_y: None
+                                height: self.texture_size[1]
+                            PrimaryButton:
+                                id: keypair_choice_button
+                                size_hint: (None, None)
+                                width: r.scale_dp(BTN_W_XXL)
+                                height: r.scale_dp(52)
+                                on_release: root.choose_keypair_import()
+                                MDButtonIcon:
+                                    icon: "key"
+                                    icon_color: CAL_YELLOW
+                                MDButtonText:
+                                    text: "Import from Keys (Pub/Priv)"
+                                    text_color: CAL_GREEN
+                            MDLabel:
+                                text_size: self.width, None
+                                size_hint_y: None
+                                height: self.texture_size[1]
+        PrimaryBottomBar:
+
