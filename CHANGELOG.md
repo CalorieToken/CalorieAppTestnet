@@ -1,3 +1,17 @@
+## [1.1.2] - Unreleased
+
+### Planned / In Progress
+- Visual refinement pass (responsive polish, spacing normalization)
+- Performance profiling for XRPL client manager
+- Story/Reel social asset generation automation
+- Optional CalorieDB sync activation & index optimization
+
+### Potential Additions
+- WalletConnect (Phase 1 activation)
+- Accessibility contrast audit & fixes
+- Image asset compression pipeline
+
+---
 ## [1.1.1] - 2025-11-18
 
 ### Repository Hardening & Public-Safe Docs
