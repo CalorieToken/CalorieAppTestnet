@@ -1,3 +1,36 @@
+## [0.1.0-testnet] - 2025-11-19
+
+### Hardening & Compliance Milestone
+Initial public testnet stabilization introducing:
+- Repository privacy reduction (removed premature build/run instructions)
+- Canonical multi-clause legal disclaimer + cross-links (LICENSE, CONTRIBUTING, TRADEMARK)
+- Feature flag isolation for deferred Web3 browser & CalorieDB (`src/core/feature_flags.py`)
+- Security audit (no secrets; wallet backups purged)
+- .gitignore refinement (narrow sensitive patterns; added CalorieDB data dirs; avoided blanket *.dat/*.bak/*.dir)
+- Deferred XRPL ↔ CalorieDB sync service clarification
+- Legacy branches `CalorieAppV11-2`, `CalorieAppV11-3` deleted (fully merged)
+
+### Added
+- Extended legal disclaimer (`docs/LEGAL_DISCLAIMER.md`)
+- Deferred components directory (`src/_deferred/`)
+- Feature flags module
+
+### Changed
+- README deferred components section & sync wording
+- `FoodTrackScreen` gating CalorieDB recording behind flag
+- `app.py` removal of unreachable preload block
+
+### Removed
+- Duplicate active Web3BrowserScreen (kept deferred stub only)
+- Temp analysis & test artifacts; wallet backup files
+
+### Security / Compliance
+- Confirmed absence of hardcoded secrets or mnemonic phrases in tracked code
+- Wallet data ignores scoped to explicit filenames
+
+### Notes
+This tag is a baseline for future visual polish and optional feature activation; experimental modules remain disabled.
+
 ## [1.1.2] - 2025-11-19
 
 ### Added

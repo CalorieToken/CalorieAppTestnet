@@ -1,63 +1,36 @@
 # CalorieApp Version Information
 
-__version__ = "1.1.2"
-__build__ = "visual-refinement"
+__version__ = "0.1.0-testnet"
+__build__ = "hardening-milestone"
 __date__ = "2025-11-19"
-__status__ = "stable"
+__status__ = "beta"
 
 # Release Notes
 """
-Version 1.1.2 - Visual Refinement & Social Assets
-================================================
+Release 0.1.0-testnet - Hardening & Compliance Milestone
+=======================================================
 
-✨ Highlights:
-- Edge-to-edge social image generator with dynamic font fitting
-- Consolidated multi-platform social copy asset
-- Visual audit checklist and PR body template added
-- Global Telegram community link updated across docs/configs
+Scope:
+ - Repository privacy hardening (removal of build/run instructions; deferred experimental modules)
+ - Comprehensive legal disclaimer infrastructure (multi-tier + canonical file)
+ - Feature flag system isolating Web3 browser & CalorieDB prototypes
+ - Security audit (no secrets; wallet backups purged; narrowed .gitignore patterns)
+ - Deferred XRPL ↔ CalorieDB sync service clarification
+ - Branch cleanup (legacy V11 branches retired)
 
-Version 1.1.0 - Production Ready Release
-========================================
+Highlights:
+ - ✅ Multi-server XRPL failover layer retained
+ - ✅ BIP39 mnemonic flow intact & gated
+ - ✅ Screens modularized; KV loading improved
+ - ✅ Accessibility & responsive scaffolds preserved
+ - ✅ CalorieDB + Web3 features explicitly deferred & non-importing
 
-🎉 Major Features:
-- ✅ Mnemonic (BIP39) 12-word recovery phrase system
-- ✅ Generic token system for custom XRPL tokens
-- ✅ Modern unified UI with visual transaction indicators
-- ✅ Conditional Navigation System - Intelligent drawer management
-- ✅ Multi-Server XRPL Failover - Robust connectivity with automatic failover
-- ✅ Trustline management for XRPL tokens
-- ✅ Enhanced Password Fields - Eye icon visibility toggles
+Risk & Status:
+ - Testnet-only beta; not production hardened for value transfer
+ - Experimental components behind False flags to prevent accidental exposure
 
-🎨 UI/UX Improvements:
-- ✅ Unified header layout across all 25+ screens
-- ✅ Centered titles with visible CalorieApp logo (light circular background)
-- ✅ Transaction history visual indicators (↑ sent, ↓ received, • other)
-- ✅ Short peer addresses (first 6...last 4 characters)
-- ✅ Bottom-left floating action button for menu access
-- ✅ Decoded currency display in transaction history
-
-🔧 Technical Improvements:
-- ✅ Removed all deprecated MDTopAppBar components
-- ✅ Professional project structure for APK building
-- ✅ Comprehensive documentation and setup guides
-- ✅ Enhanced launcher with dependency checking
-- ✅ Organized assets and cleaned up development files
-- ✅ Clean codebase with no test scripts or backup files
-
-📱 Platform Support:
-- ✅ Android APK building with Buildozer
-- ✅ Desktop development environment
-- ✅ Cross-platform launcher scripts
-
-🛡️ Stability:
-- ✅ Zero deprecation warnings
-- ✅ Robust error handling and crash prevention
-- ✅ Encrypted wallet storage with backup systems
-- ✅ XRPL testnet connectivity with multi-server redundancy
-
-🚀 Ready For:
-- ✅ GitHub repository management
-- ✅ APK building and distribution
-- ✅ Production deployment
-- ✅ Team development
+Next Targets:
+ - Tag follow-up release for visual polish
+ - Optional activation path for CalorieDB after security model revision
+ - Add CI enforcement for PR-based changes
 """
