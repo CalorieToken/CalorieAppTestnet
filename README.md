@@ -74,8 +74,9 @@ If you disagree with any clause, do not use, clone, build, or distribute this so
 | Social Assets | ✅ | Dynamic image generator (edge‑to‑edge typography) |
 | Accessibility | 🚧 | Contrast audit scheduled |
 | Performance Profiling | 🚧 | Planned instrumentation |
-| CalorieDB Sync | 🔜 | Deferred indexing & storage phase |
+| CalorieDB Sync | 🔜 | Deferred (isolated) |
 | WalletConnect | 🔜 | Phase 1 design queued |
+| Web3 Browser | 🔜 | Deferred (flagged) |
 
 Legend: ✅ Complete · ⏳ Partial · 🚧 In Progress · 🔜 Planned
 
@@ -156,6 +157,15 @@ Robust connectivity with automatic failover:
 Lightweight in-memory caching for select XRPL requests (e.g. `ServerInfo`) reduces redundant network calls and stabilizes performance under intermittent connectivity. Cache entries automatically expire after a short TTL.
 
 ## 🚀 Getting Started (Pre-Release Notice)
+## ⏳ Deferred Components (Isolated)
+
+The following planned features are isolated under feature flags and excluded from the active beta build:
+
+- **Web3 Browser Screen** (`ENABLE_WEB3_BROWSER=False`): Future in-app browsing / WalletConnect surface.
+- **CalorieDB Sync Layer** (`ENABLE_CALORIE_DB=False`): Planned decentralized product scan indexing (IPFS + BigchainDB).
+
+They reside in `src/_deferred/` and can be re-enabled via flags once scoped for a release milestone.
+
 
 Runtime/build commands have been deliberately removed (v1.1.2) to prevent distribution of unfinished work. Request internal access: info@calorietoken.net.
 

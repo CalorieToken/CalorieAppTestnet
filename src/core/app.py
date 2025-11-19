@@ -36,7 +36,9 @@ from src.screens.MnemonicVerifyScreen import MnemonicVerifyScreen
 from src.screens.NFTMintScreen import NFTMintScreen
 from src.screens.SendXRPScreen import SendXRPScreen
 from src.screens.SettingsScreen import SettingsScreen
-from src.screens.Web3BrowserScreen import Web3BrowserScreen
+from src.core.feature_flags import ENABLE_WEB3_BROWSER
+if ENABLE_WEB3_BROWSER:
+    from src._deferred.Web3BrowserScreen import Web3BrowserScreen  # type: ignore
 from src.screens.WebViewScreen import WebViewScreen
 from src.utils.wallet_connect.xaman_connector import XamanConnector
 from src.utils.responsive import init_responsive, get_size_class, scale_dp, scale_font, ResponsiveDebugOverlay
@@ -246,7 +248,9 @@ class CalorieAppTestnet(MDApp):
         self.barcode_scan_screen = BarcodeScanScreen(name="barcode_scan_screen")
         self.camera_scan_screen = CameraScanScreen(name="camera_scan_screen")
         self.settings_screen = SettingsScreen(name="settings_screen")
-        self.web3_browser_screen = Web3BrowserScreen(name="web3_browser_screen")
+        if ENABLE_WEB3_BROWSER:
+            self.web3_browser_screen = Web3BrowserScreen(name="web3_browser_screen")
+            self.manager.add_widget(self.web3_browser_screen)
         self.webview_screen = WebViewScreen(name="webview_screen")
 
         # Add all screens to manager
@@ -276,7 +280,9 @@ class CalorieAppTestnet(MDApp):
         self.manager.add_widget(self.barcode_scan_screen)
         self.manager.add_widget(self.camera_scan_screen)
         self.manager.add_widget(self.settings_screen)
-        self.manager.add_widget(self.web3_browser_screen)
+        if ENABLE_WEB3_BROWSER:
+            # Already added above when created
+            pass
         self.manager.add_widget(self.webview_screen)
 
         # Determine initial screen based on wallet data - optimized for speed
@@ -415,8 +421,11 @@ class CalorieAppTestnet(MDApp):
         self.manager.current = "settings_screen"
 
     def navigate_to_web3_browser(self):
-        """Navigate to Web3 Browser screen"""
-        self.manager.current = "web3_browser_screen"
+        """Navigate to Web3 Browser screen (deferred)"""
+        if ENABLE_WEB3_BROWSER:
+            self.manager.current = "web3_browser_screen"
+        else:
+            print("Web3 browser feature deferred (flag disabled)")
 
     def navigate_to_webview(self):
         """Navigate to in-app WebView screen (feature flagged)"""
