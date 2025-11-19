@@ -1,5 +1,7 @@
 # Contributing to CalorieAppTestnet
 
+> Legal Notice: By contributing (issues, PRs, discussions) you accept the beta/Testnet risk, absence of warranties, and non-advice clauses defined in `docs/LEGAL_DISCLAIMER.md`. Do not submit proprietary or sensitive personal data.
+
 Thanks for contributing! This guide helps you set up a consistent dev environment and workflow.
 
 ## Quick Start

@@ -1,5 +1,7 @@
 # CalorieToken Trademark Guidelines
 
+> Cross-Reference: Brand usage is distinct from software beta/Testnet legal & liability clauses. For broader risk, non-advice, and limitation sections see `docs/LEGAL_DISCLAIMER.md`.
+
 > **Official Trademark Usage Policy**  
 > Last Updated: November 18, 2025
 

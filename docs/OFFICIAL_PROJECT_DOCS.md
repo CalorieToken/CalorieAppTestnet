@@ -14,6 +14,7 @@ CalorieApp is a mobile-first wallet and food tracking application integrated wit
 - Status: Active Beta development
 - License: Custom Dual License (see LICENSE)
 - Trademark: CalorieToken® (EUIPO registered)
+ - Legal Disclaimer: See `docs/LEGAL_DISCLAIMER.md`
 
 ## Highlights
 
@@ -56,3 +57,7 @@ Execution and packaging instructions are intentionally withheld while in active 
 - Finalize Android packaging flow
 
 For additional information or partnership inquiries, contact: info@calorietoken.net
+
+## Disclaimer (Public-Safe)
+
+CalorieApp is an active beta operating on the XRP Ledger Testnet. Features, data models, and UX flows may change without notice prior to any mainnet release. Testnet XRP and testnet CalorieToken ($CAL) units have no monetary value. Nothing herein constitutes financial, investment, dietary, medical, tax, or legal advice. Review extended clauses: `docs/LEGAL_DISCLAIMER.md`.
