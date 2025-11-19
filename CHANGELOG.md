@@ -1,4 +1,21 @@
-## [1.1.2] - Unreleased
+## [1.1.2] - 2025-11-19
+
+### Added
+- Dynamic social image generator with edge-to-edge typography (font fitting, glow)
+- Consolidated social copy file (`docs/SOCIAL_COPY_2025-11-19.md`)
+- Visual audit checklist (`docs/VISUAL_AUDIT_CHECKLIST_v1.1.2.md`)
+- PR body template for visual refinement branch
+
+### Changed
+- Updated Telegram community invite link across all docs/config metadata
+- Enhanced marketing asset generation performance (coarser gradient steps)
+- Version badge styling widened for higher impact
+
+### Notes
+- This release focuses on outward-facing visual communication and readiness for social distribution.
+- Remaining planned refinement tasks moved to upcoming version placeholder.
+
+## [1.1.3] - Unreleased
 
 ### Planned / In Progress
 - Visual refinement pass (responsive polish, spacing normalization)
@@ -151,4 +168,4 @@ Contact: info@calorietoken.net
 - 🌐 Website: https://calorietoken.net
 - 📄 Whitepaper: https://calorietoken.net/index.php/whitepaper/
 - 🐦 Twitter: [@CalorieToken](https://twitter.com/CalorieToken)
-- 💬 Telegram: [Community](https://t.me/joinchat/8jIusxwzMVI0NGVk)
+- 💬 Telegram: [Community](https://t.me/+7YxaKdQYWNA0NDA0)

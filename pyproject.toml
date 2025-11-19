@@ -49,7 +49,7 @@ Documentation = "https://github.com/CalorieToken/CalorieAppTestnet/blob/main/doc
 "Bug Tracker" = "https://github.com/CalorieToken/CalorieAppTestnet/issues"
 Whitepaper = "https://calorietoken.net/index.php/whitepaper/"
 Twitter = "https://twitter.com/CalorieToken"
-Telegram = "https://t.me/joinchat/8jIusxwzMVI0NGVk"
+Telegram = "https://t.me/+7YxaKdQYWNA0NDA0"
 Discord = "https://discord.gg/hcjJgdyDGd"
 
 [tool.coverage.run]

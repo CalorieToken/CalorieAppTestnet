@@ -30,7 +30,7 @@ This update focuses on legal hardening, branding alignment, and repository organ
 
 - Website: https://calorietoken.net
 - Twitter/X: https://twitter.com/CalorieToken
-- Telegram (Community): https://t.me/joinchat/8jIusxwzMVI0NGVk
+- Telegram (Community): https://t.me/+7YxaKdQYWNA0NDA0
 - Discord (Developers): https://discord.gg/hcjJgdyDGd
 
 ---

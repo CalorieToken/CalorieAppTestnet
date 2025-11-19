@@ -64,7 +64,7 @@ setup(
         "Documentation": "https://github.com/CalorieToken/CalorieAppTestnet/blob/main/docs/README.md",
         "Whitepaper": "https://calorietoken.net/index.php/whitepaper/",
         "Twitter": "https://twitter.com/CalorieToken",
-        "Telegram": "https://t.me/joinchat/8jIusxwzMVI0NGVk",
+        "Telegram": "https://t.me/+7YxaKdQYWNA0NDA0",
         "Discord": "https://discord.gg/hcjJgdyDGd",
     },
     include_package_data=True,
