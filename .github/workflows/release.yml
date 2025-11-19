@@ -1,0 +1,70 @@
+name: Release (Tagged)
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag to release (e.g. v0.1.1-testnet)"
+        required: false
+
+permissions:
+  contents: write
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Derive tag
+        id: vars
+        run: |
+          if [ -n "${{ github.event.inputs.tag }}" ]; then
+            echo "tag=${{ github.event.inputs.tag }}" >> $GITHUB_OUTPUT
+          else
+            echo "tag=${GITHUB_REF##*/}" >> $GITHUB_OUTPUT
+          fi
+          echo "version=${GITHUB_REF##*/}" >> $GITHUB_OUTPUT
+
+      - name: Find release note
+        id: note
+        run: |
+          TAG="${{ steps.vars.outputs.tag }}"
+          BASE=${TAG#v}
+          FILE="docs/RELEASE_NOTE_${BASE//./_^^}.md"
+          # Fallback to testnet uppercase transform
+          if [ ! -f "$FILE" ]; then
+            ALT="docs/RELEASE_NOTE_${BASE//./_ | tr '[:lower:]' '[:upper:]' }.md"
+          fi
+          if [ -f "$FILE" ]; then
+            echo "path=$FILE" >> $GITHUB_OUTPUT
+          else
+            echo "path=CHANGELOG.md" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Read body
+        id: body
+        run: |
+          BODY_PATH="${{ steps.note.outputs.path }}"
+          echo "Using body file: $BODY_PATH"
+          echo 'BODY<<EOF' >> $GITHUB_OUTPUT
+          sed 's/\r$//' "$BODY_PATH" >> $GITHUB_OUTPUT
+          echo 'EOF' >> $GITHUB_OUTPUT
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.vars.outputs.tag }}
+          name: ${{ steps.vars.outputs.tag }}
+          draft: false
+          prerelease: true
+          body: ${{ steps.body.outputs.BODY }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Summary
+        run: echo "Release published for ${{ steps.vars.outputs.tag }}" >> $GITHUB_STEP_SUMMARY
