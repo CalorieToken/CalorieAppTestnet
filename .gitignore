@@ -257,6 +257,17 @@ SOCIAL_MEDIA_ANNOUNCEMENT_KIT.md
 test_*.py
 test_*.txt
 *_output.txt
+demo_*.py
+temp_*.py
+
+# Root-level internal files
+/RELEASE_STRATEGY_SUMMARY.md
+/GIT_COMMIT_GUIDE.md
+/COMMIT_QUICK_REFERENCE.md
+/COMPREHENSIVE_TODO_LIST.md
+
+# Config with sensitive test data
+config/test_accounts.json
 
 # Test artifacts
 .pytest_cache/
