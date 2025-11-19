@@ -3,7 +3,16 @@ from kivy.properties import StringProperty, BooleanProperty, ObjectProperty
 from kivy.clock import Clock
 
 from src.utils.foodrepo_client import FoodRepoClient
-from src.utils.caloriedb import record_scan
+
+# CalorieDB prototype deferred behind feature flag
+from src.core.feature_flags import ENABLE_CALORIE_DB
+try:  # Safe guarded import of deferred module
+    if ENABLE_CALORIE_DB:
+        from src._deferred.caloriedb import record_scan  # type: ignore
+    else:
+        record_scan = None  # type: ignore
+except Exception:
+    record_scan = None  # type: ignore
 
 try:
     from kivy_garden.zbarcam import ZBarCam
@@ -150,13 +159,15 @@ class FoodTrackScreen(Screen):
         return "\n".join(lines) if lines else "Nutrition info not available"
 
     def record_to_caloriedb(self):
-        """Record food scan to CalorieDB (IPFS/BigchainDB pilot)"""
+        """Attempt to record food scan to CalorieDB if feature enabled."""
+        if not ENABLE_CALORIE_DB or record_scan is None:
+            self.result_text = "CalorieDB feature deferred (disabled)."
+            return
         if not self.product or not self.last_barcode:
             self.result_text = "Lookup a product first"
             return
-            
         try:
-            entry = record_scan(self.product, self.last_barcode)
+            entry = record_scan(self.product, self.last_barcode)  # type: ignore[arg-type]
             cid = entry.get("ipfs_cid")
             tx = entry.get("bigchaindb_tx_id")
             self.result_text = f"✓ Recorded to CalorieDB\nCID: {cid or 'n/a'}\nTX: {tx or 'n/a'}"

@@ -132,13 +132,19 @@ dmypy.json
 .buildozer/
 bin/
 
-# Wallet data files (sensitive)
+# Wallet data files (sensitive, restrict to wallet_data only)
 wallet_data.dat
 wallet_data.bak
 wallet_data.dir
-*.dat
-*.bak
-*.dir
+
+# CalorieDB (deferred feature) runtime data stores
+data/calorie_links.json
+data/caloriedb_private/
+data/caloriedb_public/
+data/caloriedb_sync/
+data/*.enc
+
+# Avoid blanket ignoring all .dat/.bak/.dir (removed) to allow legitimate data assets
 
 # Temporary files
 *.tmp
@@ -298,10 +304,12 @@ src/utils/wallet_connect/
 src/utils/pro_*.py
 src/utils/xrpl_caloriedb_sync.py
 src/utils/calorie_linking.py
+# Deferred experimental screens (keep Web3 browser ignored to prevent accidental reintroduction)
 src/screens/Web3BrowserScreen.py
-src/screens/WebViewScreen.py
-src/screens/BarcodeScanScreen.py
-src/screens/CameraScanScreen.py
+# Active screens needed for app runtime (stop ignoring)
+!src/screens/WebViewScreen.py
+!src/screens/BarcodeScanScreen.py
+!src/screens/CameraScanScreen.py
 
 # Progress docs & internal summaries (not for public)
 docs/archive/

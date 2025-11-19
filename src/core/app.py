@@ -580,20 +580,5 @@ class CalorieAppTestnet(MDApp):
 
 
 if __name__ == "__main__":
+    # Direct run path for standalone execution
     CalorieAppTestnet().run()
-
-    def on_start(self):
-        try:
-            from kivy.clock import Clock
-            Clock.schedule_once(self._preload_screens, 0.8)
-        except Exception:
-            pass
-
-    def _preload_screens(self, *_):
-        try:
-            _ = self.manager.get_screen('wallet_screen')
-            _ = self.manager.get_screen('settings_screen')
-            _ = self.manager.get_screen('send_xrp_screen')
-            print('✅ Screens pre-loaded')
-        except Exception:
-            pass
