@@ -292,6 +292,7 @@ scripts/**
 !scripts/run.py
 !scripts/run.bat
 !scripts/run.sh
+!scripts/tag_release.py
 
 # Development automation tools (private)
 tools/
