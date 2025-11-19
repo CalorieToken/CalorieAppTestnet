@@ -141,43 +141,11 @@ Robust connectivity with automatic failover:
 ### XRPL Response Caching
 Lightweight in-memory caching for select XRPL requests (e.g. `ServerInfo`) reduces redundant network calls and stabilizes performance under intermittent connectivity. Cache entries automatically expire after a short TTL.
 
-## 🚀 Getting Started
+## 🚀 Getting Started (Public-Safe)
 
-👉 **See the [Quick Start Guide](docs/QUICK_START.md) for detailed setup instructions.**
+> Execution and build instructions are intentionally withheld until a stable, review-approved release milestone. The repository at this stage is for transparency of progress, documentation, and ongoing refactor history — not for end-user execution or distribution.
 
-### Prerequisites
-- Python 3.12+
-- pip package manager
-
-### Installation
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/CalorieToken/CalorieAppTestnet.git
-   cd CalorieAppTestnet
-   ```
-
-2. **Install dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. **Run the application:**
-   ```bash
-   python main.py
-   ```
-
-### Building APK (Android)
-
-1. **Install Buildozer:**
-   ```bash
-   pip install buildozer
-   ```
-
-2. **Build APK:**
-   ```bash
-   buildozer android debug
-   ```
+If you are an authorized collaborator and require internal run/build procedures, request access privately (info@calorietoken.net). All prior direct run examples (e.g. `python main.py`, `buildozer android debug`) have been removed to prevent premature usage of unfinished systems.
 
 ## 📱 Usage
 
@@ -259,11 +227,8 @@ Production builds simply omit these variables and the app reverts to automatic b
 
 Breakpoints remain unchanged ensuring cross-platform compatibility; overrides are strictly opt-in for development convenience.
 
-### Debug Overlay
-Enable visual debugging of the responsive system with:
-```powershell
-$env:DEBUG_RESPONSIVE="1"; python main.py
-```
+### Debug Overlay (Development Only)
+Activation mechanics exist but invocation commands are withheld pre-release. Overlay shows breakpoint class, scaling factors, and dimensions when enabled internally.
 
 This displays a small badge in the top-right corner showing:
 - Current size class (xs/sm/md/lg/xl)
@@ -296,13 +261,7 @@ See also:
 - Material Design 3: https://m3.material.io/
 
 ### Manual Testing
-The app has been extensively tested with:
-- ✅ Navigation flow testing across all screens
-- ✅ XRPL connectivity and failover scenarios
-- ✅ Wallet creation and import processes
-- ✅ Transaction sending and receiving
-- ✅ Performance optimization validation
-- ✅ Offline mode functionality
+Internal test cycles include navigation, XRPL connectivity/failover simulation, wallet creation/import flows, transaction lifecycle validation, performance sampling, and offline mode handling. Detailed invocation steps are withheld until stable release.
 
 ## 🤝 Contributing
 

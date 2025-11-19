@@ -69,20 +69,11 @@
 
 ## 🎯 **Testing Instructions**
 
-### **Test Wallet Switching**
-1. ✅ Start the application: `python main.py`
-2. ✅ Navigate to the wallet screen
-3. ✅ Click the wallet dropdown menu
-4. ✅ Switch between available wallets (2 and 3)
-5. ✅ Verify no nonce errors appear
+### **Test Wallet Switching (Procedure Withheld)**
+Runtime invocation commands removed. High-level flow: start app, navigate wallet screen, switch wallets, confirm absence of nonce warnings.
 
-### **Test Transaction History**
-1. ✅ Select a funded wallet (like the one from Ripple Altnet faucet)
-2. ✅ Check terminal output for debug messages:
-   - `🔍 Requesting transaction history for: [address]`
-   - `📡 Transaction history response status: SUCCESS`
-   - `✅ Found X transactions!` or `ℹ️ No transactions found`
-3. ✅ Look for transaction details in the app interface
+### **Test Transaction History (Procedure Withheld)**
+Select funded wallet, observe debug output (messages listed below), verify UI reflects transaction presence or absence.
 
 ### **Create New Wallet Test**
 1. ✅ Use "Create Extra Wallet" or "Create Wallet" features

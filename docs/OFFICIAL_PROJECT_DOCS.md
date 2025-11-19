@@ -24,11 +24,9 @@ CalorieApp is a mobile-first wallet and food tracking application integrated wit
 - Food tracking features
 - Automated UX Tour (public-safe overview)
 
-## Getting Started
+## Getting Started (Public-Safe)
 
-- Quick Start: `docs/QUICK_START.md`
-- Run: `python main.py`
-- Android builds: `buildozer android debug`
+Execution and packaging instructions are intentionally withheld while in active Beta. Prior run/build examples removed to discourage use of unfinished components.
 
 ## Key Documents
 
