@@ -3,7 +3,7 @@
 [![CI](https://github.com/CalorieToken/CalorieAppTestnet/actions/workflows/ci.yml/badge.svg)](https://github.com/CalorieToken/CalorieAppTestnet/actions/workflows/ci.yml)
 [![CodeQL](https://github.com/CalorieToken/CalorieAppTestnet/actions/workflows/codeql.yml/badge.svg)](https://github.com/CalorieToken/CalorieAppTestnet/actions/workflows/codeql.yml)
 [![UX Tour](https://github.com/CalorieToken/CalorieAppTestnet/actions/workflows/ux_tour.yml/badge.svg)](https://github.com/CalorieToken/CalorieAppTestnet/actions/workflows/ux_tour.yml)
-[![Version](https://img.shields.io/badge/version-1.1.1-blue.svg)](https://github.com/CalorieToken/CalorieAppTestnet)
+[![Version](https://img.shields.io/badge/version-1.1.2-blue.svg)](https://github.com/CalorieToken/CalorieAppTestnet)
 [![Python](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/)
 [![License](https://img.shields.io/badge/license-Custom%20Dual-orange.svg)](LICENSE)
 [![Website](https://img.shields.io/badge/website-calorietoken.net-green.svg)](https://calorietoken.net)
@@ -31,39 +31,27 @@ A mobile-first cryptocurrency wallet and food tracking application for **Calorie
 - [Trademark Guidelines](docs/TRADEMARK.md) - Usage policies
 - [CalorieToken Website](https://calorietoken.net) - Official resources
 
-## 🌟 Features
+## 🌟 High-Level Feature Matrix
 
-### 🔐 Wallet Functionality
-- **Multi-Wallet Support**: Create and import multiple XRPL wallets
-- **Mnemonic Recovery**: 12-word BIP39 mnemonic phrase support for wallet backup/recovery
-- **Secure Storage**: Encrypted wallet data with password protection
-- **Balance Tracking**: Real-time XRP and custom token balances
-- **Transaction History**: Complete transaction tracking with visual indicators
+| Area | Implemented | Notes |
+|------|-------------|-------|
+| Multi‑Wallet XRPL | ✅ | Create/import; encrypted storage |
+| Mnemonic (BIP39) | ✅ | 12‑word generation, verify, import |
+| Token Support | ✅ | Generic framework + trustlines |
+| Transactions | ✅ | XRP & tokens; visual history indicators |
+| Offline Mode | ✅ | Deterministic tours/testing |
+| Multi‑Server Failover | ✅ | Rotating endpoints, graceful degradation |
+| NFT Screens | ⏳ | Mint flow refinement pending |
+| DEX Trading | ⏳ | Offer & market UI polishing |
+| Food Tracking | ✅ | Nutrition logging baseline |
+| Responsive System | ✅ | Size classes, lazy recompute, overlay (withheld) |
+| Social Assets | ✅ | Dynamic image generator (edge‑to‑edge typography) |
+| Accessibility | 🚧 | Contrast audit scheduled |
+| Performance Profiling | 🚧 | Planned instrumentation |
+| CalorieDB Sync | 🔜 | Deferred indexing & storage phase |
+| WalletConnect | 🔜 | Phase 1 design queued |
 
-### 💸 Transactions
-- **XRP Payments**: Send and receive XRP with multi-server failover
-- **Token Support**: Generic token system for custom XRPL tokens
-- **Trustline Management**: Add and manage XRPL trustlines
-- **Robust Connectivity**: Automatic failover between multiple XRPL servers
-- **Error Handling**: Graceful degradation with offline mode support
-
-### 🎨 NFT Features
-- **NFT Minting**: Create and mint NFTs on the XRPL
-- **Custom Metadata**: Full control over NFT properties and metadata
-
-### 📊 DEX Trading
-- **Decentralized Exchange**: Trade tokens directly on the XRPL DEX
-- **Market Making**: Create and manage trading offers
-
-### 🍽️ Food Tracking
-- **Calorie Monitoring**: Track daily food intake and calories
-- **Nutrition Data**: Comprehensive food database integration
-
-### ⚙️ Advanced Features
-- **Conditional Navigation**: Intelligent navigation system that only creates drawers when needed
-- **Performance Optimized**: Resource-efficient design with minimal memory footprint
-- **Multi-Server XRPL**: Automatic failover between testnet servers
-- **Password Visibility**: Enhanced UX with eye icon toggles
+Legend: ✅ Complete · ⏳ Partial · 🚧 In Progress · 🔜 Planned
 
 ## 🛠️ Technical Stack
 
@@ -141,11 +129,9 @@ Robust connectivity with automatic failover:
 ### XRPL Response Caching
 Lightweight in-memory caching for select XRPL requests (e.g. `ServerInfo`) reduces redundant network calls and stabilizes performance under intermittent connectivity. Cache entries automatically expire after a short TTL.
 
-## 🚀 Getting Started (Public-Safe)
+## 🚀 Getting Started (Pre-Release Notice)
 
-> Execution and build instructions are intentionally withheld until a stable, review-approved release milestone. The repository at this stage is for transparency of progress, documentation, and ongoing refactor history — not for end-user execution or distribution.
-
-If you are an authorized collaborator and require internal run/build procedures, request access privately (info@calorietoken.net). All prior direct run examples (e.g. `python main.py`, `buildozer android debug`) have been removed to prevent premature usage of unfinished systems.
+Runtime/build commands have been deliberately removed (v1.1.2) to prevent distribution of unfinished work. Request internal access: info@calorietoken.net.
 
 ## 📱 Usage
 

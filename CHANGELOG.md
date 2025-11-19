@@ -1,19 +1,27 @@
 ## [1.1.2] - 2025-11-19
 
 ### Added
-- Dynamic social image generator with edge-to-edge typography (font fitting, glow)
-- Consolidated social copy file (`docs/SOCIAL_COPY_2025-11-19.md`)
-- Visual audit checklist (`docs/VISUAL_AUDIT_CHECKLIST_v1.1.2.md`)
-- PR body template for visual refinement branch
+- Dynamic social image generator (`tools/generate_social_image.py`) with edge‑to‑edge adaptive typography & glow layers
+- Consolidated multi‑platform social copy (`docs/SOCIAL_COPY_2025-11-19.md`)
+- Visual audit checklist (`docs/VISUAL_AUDIT_CHECKLIST_v1.1.2.md`) for structured refinement tracking
+- PR body template (`docs/PR_BODY_feature_visual_refinement_v1.1.2.md`)
+- Deprecated branch index (`docs/DEPRECATED_BRANCHES.md`)
 
 ### Changed
-- Updated Telegram community invite link across all docs/config metadata
-- Enhanced marketing asset generation performance (coarser gradient steps)
-- Version badge styling widened for higher impact
+- README & public docs: removal of premature run/build instructions (pre‑release policy enforcement)
+- Global Telegram community link updated across all documentation & metadata
+- Social image generation performance (coarser gradient); robust font discovery (Windows + Pillow bundles)
+- Version badge updated to 1.1.2
+
+### Removed
+- Direct executable examples (`python main.py`, `buildozer android debug`) from public README/docs
+
+### Security / Compliance
+- Reaffirmed pre‑release distribution boundaries (no APK guidance until stability milestone)
 
 ### Notes
-- This release focuses on outward-facing visual communication and readiness for social distribution.
-- Remaining planned refinement tasks moved to upcoming version placeholder.
+- Focused on outward visual communication & brand consistency rather than core feature expansion.
+- Pending refinement tasks deferred to 1.1.3.
 
 ## [1.1.3] - Unreleased
 
@@ -31,19 +39,16 @@
 ---
 ## [1.1.1] - 2025-11-18
 
-### Repository Hardening & Public-Safe Docs
+### Added
+- `OFFICIAL_PROJECT_DOCS.md` public‑safe index
+- `STATUS_UPDATE_2025-11-18.md` progress snapshot
 
-#### Added
-- OFFICIAL_PROJECT_DOCS.md: Canonical, public-safe documentation index
-- STATUS_UPDATE_2025-11-18.md: Public snapshot of progress
+### Changed
+- README & docs index alignment; canonical documentation entry point introduced
+- `.gitignore` adjustments: whitelist safe UX tour guides, preserve internal artifacts privacy
 
-#### Changed
-- README.md: Removed links to private reference files; added official docs index
-- docs/README.md: Switched to external references; added official docs index
-- .gitignore: Allowlisted public UX tour guides while keeping internal files private
-
-#### Privacy
-- Reaffirmed separation between public documentation and private implementation/testing artifacts
+### Privacy
+- Reinforced segregation between public documentation & internal implementation/testing assets
 
 ---
 # Changelog
@@ -53,49 +58,25 @@ All notable changes to CalorieApp will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.1.0] - 2025-11-18
-
-### 🎉 Official CalorieToken Branding Integration
-
-**Major Update:** This release officially integrates CalorieToken® branding, legal compliance, and trademark protections as we move toward public launch.
+## [1.1.0] - 2025-11-16
 
 ### Added
-
-#### Legal & Compliance
-- ✅ **Custom Dual License** - Clarified licensing terms for personal vs. commercial use
-- ✅ **Trademark Guidelines** - Official CalorieToken® trademark usage policies (EUIPO registered)
-- ✅ **Legal Entity Information** - Chamber of Commerce KVK: 84216352 (Netherlands)
-- ✅ **Official Project Links** - Comprehensive links to CalorieToken resources
-
-#### CalorieToken Integration
-- ✅ **Official XRPL Token Details**
-  - Mainnet Issuer: `rNqGa93B8ewQP9mUwpwqA19SApbf62U7PY`
-  - Currency: Calorie ($CAL)
-  - Network: XRP Ledger Mainnet + Testnet support
-- ✅ **Project Reference Documentation** - Complete token specifications
-- ✅ **Community Links** - Twitter, Telegram, Discord, and more
-- ✅ **Trading Platform Integration** - Links to Sologenic, XPMarket, LiveCoinWatch
-
-#### Developer Resources
-- ✅ **GitHub Funding Configuration** - Support development via XRPL
-- ✅ **Enhanced Metadata** - Updated `pyproject.toml` and `setup.py`
-- ✅ **Official Website Badge** - Direct link to calorietoken.net
+- Mnemonic (BIP39) 12‑word wallet recovery system
+- Generic token framework + trustline management screen
+- Unified UI headers & transaction visual indicators
+- Multi‑server XRPL failover connectivity layer
+- Password visibility toggle components
+- Initial NFT & DEX screen scaffolds
+- CalorieToken branding integration (issuer verification, badges, trademark docs)
 
 ### Changed
+- README & LICENSE updated for Custom Dual License + trademark notice
+- Consolidated header/layout strategy across 25+ screens
+- Transaction history formatting & short address styling
 
-#### Documentation
-- 🔄 **README.md** - Added CalorieToken integration section and corrected license badge
-- 🔄 **LICENSE** - Enhanced with trademark notices and official contact information
-- 🔄 **Project Metadata** - Aligned all package information with CalorieToken branding
-
-#### Branding
-- 🎨 **Badge Updates** - Fixed license badge from MIT to Custom Dual
-- 🎨 **Footer Information** - Added CalorieToken trademark notice
-- 🎨 **Contact Details** - Official info@calorietoken.net throughout
-
-### Security
-- 🔒 **Issuer Verification** - Documented official XRPL issuer address to prevent fake tokens
-- 🔒 **Legal Protection** - Trademark registration information for brand protection
+### Security / Compliance
+- Official issuer address documented to mitigate spoofing
+- Custom Dual License + trademark usage guidelines published
 
 ---
 
