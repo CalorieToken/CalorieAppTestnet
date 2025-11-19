@@ -1,12 +1,21 @@
 # CalorieApp Version Information
 
-__version__ = "1.1.0"
-__build__ = "production-ready"
-__date__ = "2025-11-16"
+__version__ = "1.1.2"
+__build__ = "visual-refinement"
+__date__ = "2025-11-19"
 __status__ = "stable"
 
 # Release Notes
 """
+Version 1.1.2 - Visual Refinement & Social Assets
+================================================
+
+✨ Highlights:
+- Edge-to-edge social image generator with dynamic font fitting
+- Consolidated multi-platform social copy asset
+- Visual audit checklist and PR body template added
+- Global Telegram community link updated across docs/configs
+
 Version 1.1.0 - Production Ready Release
 ========================================
 
