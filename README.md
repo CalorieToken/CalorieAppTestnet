@@ -163,6 +163,7 @@ The following planned features are isolated under feature flags and excluded fro
 
 - **Web3 Browser Screen** (`ENABLE_WEB3_BROWSER=False`): Future in-app browsing / WalletConnect surface.
 - **CalorieDB Sync Layer** (`ENABLE_CALORIE_DB=False`): Planned decentralized product scan indexing (IPFS + BigchainDB).
+ - **XRPL ↔ CalorieDB Sync Service** (`ENABLE_CALORIE_DB=False`): Real-time bidirectional sync deferred; heavy integration code isolated.
 
 They reside in `src/_deferred/` and can be re-enabled via flags once scoped for a release milestone.
 
