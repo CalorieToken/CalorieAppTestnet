@@ -334,7 +334,7 @@ This application uses the XRPL Testnet for development and testing. Testnet XRP 
 - [CalorieToken Website](https://calorietoken.net)
 - [Whitepaper](https://calorietoken.net/index.php/whitepaper/)
 - [Twitter/X](https://twitter.com/CalorieToken)
-- [Telegram Community](https://t.me/joinchat/8jIusxwzMVI0NGVk)
+- [Telegram Community](https://t.me/+7YxaKdQYWNA0NDA0)
 - [Discord Developers](https://discord.gg/hcjJgdyDGd)
 - [All Links (Linktree)](https://linktr.ee/CalorieToken)
 
@@ -357,7 +357,7 @@ This application uses the XRPL Testnet for development and testing. Testnet XRP 
 
 **For CalorieToken Project:**
 - Email: info@calorietoken.net
-- Telegram: [Community Chat](https://t.me/joinchat/8jIusxwzMVI0NGVk)
+- Telegram: [Community Chat](https://t.me/+7YxaKdQYWNA0NDA0)
 - Twitter: [@CalorieToken](https://twitter.com/CalorieToken)
 
 ---

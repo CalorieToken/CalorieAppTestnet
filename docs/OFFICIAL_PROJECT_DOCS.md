@@ -42,7 +42,7 @@ CalorieApp is a mobile-first wallet and food tracking application integrated wit
 - Website: https://calorietoken.net
 - Whitepaper: https://calorietoken.net/index.php/whitepaper/
 - Twitter/X: https://twitter.com/CalorieToken
-- Telegram: https://t.me/joinchat/8jIusxwzMVI0NGVk
+- Telegram: https://t.me/+7YxaKdQYWNA0NDA0
 
 ## Privacy & Security
 

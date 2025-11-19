@@ -151,4 +151,4 @@ Contact: info@calorietoken.net
 - 🌐 Website: https://calorietoken.net
 - 📄 Whitepaper: https://calorietoken.net/index.php/whitepaper/
 - 🐦 Twitter: [@CalorieToken](https://twitter.com/CalorieToken)
-- 💬 Telegram: [Community](https://t.me/joinchat/8jIusxwzMVI0NGVk)
+- 💬 Telegram: [Community](https://t.me/+7YxaKdQYWNA0NDA0)
