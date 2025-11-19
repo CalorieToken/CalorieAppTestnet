@@ -1,7 +1,0 @@
-CalorieApp Testnet — Docs & Legal Snapshot ✅
-
-- Official docs index
-- Public-safe UX Tour guide
-- Trademark + license integrated
-
-Next up: beta stability + perf pass. Visit calorietoken.net

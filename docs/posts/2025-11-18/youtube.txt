@@ -1,3 +1,0 @@
-CalorieApp Testnet: public docs + legal snapshot now live ✅
-Official docs index, public UX tour guide, and trademark/license are ready.
-More updates soon as we polish beta and performance. calorietoken.net

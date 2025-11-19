@@ -224,6 +224,27 @@ docs/RESOURCE_USAGE_POLICY.md
 docs/RESPONSIVE_SYSTEM_GUIDE.md
 docs/UI_STYLE_GUIDE.md
 docs/UX_OPTIMIZER_SUMMARY.md
+docs/*STATUS*.md
+docs/*SUMMARY*.md
+docs/*CHECKLIST*.md
+docs/SESSION_PROGRESS_*.md
+docs/ITERATION_*.md
+docs/ACTUAL_STATUS_*.md
+docs/VISUAL_AUDIT_CHECKLIST_*.md
+docs/ROADMAP_v*.md
+
+# Internal social / marketing drafts not for public release
+docs/SOCIAL_COPY_*.md
+docs/PR_BODY_*.md
+docs/LINKEDIN_ARTICLE_*.md
+
+# Internal maintenance scripts (move to internal/ or scripts/private/)
+scripts/private/
+internal/
+tools/internal/
+
+# Backup KV files
+src/core/kv/*.kv.bak
 
 # Internal git/commit helpers
 GIT_COMMIT_GUIDE.md
@@ -254,5 +275,37 @@ scripts/**
 !scripts/run.py
 !scripts/run.bat
 !scripts/run.sh
-!build_apk.bat
-!build_apk.sh
+
+# Development automation tools (private)
+tools/
+
+# Unfinished features & experimental code (not ready for public)
+src/utils/caloriedb*.py
+src/utils/decentralized/
+src/utils/foodrepo*.py
+src/utils/wallet_connect/
+src/utils/pro_*.py
+src/utils/xrpl_caloriedb_sync.py
+src/utils/calorie_linking.py
+src/screens/Web3BrowserScreen.py
+src/screens/WebViewScreen.py
+src/screens/BarcodeScanScreen.py
+src/screens/CameraScanScreen.py
+
+# Progress docs & internal summaries (not for public)
+docs/archive/
+docs/posts/
+docs/*_COMPLETE.md
+docs/*_SUMMARY.md
+docs/ITERATIONS_*.md
+docs/KV_MODULARIZATION_*.md
+docs/LINKEDIN_ARTICLE_*.md
+docs/SOCIAL_COPY_*.md
+docs/PR_BODY_*.md
+docs/PR_DRAFT_*.md
+docs/RELEASE_BODY_*.md
+docs/ROADMAP_v*.md
+docs/VISUAL_AUDIT_*.md
+docs/POSTING_GUIDE_*.md
+docs/REPOSITORY_ORGANIZATION.md
+docs/STATUS_UPDATE_*.md
