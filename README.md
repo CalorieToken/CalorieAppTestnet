@@ -13,6 +13,32 @@ A mobile-first cryptocurrency wallet and food tracking application for **Calorie
 
 > **Latest Update (2025-11-18 – v1.1.1):** Repository hardening, public-safe documentation index, UX layout consistency, security enhancements. See [CHANGELOG](docs/CHANGELOG.md#111---2025-11-18). Pending merge from branch `chore/repo-hardening`.
 
+## ⚖️ Legal & Beta Testnet Disclaimer
+
+This software ("CalorieApp") is a pre‑release **beta** operating solely on the XRP Ledger **Testnet**. By accessing, cloning, building, or using any portion of this repository you acknowledge and agree to the following clauses:
+
+1. Experimental Status: All features (wallets, tokens, NFT, DEX, food tracking, UI components) are experimental and subject to modification, suspension, or removal without notice prior to any mainnet launch.
+2. No Real Value: Testnet XRP and any Testnet units or representations of CalorieToken ($CAL) have **no monetary, redeemable, or transferable real‑world value**.
+3. No Advice: Nothing in the code, documentation, interfaces, commit history, issues, or generated outputs constitutes financial, investment, legal, medical, nutritional, or tax advice. Do your own due diligence.
+4. No Solicitation: This repository does not solicit investment, purchase of tokens, securities, or any regulated financial instruments.
+5. Risk Acceptance: You accept all risks associated with running beta code including potential data loss, malfunction, incorrect balances, performance issues, or security defects.
+6. No Warranty: Provided "AS IS" without warranties of any kind (express or implied), including but not limited to merchantability, fitness for a particular purpose, non‑infringement, accuracy, reliability, or availability.
+7. Limitation of Liability: CalorieToken, contributors, maintainers, and affiliates shall not be liable for any direct, indirect, incidental, consequential, special, exemplary, or punitive damages arising out of or in connection with use of or inability to use this beta software.
+8. Intellectual Property: CalorieToken® trademarks, logos, and brand assets are protected. See `docs/TRADEMARK.md` for permitted usage. No license to brand assets is granted beyond the repository’s stated custom dual license.
+9. Data Handling: The current beta architecture stores sensitive wallet materials locally (encrypted). You are responsible for safeguarding keys, mnemonics, passwords, and exported data. No cloud custody is provided.
+10. Security Posture: While reasonable hardening steps are taken, the software has not undergone formal third‑party security audits. Treat all cryptographic operations as provisional.
+11. Forward‑Looking Statements: Roadmap items, planned features, scaling targets, or performance goals are forward‑looking and inherently uncertain.
+12. Jurisdiction: Usage is subject to applicable laws in your jurisdiction. If local regulations restrict interaction with beta blockchain software, you must discontinue use.
+13. Contribution Disclosure: Pull requests, issues, or discussions may become publicly visible. Do not submit proprietary, confidential, or sensitive personal data.
+14. Licensing: Code usage is governed by the Custom Dual License (personal/educational permitted; commercial/public distribution requires written permission). See `LICENSE`.
+15. Monitoring: Public transparency of development is provided; you can review ongoing commits, branches, and releases at: https://github.com/CalorieToken/CalorieAppTestnet
+
+If you disagree with any clause, do not use, clone, build, or distribute this software.
+
+**Contact (Licensing / Compliance / Security):** info@calorietoken.net
+
+
+
 ## 🪙 CalorieToken Integration
 
 **Official CalorieToken XRPL Token:**
