@@ -8,10 +8,11 @@ Contributing:
  - Guard screen registration, menu items, and actions using these flags.
  - Do not perform side effects at import time.
 """
+import os
 
-# Deferred screens / modules
-ENABLE_WEB3_BROWSER = False  # Web3BrowserScreen (Android WebView pending)
-ENABLE_CALORIE_DB = False    # CalorieDB decentralized scan recording pipeline
+# Deferred screens / modules (respect environment overrides for testing)
+ENABLE_WEB3_BROWSER = os.environ.get("ENABLE_WEB3_BROWSER", "0").lower() in ("1", "true", "yes")
+ENABLE_CALORIE_DB = os.environ.get("ENABLE_CALORIE_DB", "0").lower() in ("1", "true", "yes")
 
 def is_enabled(name: str) -> bool:
     return {

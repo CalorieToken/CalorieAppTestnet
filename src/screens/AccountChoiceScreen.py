@@ -61,11 +61,41 @@ class AccountChoiceScreen(Screen):
 
     def choose_create(self):
         """User chose to create a new account"""
-        # Generate new wallet with mnemonic and go to display screen
-        from src.utils.mnemonic_manager import generate_wallet_with_mnemonic
+        # Show progress dialog
+        from src.utils.enhanced_dialogs import show_progress_dialog
+        progress_dialog = show_progress_dialog(
+            title="Generating Wallet",
+            message="Creating your new wallet...\nGenerating secure keys and mnemonic phrase."
+        )
 
+        # Move wallet generation to background thread
+        from threading import Thread
+        from kivy.clock import Clock
+
+        def _generate_wallet():
+            try:
+                from src.utils.mnemonic_manager import generate_wallet_with_mnemonic
+                wallet, mnemonic = generate_wallet_with_mnemonic()
+
+                # Schedule UI update on main thread
+                Clock.schedule_once(
+                    lambda dt: self._on_wallet_generated(wallet, mnemonic, progress_dialog),
+                    0
+                )
+            except Exception as e:
+                Clock.schedule_once(
+                    lambda dt: self._on_wallet_error(str(e), progress_dialog),
+                    0
+                )
+
+        Thread(target=_generate_wallet, daemon=True).start()
+
+    def _on_wallet_generated(self, wallet, mnemonic, progress_dialog):
+        """Called on main thread after wallet generation completes"""
         try:
-            wallet, mnemonic = generate_wallet_with_mnemonic()
+            # Dismiss progress dialog
+            if progress_dialog:
+                progress_dialog.dismiss()
 
             # Navigate to mnemonic display screen
             display_screen = self.manager.get_screen("mnemonic_display_screen")
@@ -77,10 +107,16 @@ class AccountChoiceScreen(Screen):
                 return_screen=self.return_screen,
             )
             self.manager.current = "mnemonic_display_screen"
-
         except Exception as e:
-            print(f"Error generating wallet: {e}")
-            show_error_dialog(title="Error", text=f"Failed to generate wallet: {str(e)}")
+            if progress_dialog:
+                progress_dialog.dismiss()
+            show_error_dialog(title="Error", text=f"Failed to display wallet: {str(e)}")
+
+    def _on_wallet_error(self, error_msg, progress_dialog):
+        """Called on main thread if wallet generation fails"""
+        if progress_dialog:
+            progress_dialog.dismiss()
+        show_error_dialog(title="Error", text=f"Failed to generate wallet: {error_msg}")
 
     def go_back(self):
         """Go back to previous screen"""

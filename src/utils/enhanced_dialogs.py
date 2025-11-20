@@ -6,7 +6,10 @@ Provides consistent, user-friendly dialogs with proper styling and helpful actio
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.button import MDButton, MDButtonText
 from kivymd.uix.label import MDLabel
+from kivymd.uix.progressindicator import MDCircularProgressIndicator
+from kivymd.uix.boxlayout import MDBoxLayout
 from kivy.utils import get_color_from_hex
+from kivy.metrics import dp
 
 
 class DialogType:
@@ -249,6 +252,60 @@ def confirm_transaction(amount: str, currency: str, destination: str, on_confirm
     )
 
 
+def show_progress_dialog(title: str, message: str):
+    """Show non-blocking progress dialog with spinner
+    
+    Args:
+        title: Dialog title
+        message: Progress message
+        
+    Returns:
+        Dialog instance (can be dismissed later)
+    """
+    # Create content with spinner and message
+    content = MDBoxLayout(
+        orientation="horizontal",
+        spacing=dp(16),
+        padding=dp(16),
+        adaptive_height=True,
+    )
+    
+    spinner = MDCircularProgressIndicator(
+        size_hint=(None, None),
+        size=(dp(48), dp(48)),
+    )
+    
+    message_label = MDLabel(
+        text=message,
+        adaptive_height=True,
+        valign="center",
+    )
+    
+    content.add_widget(spinner)
+    content.add_widget(message_label)
+    
+    # Import dialog components
+    try:
+        from kivymd.uix.dialog import MDDialogHeadlineText, MDDialogContentContainer
+        
+        dialog = MDDialog(
+            MDDialogHeadlineText(text=title),
+            MDDialogContentContainer(
+                content,
+                orientation="vertical",
+            ),
+        )
+    except ImportError:
+        # Fallback for older KivyMD
+        dialog = MDDialog(
+            title=title,
+            text=message,
+        )
+    
+    dialog.open()
+    return dialog
+
+
 __all__ = [
     'EnhancedDialog',
     'DialogType',
@@ -258,4 +315,5 @@ __all__ = [
     'show_success',
     'show_error',
     'confirm_transaction',
+    'show_progress_dialog',
 ]

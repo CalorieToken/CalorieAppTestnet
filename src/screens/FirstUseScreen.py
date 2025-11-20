@@ -134,21 +134,63 @@ class FirstUseScreen(Screen):
             self.ids.confirm_password_input.error = True
             return
 
-        # Hash the password using bcrypt before storing it
-        hashed_password = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
+        # Show progress dialog
+        from src.utils.enhanced_dialogs import show_progress_dialog
+        progress_dialog = show_progress_dialog(
+            title="Creating Password",
+            message="Encrypting your password...\nThis may take a moment."
+        )
 
-        # Generate encryption key for storing wallet data
-        from cryptography.fernet import Fernet
+        # Move encryption to background thread
+        from threading import Thread
+        from kivy.clock import Clock
 
-        encryption_key = Fernet.generate_key()
+        def _encrypt_password():
+            try:
+                # Hash the password using bcrypt (CPU intensive)
+                hashed_password = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
 
-        # Use password to encrypt private keys
-        self.wallet_data = shelve.open(WALLET_DATA_PATH)
-        self.wallet_data["password"] = hashed_password
-        self.wallet_data["encryption_key"] = encryption_key
-        self.wallet_data.close()
+                # Generate encryption key
+                from cryptography.fernet import Fernet
+                encryption_key = Fernet.generate_key()
 
-        # Navigate to account choice screen for first account setup
-        account_choice_screen = self.manager.get_screen("account_choice_screen")
-        account_choice_screen.set_context(is_first_account=True, return_screen="wallet_screen")
-        self.manager.current = "account_choice_screen"
+                # Schedule UI update on main thread
+                Clock.schedule_once(
+                    lambda dt: self._on_password_encrypted(hashed_password, encryption_key, progress_dialog),
+                    0
+                )
+            except Exception as e:
+                Clock.schedule_once(
+                    lambda dt: self._on_password_error(str(e), progress_dialog),
+                    0
+                )
+
+        Thread(target=_encrypt_password, daemon=True).start()
+
+    def _on_password_encrypted(self, hashed_password, encryption_key, progress_dialog):
+        """Called on main thread after password encryption completes"""
+        try:
+            # Dismiss progress dialog
+            if progress_dialog:
+                progress_dialog.dismiss()
+
+            # Store encrypted data
+            self.wallet_data = shelve.open(WALLET_DATA_PATH)
+            self.wallet_data["password"] = hashed_password
+            self.wallet_data["encryption_key"] = encryption_key
+            self.wallet_data.close()
+
+            # Navigate to account choice screen
+            account_choice_screen = self.manager.get_screen("account_choice_screen")
+            account_choice_screen.set_context(is_first_account=True, return_screen="wallet_screen")
+            self.manager.current = "account_choice_screen"
+        except Exception as e:
+            if progress_dialog:
+                progress_dialog.dismiss()
+            show_password_error(f"Failed to save password: {str(e)}")
+
+    def _on_password_error(self, error_msg, progress_dialog):
+        """Called on main thread if password encryption fails"""
+        if progress_dialog:
+            progress_dialog.dismiss()
+        show_password_error(f"Password creation failed: {error_msg}")

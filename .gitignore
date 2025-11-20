@@ -293,6 +293,10 @@ scripts/**
 !scripts/run.bat
 !scripts/run.sh
 !scripts/tag_release.py
+!scripts/complete_ux_tour.py
+!scripts/ux_tour_fix_automation.py
+!scripts/ux_tour_orchestrator.py
+!scripts/automated_improvement_cycle.py
 
 # Development automation tools (private)
 tools/

@@ -1,60 +1,233 @@
 #:import r src.utils.responsive
 <IntroScreen>:
-    ResponsiveContainer:
+    MDBoxLayout:
         orientation: "vertical"
         canvas.before:
+            # Modern gradient background - vibrant greens
             Color:
-                rgba: rgba('#bfc6e0')
+                rgba: rgba('#FFFFFF')
             Rectangle:
                 pos: self.pos
                 size: self.size
+            Color:
+                rgba: (0.85, 0.95, 0.85, 1)
+            Rectangle:
+                pos: self.pos[0], self.pos[1]
+                size: self.size[0], self.size[1] * 0.7
+            Color:
+                rgba: (0.7, 0.9, 0.7, 1)
+            Rectangle:
+                pos: self.pos[0], self.pos[1]
+                size: self.size[0], self.size[1] * 0.4
+            # Decorative circles
+            Color:
+                rgba: (0.3, 0.8, 0.4, 0.1)
+            Ellipse:
+                pos: self.pos[0] - r.scale_dp(50), self.pos[1] + self.size[1] - r.scale_dp(150)
+                size: r.scale_dp(200), r.scale_dp(200)
+            Color:
+                rgba: (0.4, 0.85, 0.5, 0.08)
+            Ellipse:
+                pos: self.pos[0] + self.size[0] - r.scale_dp(150), self.pos[1] + r.scale_dp(50)
+                size: r.scale_dp(250), r.scale_dp(250)
         AppHeader:
             id: app_header
             title: "CalorieApp"
-        ContentScroll:
-            ContentSection:
-                ContentCard:
-                    md_bg_color: CAL_BG_LIGHT
-                    MDBoxLayout:
-                        orientation: "vertical"
-                        padding: [r.scale_dp(SP_LG), r.scale_dp(SP_LG)]
-                        spacing: r.scale_dp(SP_MD)
-                        MDLabel:
-                            # Use a universally supported font_style across size classes
-                            font_style: "Title"
-                            text: "Welcome to CalorieApp"
-                            halign: "center"
-                            theme_text_color: "Custom"
-                            text_color: rgba('#202443')
-                            size_hint_y: None
-                            height: str(r.scale_dp(40))
-                        MDLabel:
-                            text: "Track your calories across meals"
-                            halign: "center"
-                            theme_text_color: "Custom"
-                            text_color: rgba('#202443')
-                            size_hint_y: None
-                            height: str(r.scale_dp(24))
-                            text_size: self.width, None
-                        MDLabel:
-                            text: "Calorie is building a global food token"
-                            halign: "center"
-                            theme_text_color: "Custom"
-                            text_color: rgba('#202443')
-                            size_hint_y: None
-                            height: str(r.scale_dp(24))
-                            text_size: self.width, None
-                        Widget:
-                            size_hint_y: None
-                            height: r.scale_dp(SP_SM)
-                        PrimaryButtonFixed:
-                            width: r.scale_dp(BTN_W_MD)
-                            on_release: root.next()
-                            MDButtonIcon:
-                                icon: "page-next-outline"
-                                icon_color: CAL_YELLOW
-                            MDButtonText:
-                                text: "Get Started"
-                                text_color: CAL_GREEN
+        AnchorLayout:
+            anchor_x: "center"
+            anchor_y: "center"
+            MDBoxLayout:
+                id: content_box
+                orientation: "vertical"
+                padding: [r.scale_dp(SP_XL), 0]
+                spacing: r.scale_dp(SP_LG)
+                size_hint: None, None
+                width: r.scale_dp(380)
+                height: r.scale_dp(520)
+                
+                # Logo Icon - HUGE and eye-catching
+                AnchorLayout:
+                    id: logo_box
+                    size_hint_y: None
+                    height: r.scale_dp(140)
+                    canvas.before:
+                        # Shadow for logo
+                        Color:
+                            rgba: (0.2, 0.6, 0.2, 0.2)
+                        Ellipse:
+                            pos: self.center_x - r.scale_dp(75), self.center_y - r.scale_dp(75)
+                            size: r.scale_dp(150), r.scale_dp(150)
+                    MDIcon:
+                        icon: "food-apple"
+                        halign: "center"
+                        theme_text_color: "Custom"
+                        text_color: rgba('#2E7D32')
+                        font_size: "120sp"
+                        size_hint: None, None
+                        size: r.scale_dp(140), r.scale_dp(140)
+                        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                
+                Widget:
+                    size_hint_y: None
+                    height: r.scale_dp(10)
+                
+                # Title - Larger and bolder
+                AnchorLayout:
+                    id: title_box
+                    size_hint_y: None
+                    height: r.scale_dp(80)
+                    MDLabel:
+                        text: "Welcome to\nCalorieApp"
+                        halign: "center"
+                        theme_text_color: "Custom"
+                        text_color: rgba('#1B5E20')
+                        size_hint_y: None
+                        height: r.scale_dp(80)
+                        font_size: "32sp"
+                        bold: True
+                        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                
+                Widget:
+                    size_hint_y: None
+                    height: r.scale_dp(15)
+                
+                # Subtitle 1 with icon - More prominent
+                MDBoxLayout:
+                    id: subtitle1_box
+                    orientation: "horizontal"
+                    size_hint_y: None
+                    height: r.scale_dp(50)
+                    spacing: r.scale_dp(SP_MD)
+                    padding: [r.scale_dp(SP_LG), r.scale_dp(SP_SM)]
+                    canvas.before:
+                        Color:
+                            rgba: (1, 1, 1, 0.5)
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [25, 25, 25, 25]
+                    MDIcon:
+                        icon: "chart-line"
+                        theme_text_color: "Custom"
+                        text_color: rgba('#1B5E20')
+                        font_size: "28sp"
+                        size_hint: None, None
+                        size: r.scale_dp(32), r.scale_dp(32)
+                        pos_hint: {"center_y": 0.5}
+                    MDLabel:
+                        text: "Track your calories"
+                        halign: "left"
+                        valign: "center"
+                        theme_text_color: "Custom"
+                        text_color: rgba('#1B5E20')
+                        font_size: "18sp"
+                        bold: True
+                
+                Widget:
+                    size_hint_y: None
+                    height: r.scale_dp(10)
+                
+                # Subtitle 2 with icon - More prominent
+                MDBoxLayout:
+                    id: subtitle2_box
+                    orientation: "horizontal"
+                    size_hint_y: None
+                    height: r.scale_dp(50)
+                    spacing: r.scale_dp(SP_MD)
+                    padding: [r.scale_dp(SP_LG), r.scale_dp(SP_SM)]
+                    canvas.before:
+                        Color:
+                            rgba: (1, 1, 1, 0.5)
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [25, 25, 25, 25]
+                    MDIcon:
+                        icon: "earth"
+                        theme_text_color: "Custom"
+                        text_color: rgba('#1B5E20')
+                        font_size: "28sp"
+                        size_hint: None, None
+                        size: r.scale_dp(32), r.scale_dp(32)
+                        pos_hint: {"center_y": 0.5}
+                    MDLabel:
+                        text: "Global food token"
+                        halign: "left"
+                        valign: "center"
+                        theme_text_color: "Custom"
+                        text_color: rgba('#1B5E20')
+                        font_size: "18sp"
+                        bold: True
+                
+                Widget:
+                    size_hint_y: None
+                    height: r.scale_dp(30)
+                
+                # Version badge
+                AnchorLayout:
+                    id: version_box
+                    size_hint_y: None
+                    height: r.scale_dp(30)
+                    MDLabel:
+                        text: "v1.0.0-testnet"
+                        halign: "center"
+                        theme_text_color: "Custom"
+                        text_color: rgba('#558B2F')
+                        size_hint: None, None
+                        size: r.scale_dp(120), r.scale_dp(30)
+                        font_size: "12sp"
+                        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                        canvas.before:
+                            Color:
+                                rgba: rgba('#DCEDC8')
+                            RoundedRectangle:
+                                pos: self.pos
+                                size: self.size
+                                radius: [15, 15, 15, 15]
+        
+        # Button area - Much more eye-catching
+        MDBoxLayout:
+            orientation: "vertical"
+            size_hint_y: None
+            height: r.scale_dp(110)
+            padding: [r.scale_dp(SP_XL), r.scale_dp(SP_LG)]
+            canvas.before:
+                # Gradient bottom bar
+                Color:
+                    rgba: (0.95, 0.98, 0.95, 1)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            MDCard:
+                id: start_button
+                elevation: 16
+                shadow_softness: 16
+                md_bg_color: (0.29, 0.69, 0.31, 1)
+                size_hint_y: None
+                height: r.scale_dp(64)
+                radius: [32, 32, 32, 32]
+                ripple_behavior: True
+                on_release: root.next()
+                MDBoxLayout:
+                    orientation: "horizontal"
+                    padding: [r.scale_dp(SP_XL), 0]
+                    spacing: r.scale_dp(SP_MD)
+                    MDIcon:
+                        icon: "arrow-right-circle"
+                        theme_text_color: "Custom"
+                        text_color: rgba('#FFFFFF')
+                        font_size: "32sp"
+                        size_hint: None, None
+                        size: r.scale_dp(40), r.scale_dp(40)
+                        pos_hint: {"center_y": 0.5}
+                    MDLabel:
+                        text: "GET STARTED"
+                        halign: "center"
+                        valign: "center"
+                        theme_text_color: "Custom"
+                        text_color: rgba('#FFFFFF')
+                        font_size: "20sp"
+                        bold: True
+        PrimaryBottomBar:
         PrimaryBottomBar:
 

@@ -34,3 +34,10 @@ aiohttp
 # Note: pyjnius is installed automatically by buildozer when building for Android
 # Image generation utility (local social asset automation)
 pillow>=10.3.0
+
+# Optional Sensor / Scanning (enable manually for desktop simulation)
+# Uncomment if you want real barcode/QR decoding and potential camera integrations.
+# pyzbar provides barcode/QR decode; opencv-python enables camera frame capture.
+# Leave commented to keep minimal footprint; simulation works without them.
+# pyzbar
+# opencv-python

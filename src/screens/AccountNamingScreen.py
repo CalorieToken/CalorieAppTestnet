@@ -188,79 +188,65 @@ class AccountNamingScreen(Screen):
         if hasattr(self.ids, "account_name_input"):
             self.ids.account_name_input.text = ""
 
-        # Auto-fund via faucet for first account or any newly generated extra wallet
+        # Navigate to wallet immediately
+        self.manager.current = "wallet_screen"
+        wallet_screen = self.manager.get_screen("wallet_screen")
+        if hasattr(wallet_screen, "refresh_account_data"):
+            wallet_screen.refresh_account_data()
+
+        # Auto-fund via faucet in background (non-blocking)
         if (self.is_first_account or self.created_new_wallet) and fund_existing_address_sync is not None:
-            # Navigate immediately, perform funding in background
-            self.manager.current = "wallet_screen"
-            wallet_screen = self.manager.get_screen("wallet_screen")
-            if hasattr(wallet_screen, "refresh_account_data"):
-                wallet_screen.refresh_account_data()
-            self._start_funding_then_navigate()
-        else:
-            self.manager.current = "wallet_screen"
-            wallet_screen = self.manager.get_screen("wallet_screen")
-            if hasattr(wallet_screen, "refresh_account_data"):
-                wallet_screen.refresh_account_data()
+            self._start_background_funding(wallet_screen)
 
     def show_error(self, title, message):
         """Show error dialog"""
         show_error_dialog(title=title, text=message)
 
-    def _start_funding_then_navigate(self):
-        """Show a short funding dialog and attempt faucet funding, then go to wallet."""
-        # Show progress dialog
-        progress_dialog = None
-        try:
-            # Inform user with a non-blocking info dialog
-            show_info_dialog(
-                title="Funding Wallet",
-                text="Requesting XRP Testnet faucet...\nThis may take a few seconds.",
-            )
-        except Exception:
-            pass
-
+    def _start_background_funding(self, wallet_screen):
+        """Start faucet funding in background without blocking UI."""
         address = getattr(self.wallet, "classic_address", None)
         if not address or fund_existing_address_sync is None:
-            # If no address or helper missing, nothing further to do
             return
 
-        # Run the funding in a thread to avoid blocking UI
+        # Show non-blocking progress notification
+        from src.utils.enhanced_dialogs import show_progress_dialog
+        progress_dialog = show_progress_dialog(
+            title="Funding Wallet",
+            message="Requesting testnet XRP from faucet...\nThis runs in background."
+        )
+
+        # Auto-dismiss progress dialog after 2 seconds
+        Clock.schedule_once(lambda dt: progress_dialog.dismiss() if progress_dialog else None, 2.0)
+
+        # Run funding in background thread
+        from threading import Thread
+
         def _do_fund():
             try:
                 status = fund_existing_address_sync(address)
-            except Exception:
-                status = "❌ Faucet error - wallet remains unfunded"
-            return status
+            except Exception as e:
+                status = f"❌ Faucet error: {str(e)[:50]}"
 
-        executor = ThreadPoolExecutor(max_workers=1)
-        future = executor.submit(_do_fund)
+            # Schedule UI update on main thread
+            Clock.schedule_once(
+                lambda dt: self._on_funding_complete(status, wallet_screen),
+                0
+            )
 
-        def _after_fund(dt):
-            try:
-                status = future.result(timeout=0)
-            except Exception:
-                status = "❌ Faucet error - wallet remains unfunded"
-            # No persistent progress dialog to dismiss here
+        Thread(target=_do_fund, daemon=True).start()
 
-            # Optionally inform user of funding status
-            show_info_dialog(title="Wallet Ready", text=f"{status}\n\nOpening your wallet...")
+    def _on_funding_complete(self, status, wallet_screen):
+        """Called on main thread after funding completes"""
+        # Show brief status notification
+        show_info_dialog(
+            title="Faucet Update",
+            text=status
+        )
 
-            # Trigger an immediate balance check if available (wallet already shown)
-            try:
-                from kivy.clock import Clock as _Clock
-
-                if hasattr(wallet_screen, "check_balance"):
-                    _Clock.schedule_once(lambda _dt: wallet_screen.check_balance(dt=0), 0)
-            except Exception:
-                pass
-
-        # Poll future completion on the next frame until done
-        def _poll_future(dt):
-            if future.done():
-                Clock.unschedule(_poll_future)
-                _after_fund(0)
-
-        Clock.schedule_interval(_poll_future, 0.2)
+        # Auto-dismiss after 2 seconds
+        # Refresh balance
+        if hasattr(wallet_screen, "check_balance"):
+            Clock.schedule_once(lambda dt: wallet_screen.check_balance(dt=0), 0.5)
 
     def go_back(self):
         """Go back to previous screen"""

@@ -1,13 +1,14 @@
 # CalorieApp Version Information
 
-__version__ = "0.1.0-testnet"
+__version__ = "0.1.0"
+__variant__ = "testnet"
 __build__ = "hardening-milestone"
 __date__ = "2025-11-19"
 __status__ = "beta"
 
 # Release Notes
 """
-Release 0.1.0-testnet - Hardening & Compliance Milestone
+Release 0.1.0 (testnet variant) - Hardening & Compliance Milestone
 =======================================================
 
 Scope:
