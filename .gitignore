@@ -136,6 +136,7 @@ bin/
 wallet_data.dat
 wallet_data.bak
 wallet_data.dir
+wallet_state.json
 
 # CalorieDB (deferred feature) runtime data stores
 data/calorie_links.json
@@ -297,6 +298,9 @@ scripts/**
 !scripts/ux_tour_fix_automation.py
 !scripts/ux_tour_orchestrator.py
 !scripts/automated_improvement_cycle.py
+
+# Private development workspace (kept local only)
+universal_app_builder/
 
 # Development automation tools (private)
 tools/
