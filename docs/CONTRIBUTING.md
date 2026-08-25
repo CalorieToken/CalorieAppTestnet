@@ -8,6 +8,10 @@
 > ownership. A separate written assignment or project-compatible licence must
 > be agreed with ICTHendrikse before merge.
 
+Use `docs/CONTRIBUTOR_RIGHTS_DECLARATION.md` and
+`docs/ASSET_CREATOR_DECLARATION.md` to gather provenance. The templates do not
+replace a separate written assignment or explicit project-compatible licence.
+
 This repository is an inactive historical Testnet prototype. It is retained for
 evidence and review, not as a supported installation source. Do not publish a
 package or binary from this repository without a fresh dependency, security,
@@ -50,10 +54,13 @@ from verified upstream releases before code is run or distributed.
 python -m pytest -q --disable-warnings --maxfail=1 --cov=src --cov-report=term-missing
 ```
 
-## CI
-- GitHub Actions runs lint, format check, tests (Ubuntu + Windows), and a KV sanity check.
-- CodeQL code scanning runs on push/PR and weekly schedule for Python.
-- Please keep PRs focused, with clear descriptions and screenshots for UI changes.
+## Archival integrity automation
+
+- Pushes and pull requests enforce current legal boundaries and Python syntax
+  without installing the non-reproducible historical dependency inventory.
+- Historical lint, KV, UX-tour, and release workflows are manual archival
+  records and do not represent supported runtime or publication claims.
+- CodeQL scans source without resolving the historical runtime environment.
 
 ## PR Tips
 - Update or add docs for new behaviors.
