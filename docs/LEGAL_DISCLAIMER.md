@@ -26,7 +26,10 @@ The Software is provided "AS IS" without any warranties—express or implied—i
 In no event shall CalorieToken, contributors, maintainers, affiliates, or licensors be liable for any direct, indirect, incidental, consequential, special, exemplary, or punitive damages (including but not limited to loss of funds, data, goodwill, profits, or use) arising out of or in connection with use of or inability to use the Software, even if advised of the possibility of such damages.
 
 ## 8. Intellectual Property & Trademarks
-CalorieToken® trademarks, logos, and branding are protected assets. See `docs/TRADEMARK.md` for permitted usage. No trademark or branding rights are granted beyond what is explicitly outlined. The Custom Dual License governs code usage—not trademark rights.
+CalorieToken trade-mark rights are owned by Pieter Hendrikse. Logo-artwork
+copyright remains subject to separate chain-of-title verification. See
+`docs/TRADEMARK.md`. The repository licence governs software use, not
+trade-mark rights.
 
 ## 9. Data Handling & Local Security
 Sensitive wallet materials (keys, mnemonics, passwords) are stored locally (encrypted where implemented). No custody, key escrow, or managed backup services are provided. You are solely responsible for safeguarding exported or stored credentials.
@@ -44,7 +47,10 @@ You are responsible for ensuring that use of the Software complies with all laws
 Pull requests, issues, discussions, and submitted artifacts may become publicly visible. Do **not** submit proprietary, trade secret, personal, or confidential information. By contributing you grant necessary rights for project maintenance and publication under the repository’s license.
 
 ## 14. Licensing Interaction
-Code usage is governed by the Custom Dual License (`LICENSE`). Commercial or public distribution beyond personal/educational scope requires written permission (info@calorietoken.net). This disclaimer supplements (does not supersede) the license terms.
+Current-version code usage is governed by the prospective rights reservation
+in `LICENSE`. Earlier copies may retain rights validly granted under the
+historical custom licence. This disclaimer supplements and does not supersede
+the controlling licence terms.
 
 ## 15. Monitoring & Transparency
 Development transparency is provided through public commits, branches, tags, and release notes at: https://github.com/CalorieToken/CalorieAppTestnet. No guarantee is made that historical versions will remain available.
@@ -66,6 +72,6 @@ Accessing, cloning, building, executing, or contributing to the repository const
 
 ---
 **Contact (Licensing / Compliance / Security):** info@calorietoken.net  
-CalorieToken® | Chamber of Commerce (KVK): 84216352 | EUIPO Registered Trademark
+CalorieToken | Registered EU trade mark of Pieter Hendrikse | Software rights administered by ICTHendrikse (KvK 73774693) only to the extent actually held
 
 *End of Disclaimer*

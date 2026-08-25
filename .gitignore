@@ -298,6 +298,7 @@ scripts/**
 !scripts/ux_tour_fix_automation.py
 !scripts/ux_tour_orchestrator.py
 !scripts/automated_improvement_cycle.py
+!scripts/check_legal_boundaries.py
 
 # Private development workspace (kept local only)
 universal_app_builder/

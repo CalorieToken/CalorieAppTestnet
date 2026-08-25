@@ -3,11 +3,17 @@
 > Cross-Reference: Brand usage is distinct from software beta/Testnet legal & liability clauses. For broader risk, non-advice, and limitation sections see `docs/LEGAL_DISCLAIMER.md`.
 
 > **Official Trademark Usage Policy**  
-> Last Updated: November 18, 2025
+> Last Updated: August 25, 2026
 
 ## 📋 Overview
 
-"CalorieToken," the CalorieToken logo, "$CAL," and related branding elements are registered trademarks owned by **CalorieToken** (Chamber of Commerce KVK: 84216352).
+CalorieToken is a registered European Union trade mark owned by **Pieter
+Hendrikse**. ICTHendrikse (KvK 73774693) administers the current software
+project but is not represented here as the trade-mark owner.
+
+Earlier repository wording that named CalorieToken / KvK 84216352 as the
+trade-mark owner is superseded by this ownership correction. Calorie Token VOF
+(KvK 84216352) remains relevant historical context only.
 
 **Trademark Registration:**
 - **Jurisdiction:** European Union
@@ -156,8 +162,8 @@ CalorieToken, $CAL, or CAL
 
 Include this notice in documentation:
 ```
-CalorieToken® is a registered trademark of CalorieToken 
-(KVK: 84216352). Used with permission [or: for identification purposes only].
+CalorieToken is a registered European Union trade mark of Pieter Hendrikse.
+Used with permission [or: for identification purposes only].
 ```
 
 ## 🔗 Linking to Official Resources
@@ -260,7 +266,8 @@ If you observe potential trademark infringement:
 
 ### Legal Contacts
 - **Email:** info@calorietoken.net
-- **Jurisdiction:** Netherlands (KVK: 84216352)
+- **Software administrator:** ICTHendrikse (KvK 73774693), Netherlands
+- **Trade-mark owner:** Pieter Hendrikse
 - **Legal Inquiries:** Specify "Legal/Trademark" in subject line
 
 ## ❓ FAQ
@@ -305,4 +312,4 @@ These guidelines are for informational purposes and do not constitute legal advi
 
 ---
 
-**© 2023-2025 CalorieToken | KVK: 84216352 | All trademarks reserved**
+**CalorieToken | Registered EU trade mark of Pieter Hendrikse**

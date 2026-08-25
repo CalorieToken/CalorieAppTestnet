@@ -1,80 +1,68 @@
-CalorieAppTestnet - CUSTOM DUAL LICENSE
+CalorieAppTestnet Rights and Licence Notice
+Version 2.0 - prospective clarification
 
-Reference: For full beta/Testnet legal, risk, liability, and non-advice clauses see `docs/LEGAL_DISCLAIMER.md` (canonical). This pointer does not modify license grant terms.
+CURRENT RIGHTS ADMINISTRATION
 
-Copyright (c) 2023-2025 CalorieToken
-Chamber of Commerce (KVK): 84216352
-Website: https://calorietoken.net
-Email: info@calorietoken.net
+ICTHendrikse (KvK 73774693) administers rights in original portions of
+CalorieAppTestnet that it created or lawfully acquired. Copyright and other
+rights are asserted only to the extent actually held. All ungranted rights are
+reserved.
 
-CalorieToken® is a registered trademark (EUIPO) of CalorieToken.
-Unauthorized use of the CalorieToken name, logo, or branding is prohibited.
+NO NEW GENERAL LICENCE
 
-================================================================================
-LICENSE TERMS
-================================================================================
+For repository versions first obtained under this notice, no permission is
+granted to use, copy, modify, merge, publish, distribute, sublicense, sell,
+host, deploy, or create derivative works except through a separate written
+licence from the relevant rights holder.
 
-> If in doubt about / questions regarding CalorieToken licenses: please contact CalorieToken : info@calorietoken.net
+Public visibility does not place the repository in the public domain and does
+not grant an open-source licence.
 
-# For public / commercial / beta use
-### Eg. XRPL forks, public projects, etc.
+HISTORICAL LICENCE GRANTS
 
-Permission required by CalorieToken / Chamber of Commerce KVK: 84216352. 
-Please contact info@calorietoken.net with a project description. A license may be granted
-(free of charge or paid) depending on the project & target audience.
+Earlier repository versions carried a custom licence dated 2023-2025 that
+purported to permit certain personal, educational, research, and
+non-commercial uses. Rights already validly granted for a particular copy are
+not retroactively withdrawn by this notice. The earlier wording contained an
+ambiguity between permission to "publish" and a separate requirement for
+permission for public use; this notice grants no new publication right.
 
-# For personal use
-### Eg. Educational, research (non commercial, non public)
+Nothing here establishes that the historic entity or current administrator
+owned every contribution at the time of an earlier grant. Authorship,
+assignment, and third-party rights remain evidence-dependent.
 
-Permission is hereby granted to any person obtaining a copy
-of this software and associated documentation files (the "Software"),
-including the rights to use, modify, merge and publish for personal AND
-non commercial use.
+TRADE MARKS
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+CalorieToken is a registered European Union trade mark owned by Pieter
+Hendrikse. No software licence grants a right to use CalorieToken, its logo,
+$CAL branding, trade dress, domains, or confusingly similar marks.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+Trade-mark ownership is distinct from copyright in the logo artwork. The
+finished logo artwork's historical authorship, licence, and assignment chain
+must be documented separately; no blanket exclusive-copyright claim is made
+for it here.
 
-================================================================================
-TRADEMARK NOTICE
-================================================================================
+THIRD-PARTY MATERIAL
 
-"CalorieToken," the CalorieToken logo, "$CAL," and related branding are 
-trademarks owned by CalorieToken (KVK: 84216352), registered with the 
-European Union Intellectual Property Office (EUIPO).
+Dependencies, frameworks, libraries, protocols, fonts, images, data, and other
+third-party material remain governed by their own terms. This notice does not
+relicense Kivy, KivyMD, xrpl-py, XRP Ledger materials, Open Food Facts
+materials, or any other third-party work.
 
-Permitted Use:
-- Technical documentation and integration guides
-- Stating compatibility with CalorieToken services
-- Educational and research purposes
+PATENTS AND OTHER RIGHTS
 
-Prohibited Without Permission:
-- Using "CalorieToken" in product/service names
-- Reproducing logos for commercial purposes
-- Implying official endorsement or partnership
+No patent, design, database, trade-secret, trade-mark, or other non-copyright
+licence is granted. The repository has been publicly available since 20
+February 2023 and its public history may constitute disclosure relevant to
+novelty. No statement in this file is a claim that any disclosed feature is
+patentable or that a valid patent right exists.
 
-For trademark usage permissions, contact: info@calorietoken.net
+NO WARRANTY
 
-================================================================================
-OFFICIAL PROJECT LINKS
-================================================================================
+THE MATERIAL IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+PURPOSE, NON-INFRINGEMENT, ACCURACY, SECURITY, OR AVAILABILITY. TO THE MAXIMUM
+EXTENT PERMITTED BY LAW, THE RIGHTS HOLDERS AND CONTRIBUTORS ARE NOT LIABLE FOR
+CLAIMS, DAMAGES, OR OTHER LIABILITY ARISING FROM THE MATERIAL OR ITS USE.
 
-Website:       https://calorietoken.net
-GitHub:        https://github.com/CalorieToken/CalorieAppTestnet
-Whitepaper:    https://calorietoken.net/index.php/whitepaper/
-Twitter/X:     https://twitter.com/CalorieToken
-Telegram:      https://t.me/+7YxaKdQYWNA0NDA0
-Discord:       https://discord.gg/hcjJgdyDGd
-
-XRPL Token Details:
-Currency:      Calorie
-Issuer:        rNqGa93B8ewQP9mUwpwqA19SApbf62U7PY
-Network:       XRP Ledger Mainnet
-
+See COPYRIGHT.md, NOTICE, docs/TRADEMARK.md, and docs/LEGAL_DISCLAIMER.md.

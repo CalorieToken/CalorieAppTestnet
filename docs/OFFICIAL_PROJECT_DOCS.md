@@ -12,7 +12,7 @@ CalorieApp is a mobile-first wallet and food tracking application integrated wit
 - Platform: Python 3.12, KivyMD 2.0
 - Network: XRPL Testnet (development), Mainnet-ready
 - Status: Active Beta development
-- License: Custom Dual License (see LICENSE)
+- Licence: current prospective rights reservation; historic grants may remain valid for older copies (see LICENSE)
 - Trademark: CalorieToken® (EUIPO registered)
  - Legal Disclaimer: See `docs/LEGAL_DISCLAIMER.md`
 

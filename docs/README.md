@@ -87,7 +87,9 @@ For questions or issues:
 
 ## 📄 License
 
-CalorieApp Testnet is licensed under a CUSTOM (dual) License.
+Current CalorieAppTestnet versions grant no new general licence. Earlier copies
+may retain rights validly granted under the historical custom licence. See
+`../LICENSE`.
 
 ---
 

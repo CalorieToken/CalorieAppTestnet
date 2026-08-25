@@ -9,12 +9,12 @@ version = "1.1.0"
 description = "Mobile cryptocurrency wallet and food tracking application for CalorieToken on XRPL"
 readme = "README.md"
 requires-python = ">=3.12"
-license = {text = "Custom Dual License - See LICENSE file"}
+license = {text = "Proprietary - historical grants may apply; see LICENSE"}
 authors = [
-    {name = "CalorieToken", email = "info@calorietoken.net"}
+    {name = "CalorieApp contributors", email = "info@calorietoken.net"}
 ]
 maintainers = [
-    {name = "CalorieToken Development Team", email = "info@calorietoken.net"}
+    {name = "ICTHendrikse", email = "info@calorietoken.net"}
 ]
 keywords = [
     "blockchain",

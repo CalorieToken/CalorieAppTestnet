@@ -11,6 +11,12 @@
 
 A mobile-first cryptocurrency wallet and food tracking application for **CalorieToken** on the XRP Ledger, built with KivyMD.
 
+> **Rights correction (2026):** ICTHendrikse (KvK 73774693) administers
+> rights in original portions it created or lawfully acquired. CalorieToken is
+> a registered EU trade mark owned by Pieter Hendrikse. Earlier references to
+> Calorie Token VOF (KvK 84216352) are historical and do not by themselves
+> prove transfer of every IP right. See `LICENSE`, `COPYRIGHT.md`, and `NOTICE`.
+
 > **Latest Update (2025-11-18 – v1.1.1):** Repository hardening, public-safe documentation index, UX layout consistency, security enhancements. See [CHANGELOG](docs/CHANGELOG.md#111---2025-11-18). Pending merge from branch `chore/repo-hardening`.
 
 ## ⚖️ Legal & Beta Testnet Disclaimer
@@ -30,7 +36,7 @@ This software ("CalorieApp") is a pre‑release **beta** operating solely on the
 11. Forward‑Looking Statements: Roadmap items, planned features, scaling targets, or performance goals are forward‑looking and inherently uncertain.
 12. Jurisdiction: Usage is subject to applicable laws in your jurisdiction. If local regulations restrict interaction with beta blockchain software, you must discontinue use.
 13. Contribution Disclosure: Pull requests, issues, or discussions may become publicly visible. Do not submit proprietary, confidential, or sensitive personal data.
-14. Licensing: Code usage is governed by the Custom Dual License (personal/educational permitted; commercial/public distribution requires written permission). See `LICENSE`.
+14. Licensing: Current versions grant no new general licence. Earlier copies may retain rights validly granted under the historic custom licence. See `LICENSE`.
 15. Monitoring: Public transparency of development is provided; you can review ongoing commits, branches, and releases at: https://github.com/CalorieToken/CalorieAppTestnet
 
 If you disagree with any clause, do not use, clone, build, or distribute this software.
@@ -296,15 +302,17 @@ We welcome contributions! Please read our [Contributing Guide](docs/CONTRIBUTING
 
 ## 📄 License
 
-This project is licensed under a **Custom Dual License** - see the [LICENSE](LICENSE) file for details.
+Current repository versions are subject to the prospective rights reservation
+in [LICENSE](LICENSE). Earlier copies may retain rights validly granted under
+the historical custom 2023-2025 licence.
 
-**Summary:**
-- **Personal Use:** Permitted for educational, research, and non-commercial purposes
-- **Commercial/Public Use:** Requires explicit written permission from CalorieToken
+No new general permission to use, publish, distribute, or commercialize the
+current version is granted.
 
 **Contact for commercial licensing:** info@calorietoken.net
 
-**Trademark Notice:** CalorieToken® and related branding are registered trademarks. See [TRADEMARK.md](docs/TRADEMARK.md).
+**Trademark Notice:** CalorieToken is a registered EU trade mark owned by
+Pieter Hendrikse. See [TRADEMARK.md](docs/TRADEMARK.md).
 
 ## 🌐 XRPL Testnet
 
@@ -348,5 +356,5 @@ This application uses the XRPL Testnet for development and testing. Testnet XRP 
 
 ---
 
-**CalorieToken® | Chamber of Commerce KVK: 84216352**  
-*Trademark registered with EUIPO | See [TRADEMARK.md](docs/TRADEMARK.md) for usage guidelines*
+**CalorieToken | Registered EU trade mark of Pieter Hendrikse**
+*Software rights administered by ICTHendrikse (KvK 73774693), limited to rights actually held.*
