@@ -49,7 +49,7 @@ professional crypto-asset service. No MiCA compliance, AFM licence, regulatory
 approval, or white-paper approval is claimed. See `REGULATORY_BOUNDARY.md`.
 
 ## 13. Contributions & Public Disclosure
-Pull requests, issues, discussions, and submitted artifacts may become publicly visible. Do **not** submit proprietary, trade secret, personal, or confidential information. By contributing you grant necessary rights for project maintenance and publication under the repository’s license.
+Pull requests, issues, discussions, and submitted artifacts may become publicly visible. Do **not** submit proprietary, trade secret, personal, or confidential information. Submission alone does not transfer ownership or grant an implied licence. The provenance disclosures and separate written rights agreement described in `docs/CONTRIBUTING.md` must be completed before material is accepted or merged.
 
 ## 14. Licensing Interaction
 Current-version code usage is governed by the prospective rights reservation

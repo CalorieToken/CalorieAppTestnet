@@ -8,23 +8,17 @@
 > ownership. A separate written assignment or project-compatible licence must
 > be agreed with ICTHendrikse before merge.
 
-Thanks for contributing! This guide helps you set up a consistent dev environment and workflow.
+This repository is an inactive historical Testnet prototype. It is retained for
+evidence and review, not as a supported installation source. Do not publish a
+package or binary from this repository without a fresh dependency, security,
+licensing, and regulatory review.
 
-## Quick Start
+## Historical development information
 
-1. Python 3.12 recommended.
-2. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. Run locally:
-   ```bash
-   python -u run.py
-   ```
-4. Validate KV files:
-   ```bash
-   python -u scripts/kv_sanity_check.py
-   ```
+The earlier quick-start and runtime instructions are intentionally withdrawn.
+`requirements.txt`, build files, and scripts document the prototype's former
+environment but are not a lockfile or a presently supported build procedure.
+Security reviewers may inspect the repository without executing it.
 
 ## Code Style
 - Black (line length 100), isort (black profile), flake8.
@@ -44,23 +38,12 @@ What it does:
 
 If a hook modifies files, re-add them and commit again.
 
-## Dependency management with pip-tools (optional, recommended)
-We keep `requirements.txt` checked in for easy installs. For clean upgrades and lockfiles, use pip-tools:
+## Dependency records
 
-```bash
-pip install pip-tools
-
-# Edit high-level deps in requirements.in, then compile a locked requirements.txt
-pip-compile --upgrade
-
-# Install exactly what's in requirements.txt
-pip-sync
-```
-
-Notes:
-- Edit `requirements.in` for top-level packages. `requirements.txt` is generated.
-- CI installs from `requirements.txt`.
-- Use `--upgrade` only when you intend to refresh versions.
+The dependency manifests are historical inventories. They contain broad ranges
+and a development-branch reference and therefore do not reproduce a reviewed
+environment. Any revival must create a fresh lockfile and third-party notices
+from verified upstream releases before code is run or distributed.
 
 ## Tests
 ```bash

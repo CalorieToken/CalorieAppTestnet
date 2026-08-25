@@ -1,3 +1,9 @@
+# HISTORICAL, NON-REPRODUCIBLE DEPENDENCY INVENTORY
+#
+# This file records the inactive Testnet prototype's former inputs. It is not a
+# supported lockfile or installation instruction: entries include broad ranges
+# and an unpinned development branch. Re-verify versions, security, licence
+# obligations, and platform compatibility before any revival or distribution.
 # CalorieApp Requirements - KivyMD 2.0.dev (master branch)
 
 # Core Kivy and KivyMD

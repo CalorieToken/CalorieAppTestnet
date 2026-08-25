@@ -2,8 +2,10 @@
 """
 CalorieApp Setup Script
 
-Setup script for the CalorieApp application.
-This provides installation and development tools.
+Historical metadata for the inactive CalorieApp Testnet prototype.
+
+This file is retained as evidence and is not a supported publication or
+installation path. See README.md, LICENSE, and docs/REGULATORY_BOUNDARY.md.
 """
 
 from setuptools import setup, find_packages
@@ -28,7 +30,7 @@ def read_requirements():
 setup(
     name="calorieapp",
     version="1.1.0",
-    description="Mobile cryptocurrency wallet and food tracking application for CalorieToken on XRPL",
+    description="Inactive historical CalorieApp XRPL Testnet prototype",
     long_description=read_readme(),
     long_description_content_type="text/markdown",
     author="CalorieApp contributors",
@@ -45,15 +47,14 @@ setup(
         ],
     },
     classifiers=[
-        "Development Status :: 4 - Beta",
+        "Development Status :: 7 - Inactive",
+        "Private :: Do Not Upload",
         "Intended Audience :: End Users/Desktop",
         "License :: Other/Proprietary License",
         "Operating System :: OS Independent",
         "Operating System :: Android",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.12",
-        "Topic :: Office/Business :: Financial",
-        "Topic :: Office/Business :: Financial :: Cryptocurrency",
         "Topic :: Health :: Nutrition",
     ],
     keywords="blockchain, cryptocurrency, wallet, xrpl, kivy, kivymd, calorie, tracking, testnet, calorietoken",

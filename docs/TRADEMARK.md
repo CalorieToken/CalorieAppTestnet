@@ -108,7 +108,7 @@ You **MUST NOT** use CalorieToken trademarks for:
 
 ### Official Logo
 
-The CalorieToken logo is available at:
+The project currently uses logo artwork available at:
 ```
 https://calorietoken.net/wp-content/uploads/2021/12/C-Logotranspa.png
 ```
@@ -118,6 +118,12 @@ https://calorietoken.net/wp-content/uploads/2021/12/C-Logotranspa.png
 - Token listings on exchanges/wallets
 - Educational materials
 - News/media coverage
+
+These are trade-mark usage guidelines only. Copyright ownership and the
+licensing chain for the logo artwork have not yet been conclusively verified;
+do not treat this page as a copyright licence. Obtain written permission before
+copying the artwork unless an applicable legal exception independently permits
+the intended use.
 
 **Requirements:**
 1. **Clear Space:** Maintain 10% of logo width as clear space on all sides
@@ -300,8 +306,8 @@ If you observe potential trademark infringement:
 
 These guidelines may be updated periodically. Check for updates:
 - **URL:** https://github.com/CalorieToken/CalorieAppTestnet/blob/main/docs/TRADEMARK.md
-- **Last Updated:** November 18, 2025
-- **Version:** 1.0.0
+- **Last Updated:** August 25, 2026
+- **Version:** 1.1.0
 
 **Notification:** Major changes will be announced via official channels (Twitter, Telegram).
 

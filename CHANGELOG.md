@@ -164,7 +164,7 @@ We follow [Semantic Versioning](https://semver.org/):
 
 ### Trademark Notice
 
-CalorieToken® and "$CAL" are registered trademarks of CalorieToken (KVK: 84216352). See [TRADEMARK.md](docs/TRADEMARK.md) for usage guidelines.
+CalorieToken® is a registered European Union trade mark owned by Pieter Hendrikse. Calorie Token VOF (KvK 84216352) is historical context only. See [TRADEMARK.md](docs/TRADEMARK.md) for usage guidelines and scope.
 
 ### License
 
