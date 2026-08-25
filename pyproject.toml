@@ -6,7 +6,7 @@ exclude = ".git|__pycache__|build|dist"
 [project]
 name = "calorieapp"
 version = "1.1.0"
-description = "Mobile cryptocurrency wallet and food tracking application for CalorieToken on XRPL"
+description = "Historical CalorieApp testnet prototype for XRPL wallet and food-tracking experiments"
 readme = "README.md"
 requires-python = ">=3.12"
 license = {text = "Proprietary - historical grants may apply; see LICENSE"}
@@ -29,7 +29,8 @@ keywords = [
     "testnet"
 ]
 classifiers = [
-    "Development Status :: 4 - Beta",
+    "Development Status :: 7 - Inactive",
+    "Private :: Do Not Upload",
     "Intended Audience :: End Users/Desktop",
     "License :: Other/Proprietary License",
     "Operating System :: OS Independent",
@@ -46,6 +47,7 @@ classifiers = [
 Homepage = "https://calorietoken.net"
 Repository = "https://github.com/CalorieToken/CalorieAppTestnet"
 Documentation = "https://github.com/CalorieToken/CalorieAppTestnet/blob/main/docs/README.md"
+"Regulatory Boundary" = "https://github.com/CalorieToken/CalorieAppTestnet/blob/main/docs/REGULATORY_BOUNDARY.md"
 "Bug Tracker" = "https://github.com/CalorieToken/CalorieAppTestnet/issues"
 Whitepaper = "https://calorietoken.net/index.php/whitepaper/"
 Twitter = "https://twitter.com/CalorieToken"
