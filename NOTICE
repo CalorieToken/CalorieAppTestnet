@@ -6,7 +6,13 @@ Current rights administration:
 
 Trade mark:
   CalorieToken is a registered European Union trade mark owned by Pieter
-  Hendrikse. No trade-mark licence is granted.
+  Hendrikse for the services specified in its registration in Nice Class 36.
+  This is not regulatory authorisation. No trade-mark licence is granted.
+
+Regulatory boundary:
+  This repository is a historical, experimental Testnet prototype and not the
+  current CalorieApp V1 runtime or a live crypto-asset service. See
+  docs/REGULATORY_BOUNDARY.md.
 
 Historical entity:
   Calorie Token VOF (KvK 84216352) appears in earlier project and licence
@@ -25,4 +31,3 @@ Visual assets:
 Historic licence:
   Earlier copies may remain subject to rights validly granted under the custom
   2023-2025 licence. See LICENSE.
-

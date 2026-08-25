@@ -8,8 +8,14 @@
 ## 📋 Overview
 
 CalorieToken is a registered European Union trade mark owned by **Pieter
-Hendrikse**. ICTHendrikse (KvK 73774693) administers the current software
+Hendrikse** for the services specified in its registration in **Nice Class
+36**. ICTHendrikse (KvK 73774693) administers the current software
 project but is not represented here as the trade-mark owner.
+
+Nice classification defines the goods or services covered by the registration.
+It does not constitute an AFM licence, MiCA authorisation, approval of a
+crypto-asset white paper, or permission to provide regulated financial or
+crypto-asset services.
 
 Earlier repository wording that named CalorieToken / KvK 84216352 as the
 trade-mark owner is superseded by this ownership correction. Calorie Token VOF

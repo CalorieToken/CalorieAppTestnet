@@ -17,6 +17,11 @@ A mobile-first cryptocurrency wallet and food tracking application for **Calorie
 > Calorie Token VOF (KvK 84216352) are historical and do not by themselves
 > prove transfer of every IP right. See `LICENSE`, `COPYRIGHT.md`, and `NOTICE`.
 
+> **Regulatory boundary:** this is a historical, experimental XRP Ledger
+> Testnet prototype, not the current CalorieApp V1 production runtime and not a
+> live wallet, exchange, payment service, or investment product. See
+> [`docs/REGULATORY_BOUNDARY.md`](docs/REGULATORY_BOUNDARY.md).
+
 > **Latest Update (2025-11-18 – v1.1.1):** Repository hardening, public-safe documentation index, UX layout consistency, security enhancements. See [CHANGELOG](docs/CHANGELOG.md#111---2025-11-18). Pending merge from branch `chore/repo-hardening`.
 
 ## ⚖️ Legal & Beta Testnet Disclaimer
@@ -56,7 +61,9 @@ If you disagree with any clause, do not use, clone, build, or distribute this so
 - **Whitepaper:** [Read here](https://calorietoken.net/index.php/whitepaper/)
 
 > **"Aiming to be the world's food token"**  
-> CalorieToken targets the worldwide food & beverage industry with blockchain-based payment solutions.
+> This records the historical project direction. It does not claim that this
+> Testnet repository currently provides payment services or has regulatory
+> authorisation.
 
 **Learn More:**
 - [Official Documentation Index](docs/OFFICIAL_PROJECT_DOCS.md)

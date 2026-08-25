@@ -43,6 +43,11 @@ Roadmap items, planned features, performance goals, scaling targets, and future 
 ## 12. Regulatory & Jurisdictional Compliance
 You are responsible for ensuring that use of the Software complies with all laws, regulations, and restrictions applicable in your jurisdiction. If local rules prohibit interaction with beta blockchain software or test tokens, discontinue use immediately.
 
+This historical Testnet repository is not represented as an offer to the
+public, admission to trading, live wallet, exchange, payment service, or other
+professional crypto-asset service. No MiCA compliance, AFM licence, regulatory
+approval, or white-paper approval is claimed. See `REGULATORY_BOUNDARY.md`.
+
 ## 13. Contributions & Public Disclosure
 Pull requests, issues, discussions, and submitted artifacts may become publicly visible. Do **not** submit proprietary, trade secret, personal, or confidential information. By contributing you grant necessary rights for project maintenance and publication under the repository’s license.
 
