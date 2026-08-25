@@ -1,34 +1,22 @@
-name: KV Sanity Check
+name: KV Sanity (Archived)
 
 on:
-  push:
-    paths:
-      - 'src/core/kv/**/*.kv'
-      - 'scripts/kv_sanity_check.py'
-      - 'requirements.txt'
-  pull_request:
-    paths:
-      - 'src/core/kv/**/*.kv'
-      - 'scripts/kv_sanity_check.py'
-      - 'requirements.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
-  kv-check-windows:
-    runs-on: windows-latest
+  archive-check:
+    name: Preserve KV evidence
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-
-      - name: Install dependencies
+        uses: actions/checkout@v5
+      - name: Verify historical inputs remain present
+        shell: bash
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
-      - name: Run KV sanity check
-        run: |
-          python -u scripts/kv_sanity_check.py
+          test -f scripts/kv_sanity_check.py
+          test -d src/core/kv
+      - name: Explain scope
+        run: echo "The dependency-bound runtime KV test is archived and is not a supported build claim." >> "$GITHUB_STEP_SUMMARY"

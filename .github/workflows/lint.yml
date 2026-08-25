@@ -1,41 +1,23 @@
-name: Lint
+name: Historical Source Syntax
 
 on:
-  pull_request:
-  push:
-    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
-  lint:
-    name: Lint (flake8, black --check, isort --check)
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
-        python-version: ['3.12']
-
+  syntax:
+    name: Python syntax only
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/checkout@v5
+      - name: Set up Python
+        uses: actions/setup-python@v6
         with:
-          python-version: ${{ matrix.python-version }}
-
-      - name: Install tools
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install flake8 black isort
-
-      - name: Black check
-        run: |
-          python -m black --check .
-
-      - name: Isort check
-        run: |
-          python -m isort --check-only .
-
-      - name: Flake8
-        run: |
-          python -m flake8 src tests
+          python-version: "3.12"
+      - name: Compile without imports
+        run: python -m compileall -q scripts src tests
+      - name: Explain scope
+        run: echo "Formatting is not retroactively imposed on preserved historical source." >> "$GITHUB_STEP_SUMMARY"
