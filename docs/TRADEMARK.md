@@ -24,7 +24,16 @@ trade-mark owner is superseded by this ownership correction. Calorie Token VOF
 **Trademark Registration:**
 - **Jurisdiction:** European Union
 - **Registry:** European Union Intellectual Property Office (EUIPO)
+- **CalorieToken mark:** EUTM application `019137415`; public registry data
+  reports filing on 30 January 2025 and registration on 20 May 2025
+- **Figurative logo mark:** EUTM application `019125433`; public registry data
+  reports filing on 30 December 2024 and registration on 6 May 2025
+- **Class and specification:** Nice Class 36, “Financial transactions via blockchain”
 - **Search:** [EUIPO eSearch](https://euipo.europa.eu/eSearch/#basic/1+1+1+1/100+100+100+100/calorietoken)
+
+The official EUIPO certificate or current register extract controls if a
+secondary source differs. Registration of a figurative mark does not itself
+prove copyright authorship or assignment in the underlying artwork.
 
 ## ⚖️ Legal Protection
 

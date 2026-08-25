@@ -3,6 +3,9 @@
 Status: incomplete; review required before reuse or distribution.
 
 This register identifies tracked visual assets without asserting ownership.
+Public registry data identifies figurative EUTM application `019125433`, but
+the exact registered image has not yet been matched to each tracked file and
+trade-mark registration does not itself prove copyright chain of title.
 The Git history proves repository possession, not authorship, assignment, or a
 licence from the creator. Trademark permission and copyright permission are
 separate. Until documentary evidence is attached, treat the logo artwork and

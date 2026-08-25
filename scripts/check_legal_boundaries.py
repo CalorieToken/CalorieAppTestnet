@@ -14,14 +14,15 @@ def require(path: str, fragments: tuple[str, ...]) -> None:
 
 
 def main() -> None:
-    required = ("LICENSE", "COPYRIGHT.md", "NOTICE", "docs/TRADEMARK.md")
+    required = ("LICENSE", "COPYRIGHT.md", "NOTICE", "docs/TRADEMARK.md", "IP_EVIDENCE_REGISTER.md")
     missing = [path for path in required if not (ROOT / path).is_file()]
     if missing:
         raise SystemExit(f"Missing legal boundary files: {missing}")
 
     require("LICENSE", ("NO NEW GENERAL LICENCE", "HISTORICAL LICENCE GRANTS", "Pieter", "Hendrikse"))
     require("COPYRIGHT.md", ("ICTHendrikse", "KvK 84216352", "26 August 2024"))
-    require("docs/TRADEMARK.md", ("Pieter Hendrikse", "ICTHendrikse (KvK 73774693)"))
+    require("docs/TRADEMARK.md", ("Pieter Hendrikse", "ICTHendrikse (KvK 73774693)", "019137415", "019125433"))
+    require("IP_EVIDENCE_REGISTER.md", ("Official EUIPO certificate", "Do not commit certificates"))
     require("NOTICE", ("Third-party components", "Historic licence"))
 
     current_files = (
