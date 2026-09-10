@@ -29,10 +29,12 @@ Testnet assets have no real monetary or redeemable value, and the network can re
 
 ## Rights and responsible use
 
-ICTHendrikse (KVK 73774693) administers rights in original material it created or lawfully acquired. Earlier references to Calorie Token VOF (KVK 84216352) are historical and do not prove transfer of every right. CalorieToken is identified by the project owner as an EU trade mark of Pieter Hendrikse; trade-mark rights are separate from regulatory authorisation.
+ICTHendrikse (KvK 73774693) administers rights in original material it created or lawfully acquired. Earlier references to Calorie Token VOF (KvK 84216352) are historical and do not prove transfer of every right. CalorieToken is identified by the project owner as an EU trade mark of Pieter Hendrikse; trade-mark rights are separate from regulatory authorisation.
 
 Current versions grant no new general licence. Earlier copies may retain rights validly granted under their historical licence. See [LICENSE](LICENSE), [COPYRIGHT.md](COPYRIGHT.md), [NOTICE](NOTICE) and [trade-mark guidance](docs/TRADEMARK.md). Existing third-party rights and mandatory legal protections remain unaffected.
 
 The prototype is experimental and may fail or lose data. Nothing here is financial, investment, medical, dietary, tax or legal advice. Do not put credentials, wallet recovery information or personal data into public issues. Start with the documentation; use the project's published security or privacy contact for a concern that requires it.
 
 Documentation reviewed: **10 September 2026**. This revision changes public interpretation and navigation, not executable code, licences, historical test results or deployment.
+
+The archived README preserves its original bytes, including links written relative to the repository root. Those links may not resolve from `docs/archive/`; use the [original README at its historical commit](https://github.com/CalorieToken/CalorieAppTestnet/blob/cfc230d7e2b92322997fbbc8815be563740c3288/README.md) when following its original links.

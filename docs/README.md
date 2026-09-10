@@ -39,3 +39,5 @@ The `archive/` directory contains historical completion reports and development 
 
 
 For the current webapp, use [CalorieApp V2](https://github.com/CalorieToken/CalorieApp). [Earlier README](archive/README-before-2026-09-10.md) preserves the dated feature and test statements without claiming they were rerun in this update.
+
+The archived README preserves its original bytes, including links written relative to the repository root. Those links may not resolve from `docs/archive/`; use the [original README at its historical commit](https://github.com/CalorieToken/CalorieAppTestnet/blob/cfc230d7e2b92322997fbbc8815be563740c3288/README.md) when following its original links.
