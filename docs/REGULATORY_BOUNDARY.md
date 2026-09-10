@@ -1,9 +1,9 @@
 # Regulatory and product boundary
 
-Last updated: 25 August 2026
+Last updated: 10 September 2026
 
 This repository preserves an experimental, historical XRP Ledger Testnet
-prototype. It is not the current CalorieApp V1 production runtime and it must
+prototype. It is not the current CalorieApp V2 production runtime and it must
 not be presented as a live wallet, exchange, payment service, investment
 product, or other professional crypto-asset service.
 
@@ -18,12 +18,12 @@ advice, or operate a trading platform.
 No maintained, production-ready, or regulator-approved status is claimed. Do
 not use this prototype with mainnet credentials or assets.
 
-## Separation from current CalorieApp V1
+## Separation from current CalorieApp V2
 
-Current CalorieApp V1 is a separate non-financial, non-custodial food and
+Current CalorieApp V2 is a separate non-financial, non-custodial food and
 nutrition web application. No wallet custody or financial transaction layer is
-claimed in V1. Historical Testnet capabilities in this repository are not
-evidence that those capabilities exist in current V1.
+claimed in V2. Historical Testnet capabilities in this repository are not
+evidence that those capabilities exist in current V2.
 
 ## MiCA and trade-mark distinction
 

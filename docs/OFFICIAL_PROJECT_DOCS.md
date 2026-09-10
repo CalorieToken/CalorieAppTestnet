@@ -1,63 +1,18 @@
-# Official Project Documentation
+# CalorieApp Testnet: reading guide
 
-Last Updated: 2025-11-18
-Version: 1.1.0
+Updated 10 September 2026. This is the public entry point for the historical prototype, not a deployment guide for the current app.
 
-This document is the canonical, public-safe entry point for CalorieApp Testnet documentation. It consolidates high-level information for users, contributors, and partners while keeping implementation details private until stable release.
+The current **CalorieApp V2** is a separate food and nutrition webapp. Its [source and documentation](https://github.com/CalorieToken/CalorieApp) and [current publications](https://github.com/CalorieToken/Publications) describe that scope. This repository's wallet, transaction, DEX and NFT material remains historical Testnet experimentation.
 
-## Overview
+| Read | Purpose |
+| --- | --- |
+| [Repository overview](../README.md) | Historical status, current links and rights |
+| [Regulatory boundary](REGULATORY_BOUNDARY.md) | Separation from current food-app and regulated-service claims |
+| [Historical document index](README.md) | Dated development material |
+| [Change log](CHANGELOG.md) | Changes recorded for older builds |
+| [Licence](../LICENSE) | Current rights reservation and the treatment of earlier grants |
+| [Trade marks](TRADEMARK.md) | Brand scope, separate from financial authorisation |
 
-CalorieApp is a mobile-first wallet and food tracking application integrated with CalorieToken on the XRP Ledger. The app targets practical payments and nutrition tracking with a focus on performance and usability.
+The website's newer Testnet guide does not activate this legacy runtime or turn a test account into a pilot entitlement. The Community Voting Hub is informational: no voting or proposal submission is active. Screenshots, diagrams and old mainnet directions are preserved as history, not recommendations to use real assets.
 
-- Platform: Python 3.12, KivyMD 2.0
-- Network: XRPL Testnet (development), Mainnet-ready
-- Status: Active Beta development
-- Licence: current prospective rights reservation; historic grants may remain valid for older copies (see LICENSE)
-- Trademark: CalorieToken® (EUIPO registered)
- - Legal Disclaimer: See `docs/LEGAL_DISCLAIMER.md`
-
-## Highlights
-
-- Multi-wallet XRPL support (create/import)
-- XRP and token transactions with robust connectivity
-- Trustline management
-- NFT and DEX screens (in development)
-- Food tracking features
-- Automated UX Tour (public-safe overview)
-
-## Getting Started (Public-Safe)
-
-Execution and packaging instructions are intentionally withheld while in active Beta. Prior run/build examples removed to discourage use of unfinished components.
-
-## Key Documents
-
-- Project README: `README.md`
-- Changelog: `docs/CHANGELOG.md`
-- UX Tour Guide (public-safe): `docs/UX_TOUR_GUIDE.md`
-- Legal: `LICENSE`, `docs/TRADEMARK.md`
-
-## Links
-
-- Website: https://calorietoken.net
-- Whitepaper: https://calorietoken.net/index.php/whitepaper/
-- Twitter/X: https://twitter.com/CalorieToken
-- Telegram: https://t.me/+7YxaKdQYWNA0NDA0
-
-## Privacy & Security
-
-- Internal implementation details and research references are intentionally excluded from this public repository snapshot to prevent copying and to protect competitive advantages.
-- Public docs focus on high-level capabilities and safe operational guidance.
-- Detailed technical integrations, test artifacts, and analysis outputs remain private until stable release.
-
-## Roadmap Snapshot (Public)
-
-- Beta polish and stability improvements
-- Accessibility and performance tuning
-- Expanded transaction UX
-- Finalize Android packaging flow
-
-For additional information or partnership inquiries, contact: info@calorietoken.net
-
-## Disclaimer (Public-Safe)
-
-CalorieApp is an active beta operating on the XRP Ledger Testnet. Features, data models, and UX flows may change without notice prior to any mainnet release. Testnet XRP and testnet CalorieToken ($CAL) units have no monetary value. Nothing herein constitutes financial, investment, dietary, medical, tax, or legal advice. Review extended clauses: `docs/LEGAL_DISCLAIMER.md`.
+No executable code or production configuration changes with this document update. Never submit seeds, private keys or personal records to public documentation or issues.

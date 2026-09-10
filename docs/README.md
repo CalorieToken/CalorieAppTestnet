@@ -1,6 +1,6 @@
 # CalorieApp Testnet Documentation
 
-Welcome to the CalorieApp Testnet documentation. This directory contains comprehensive guides and references for developers and users.
+**Historical reference index - reviewed 10 September 2026.** These guides describe their original prototype/build. They are not current operational instructions or evidence that wallet, DEX or NFT functionality is active in CalorieApp V2. Start with the [current reading guide](OFFICIAL_PROJECT_DOCS.md).
 
 ## 📚 Documentation Index
 
@@ -32,66 +32,10 @@ Welcome to the CalorieApp Testnet documentation. This directory contains compreh
 
 ### Legal & Licensing
 - **[Trademark Guidelines](TRADEMARK.md)** - CalorieToken® trademark usage policy ⚠️
-- **[License](../LICENSE)** - Custom dual license terms
+- **[License](../LICENSE)** - Current rights reservation; earlier valid grants remain separate
 
 ### Archive
 The `archive/` directory contains historical completion reports and development progress documentation for reference.
 
-## 🚀 Quick Links
 
-### Getting Started
-1. Clone the repository
-2. Install dependencies: `pip install -r requirements.txt`
-3. Run the app: `python run.py`
-
-### Building for Android
-1. Install buildozer: `pip install buildozer`
-2. Build APK: `buildozer android debug`
-
-### Key Features
-- 🔐 Multi-wallet XRPL support
-- 🔑 12-word mnemonic recovery phrases
-- 💸 XRP and custom token transactions
-- 🎨 NFT minting capabilities
-- 📊 DEX trading interface
-- 🍽️ Food tracking features
-- 🧭 Conditional navigation system
-- 🎨 Modern unified UI layout
-- 🧪 97 automated UI/UX tests (100% pass rate) ⭐ NEW
-- 🌐 Multi-server XRPL failover with offline mode ⭐ NEW
-
-## 📖 Documentation Standards
-
-All documentation follows these principles:
-- **Clear**: Easy to understand for all skill levels
-- **Comprehensive**: Covers all aspects thoroughly
-- **Current**: Updated with latest changes
-- **Practical**: Includes examples and use cases
-
-## 🤝 Contributing
-
-When contributing documentation:
-1. Use clear, concise language
-2. Include code examples where applicable
-3. Add screenshots for UI-related documentation
-4. Update the changelog for significant changes
-5. Follow the existing documentation structure
-
-## 📞 Support
-
-For questions or issues:
-- Check existing documentation first
-- Review the [Troubleshooting Guide](FAUCET_TROUBLESHOOTING.md)
-- Open an issue on GitHub
-- Contact via Twitter: [@CalorieToken](https://twitter.com/CalorieToken)
-
-## 📄 License
-
-Current CalorieAppTestnet versions grant no new general licence. Earlier copies
-may retain rights validly granted under the historical custom licence. See
-`../LICENSE`.
-
----
-
-**Last Updated:** November 18, 2025  
-**Version:** 1.1.0
+For the current webapp, use [CalorieApp V2](https://github.com/CalorieToken/CalorieApp). [Earlier README](archive/README-before-2026-09-10.md) preserves the dated feature and test statements without claiming they were rerun in this update.
